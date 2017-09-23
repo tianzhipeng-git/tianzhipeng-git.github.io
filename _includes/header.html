@@ -1,0 +1,55 @@
+<header class="header">
+    <div class="header-container">
+        <div class="nav">
+            {% if page.path == "index.html" %}
+            <span class="title">
+				<li>
+            <img src="favicon.ico" alt="pickaxe">
+					<a href="/index.html">{{ site.title }}</a>
+				</li>
+			</span>
+            {% else %}
+            <li>
+                <img src="favicon.ico" alt="pickaxe">
+                <a href="/index.html">{{ site.title }}</a>
+            </li>
+            {% endif %}
+
+            {% if page.path == "archive.html" %}
+            <span class="title">
+				<li>
+					<a href="/archive.html">archive</a>
+				</li>
+			</span>
+            {% else %}
+            <li>
+                <a href="/archive.html">archive</a>
+            </li>
+            {% endif %}
+
+            {% if page.path == "category.html" %}
+            <span class="title">
+				<li>
+					<a href="/category.html">category</a>
+				</li>
+			</span>
+            {% else %}
+            <li>
+                <a href="/category.html">category</a>
+            </li>
+            {% endif %}
+
+            {% if page.path == "about.html" %}
+            <span class="title">
+				<li>
+					<a href="/about.html">about</a>
+				</li>
+			</span>
+            {% else %}
+            <li>
+                <a href="/about.html">about</a>
+            </li>
+            {% endif %}
+        </div>
+    </div>
+</header>
