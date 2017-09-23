@@ -3,7 +3,7 @@ layout: post
 title: "HTTP缓存机制介绍"
 date: 2017-09-22 16:23:32
 categories: http
-tags: tag1 tag2
+tags: http cache web
 ---
 
 这是前端时间做的一次分享, 起因是我们的网站在更新的时候若js等有变动, 需要用户强刷才能获取最新内容, 借这个机会了解了HTTP缓存的机制. 本文的主要内容基本上取自RFC-7234, 翻译整理加自己的理解, 加上一些其他资料和图片.
@@ -68,7 +68,7 @@ value则是对应的key, 在之前发起请求时得到的响应消息.
 - 当前请求的Header满足 对应缓存响应的Vary的要求    且
 - 请求没有no-cache指令     且
 - 对应的被缓存的响应是:
- - fresh   或
+ - [fresh](#名词解释)   或
  - allowed to be served stale      或
  - successfully validated
 

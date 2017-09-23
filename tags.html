@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+<div class="well">
+    <!-- 标签云 -->
+    <div id='tag_cloud' class="tags">
+        {% for tag in site.tags %}
+        <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+        {% endfor %}
+    </div>
+    <br/>
+
+    <!-- 标签列表 -->
+    {% for tag in site.tags %}
+    <div>
+        <h2 class="category" id="{{ tag[0] }}">{{ tag[0] }}</h2>
+        <ul>
+
+        {% for post in tag[1] %}
+            <li><span>{{ post.date | date: "%b %d %Y" }}</span>» <a href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+
+        </ul>
+    </div>
+    {% endfor %}
+</div>

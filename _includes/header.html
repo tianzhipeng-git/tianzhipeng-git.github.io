@@ -39,6 +39,18 @@
             </li>
             {% endif %}
 
+            {% if page.path == "tags.html" %}
+            <span class="title">
+				<li>
+					<a href="/tags.html">tags</a>
+				</li>
+			</span>
+            {% else %}
+            <li>
+                <a href="/tags.html">tags</a>
+            </li>
+            {% endif %}
+
             {% if page.path == "about.html" %}
             <span class="title">
 				<li>
