@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "HTTP缓存机制介绍"
-date:   2017-09-23 16:23:32
-categories: http web
+title: "HTTP缓存机制介绍"
+date: 2017-09-22 16:23:32
+categories: http
+tags: tag1 tag2
 ---
 
-# HTTP缓存机制介绍
 这是前端时间做的一次分享, 起因是我们的网站在更新的时候若js等有变动, 需要用户强刷才能获取最新内容, 借这个机会了解了HTTP缓存的机制. 本文的主要内容基本上取自RFC-7234, 翻译整理加自己的理解, 加上一些其他资料和图片.
 
 ## 提出问题
@@ -21,7 +21,7 @@ categories: http web
 
 HTTP缓存, 从类型上分两种shared cache / private cache, 前者可被中间代理和浏览器缓存,后者只能被浏览器缓存.
 
-![缓存类型]("resources/HTTPCachtType.png")
+![缓存类型](/resources/HTTPCachtType.png)
 
 这两种缓存除使用范围限制, 其他没什么不同, 下文基本不做区分.
 
@@ -40,7 +40,7 @@ value则是对应的key, 在之前发起请求时得到的响应消息.
 
 在chrome浏览器可以通过 chrome://cache/ 页面来查看当前的所有缓存
 
-![chrome缓存页面]("resources/chrome-cache.png")
+![chrome缓存页面](/resources/chrome-cache.png)
 
 点进其中每一条, 就可以看到对应的被缓存的HTTP响应消息.
 ## 何时存(缓存先决条件)
