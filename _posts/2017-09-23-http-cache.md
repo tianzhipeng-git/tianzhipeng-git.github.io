@@ -8,11 +8,14 @@ tags: http cache web
 
 这是前端时间做的一次分享, 起因是我们的网站在更新的时候若js等有变动, 需要用户强刷才能获取最新内容, 借这个机会了解了HTTP缓存的机制. 本文的主要内容基本上取自RFC-7234, 翻译整理加自己的理解, 加上一些其他资料和图片.
 
+* TOC
+{:toc}
+
 ## 提出问题
 - 为什么要清除缓存/强刷?
- - 简单说原因就是因为浏览器缓存了旧版本的文件, 在打开页面时直接使用缓存, 没有向服务器发起对 新部署上的文件的请求, 所以需要强刷.
+  - 简单说原因就是因为浏览器缓存了旧版本的文件, 在打开页面时直接使用缓存, 没有向服务器发起对 新部署上的文件的请求, 所以需要强刷.
 - 为什么要缓存? 
- - HTTP缓存的设计 一是为了节省带宽流量资源. 二是为了减少浏览器打开页面的响应时间.
+  - HTTP缓存的设计 一是为了节省带宽流量资源. 二是为了减少浏览器打开页面的响应时间.
 - 如何做的缓存? 后文解答
 - 强刷是什么? 后文解答
 
@@ -30,6 +33,7 @@ HTTP缓存, 从类型上分两种shared cache / private cache, 前者可被中�
 
 - a local store of response messages
 - the subsystem that controls storage, retrieval, and deletion of messages in it.
+
 ## 存的是什么
 HTTP缓存是一种类似KV的storage.
 
@@ -43,6 +47,7 @@ value则是对应的key, 在之前发起请求时得到的响应消息.
 ![chrome缓存页面](/resources/chrome-cache.png)
 
 点进其中每一条, 就可以看到对应的被缓存的HTTP响应消息.
+
 ## 何时存(缓存先决条件)
 因为RFC只是一份指南, 而具体的细节取决于其实现, 也就是说浏览器有很多自己控制的空间. 对于何时缓存, RFC 7234中使用这样的词汇: "MUST NOT store a response to any request, unless:", 就是说除非以下这些条件都满足, 否则不能缓存, 但是满足了这些条件, 浏览器到底要不要缓存却不一定. 我们来看一下这些条件:
 
@@ -51,12 +56,12 @@ value则是对应的key, 在之前发起请求时得到的响应消息.
 - private cache时, 不能被中间代理缓存    且
 - 响应没有no-store指令    且
 - 特定的Headers符合条件:
- - Expires header      或
- - Cache Control header 中
- - 包含max-age/s-maxage指令     或
- - 包含public指令    或
- - `扩展指令`表示允许缓存    或
- - 特定的返回code( 200, 203, 204, 206, 300, 301, 404, 405, 410, 414, and 501) 
+  - Expires header      或
+  - Cache Control header 中
+  - 包含max-age/s-maxage指令     或
+  - 包含public指令    或
+  - `扩展指令`表示允许缓存    或
+  - 特定的返回code( 200, 203, 204, 206, 300, 301, 404, 405, 410, 414, and 501) 
 
 前几条要求都是比较好理解的, 也比较容易满足. 而第5条下面的各个"或"的要求中, 只要返回码是200等, 就能缓存. 哇, 这就意味着, 大多数请求, 按规定都是可以缓存的, 这刷新了我以前"只有CSS/JS/图片才会缓存"的认知.
 
@@ -68,9 +73,45 @@ value则是对应的key, 在之前发起请求时得到的响应消息.
 - 当前请求的Header满足 对应缓存响应的Vary的要求    且
 - 请求没有no-cache指令     且
 - 对应的被缓存的响应是:
- - [fresh](#名词解释)   或
- - allowed to be served stale      或
- - successfully validated
+  - 新鲜的[(fresh)](#名词解释)   或
+  - 被允许在不新鲜(stale)时 提供服务(主要是无法连接到原始服务的情况)      或
+  - 成功验证过的(validated)
+
+这些条件综合起来看, 就是用请求的uri作为key去缓存中查找到了对应的响应, 且响应的过期时间满足条件(所谓新鲜不新鲜,就是指过期时间).
+
+## 何时删除/过期
+   删除和过期是两个操作, 缓存过期了, 浏览器默认也不会删除, 除非存储空间不足, 可能会使用LRU之类的策略清除一些.
+   
+   过期的问题, 或者说新鲜的问题, 就像是我们食品的”保质期”问题一样, 这个问题是关于缓存问题的唯一难点和重点.
+   
+   一个关于缓存是否新鲜/过期的简单公式
+   
+   ```response_is_fresh = (freshness_lifetime > current_age)```
+   
+  就是说是否新鲜 =  保质期限 是否大于 已出现/已被生产的时间.
+  
+  #
+  
+  关于一条缓存的保质期有多长, 有两种方式设置:
+  
+  - **显式的设置过期时间**
+  
+    > todo 通过xx header
+  
+  - **启发式的计算过期**
+  
+    我以前一直有个疑问, 响应header里没有缓存时间相关的内容, 也就是服务器就没有设置过期时间, 这时候怎么办?
+     
+    答案是 浏览器收到没有设置过期时间的响应时, 可以根据自己的算法来启发式的计算过期时间. 怎么计算呢, 一个典型的算法是
+    
+    ```freshness_lifetime = (date_value - last_modified_value) * 0.10 ```
+    这个算式就是**当前**时间 减去 上次修改时间 乘 0.1, 效果就是当前离这个文件(响应)的上次修改时间越久, 那么保质期设置的越长, 浏览器就是认为越久没改动的文件, 改动的频度越小.
+    
+    感兴趣的同学可以看[chromium源码](https://chromium.googlesource.com/chromium/src/+/49.0.2606.2/net/http/http_response_headers.cc#1001)中对于这部分的处理.
+    
+  #
+  关于一条缓存已出现/已被生产了多久, 即age问题, 计算方式:
+  
 
 ## 名词解释
 - `Fresh` : 新鲜的 A stored response is considered “fresh"  if the response can be reused without “validation”.
