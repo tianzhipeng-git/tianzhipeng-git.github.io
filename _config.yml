@@ -10,6 +10,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://tzp_1991.oschina.io" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
 #github_username:  jekyll
+permalink: /:year/:month/:day/:title.html
 
 # Build settings
 markdown: kramdown
