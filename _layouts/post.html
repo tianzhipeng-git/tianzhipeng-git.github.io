@@ -25,8 +25,8 @@ layout: default
     <script>
 
         var disqus_config = function () {
-            this.page.url = "{{ page.url }}";
-            this.page.identifier = "{{ page.url }}";
+            this.page.url = "{{ site.url }}{{ site.baseurl }}{{ page.url }}";
+            this.page.identifier = "{{ site.url }}{{ site.baseurl }}{{ page.url }}";
         };
         (function () { // DON'T EDIT BELOW THIS LINE
             var d = document, s = d.createElement('script');

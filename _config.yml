@@ -7,7 +7,7 @@ motto: "code, thought, growth"
 #  line in _config.yml. It will appear in your document head meta (for
 #  Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://tzp_1991.oschina.io" # the base hostname & protocol for your site
+url: "http://tianzhipeng.oschina.io" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
 #github_username:  jekyll
 permalink: /:year/:month/:day/:title.html
