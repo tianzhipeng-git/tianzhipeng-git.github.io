@@ -21,13 +21,10 @@ layout: default
     </article>
 
     {% if page.comments %}
-    <div id="SOHUCS" sid="{{ page.url }}"></div>
-    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
-    <script type="text/javascript">
-        window.changyan.api.config({
-            appid: 'cyteCdP08',
-            conf: 'prod_6ef83b3cc6728784eb87f5c3bff06c90'
-        });
-    </script>
+    <!--<div id="SOHUCS" sid="{{ page.url }}"></div>-->
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2145491"></script>
+    <!-- UY END -->
     {% endif %}
 </div>
