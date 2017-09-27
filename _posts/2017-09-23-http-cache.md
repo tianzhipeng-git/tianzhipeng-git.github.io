@@ -163,16 +163,16 @@ to prevent the “lost update" problem
 对于缓存验证, 我们有两种条件请求可以发.
   
   1. ETag方式.
+  
+      ETag全称Entity Tag, 是资源的标签的意思, 其值是一个任意的字符串, 具体内容是服务器自己决定的, 只有他自己知道, 但要求服务器保证, 同一个资源多次修改, ETag一定是不同的, 不同资源的ETag可以相同. 
 
-    ETag全称Entity Tag, 是资源的标签的意思, 其值是一个任意的字符串, 具体内容是服务器自己决定的, 只有他自己知道, 但要求服务器保证, 同一个资源多次修改, ETag一定是不同的, 不同资源的ETag可以相同. 
-
-    一些如Nginx等服务器对静态文件生成ETag的方式使用文件size和文件修改时间组合出来的, 还有一些直接用文件md5当做ETag, 简单有效.
+      一些如Nginx等服务器对静态文件生成ETag的方式使用文件size和文件修改时间组合出来的, 还有一些直接用文件md5当做ETag, 简单有效.
     
-    当服务器的响应中带有ETag Header值(如ETag:599a8d1c-eb), 浏览器缓存后想要验证这个响应,就发送一个带有If-None-Match Header的请求(如If-None-Match:599a8d1c-eb), 就是问服务器, 我缓存的这个资源是标志号是599a8d1c-eb, match or not啊?
+      当服务器的响应中带有ETag Header值(如ETag:599a8d1c-eb), 浏览器缓存后想要验证这个响应,就发送一个带有If-None-Match Header的请求(如If-None-Match:599a8d1c-eb), 就是问服务器, 我缓存的这个资源是标志号是599a8d1c-eb, match or not啊?
     
   2. Last-Modified方式.
 
-  Last-Modified, 服务器在响应中加入这个header表示自己认定的这个资源的上次修改时间. 一般Nginx在Linux服务器直接用文件系统的修改时间. 带这个header的缓存, 在验证时发送带If-Modified-Since Header的请求.
+      Last-Modified, 服务器在响应中加入这个header表示自己认定的这个资源的上次修改时间. 一般Nginx在Linux服务器直接用文件系统的修改时间. 带这个header的缓存, 在验证时发送带If-Modified-Since Header的请求.
   
 
 服务器验证条件, 如果条件不满足, 返回302, 浏览器即认为, 缓存没改动过可以继续使用, 并更新一下过期时间和Age之类的属性, 相当于重获新生了.
