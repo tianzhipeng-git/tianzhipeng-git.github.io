@@ -25,7 +25,7 @@ comments: true
 
 HTTP缓存, 从类型上分两种shared cache / private cache, 前者可被中间代理和浏览器缓存,后者只能被浏览器缓存.
 
-![缓存类型](/resources/HTTPCachtType.png)
+![缓存类型](/resources/httpcache/HTTPCachtType.png)
 
 这两种缓存除使用范围限制, 其他没什么不同, 下文基本不做区分.
 
@@ -49,7 +49,7 @@ value则是对应的key(uri), 在之前发起请求时得到的响应消息.
 
 在chrome浏览器可以通过 chrome://cache/ 页面来查看当前的所有缓存
 
-![chrome缓存页面](/resources/chrome-cache.png)
+![chrome缓存页面](/resources/httpcache/chrome-cache.png)
 
 点进其中每一条, 就可以看到对应的被缓存的HTTP响应消息.
 
@@ -140,7 +140,7 @@ value则是对应的key(uri), 在之前发起请求时得到的响应消息.
               
   我弄了幅图来展示Age的问题:
   
-  ![Age计算](/resources/cache-age.png)
+  ![Age计算](/resources/httpcache/cache-age.png)
               
   (TODO 其实我一直在思考, 为什么不用Last-Modified的值来帮助计算Age? 有想法的可以分享一下) 
   
@@ -201,7 +201,7 @@ to prevent the “lost update" problem
           该指令用于响应时, 表示这条响应被缓存后, 每一次使用前都要验证.
       - max-age指令. 最大过期时间, 是一个时间长度, 格式如`3600` 单位秒.
       - ...cache-control还有好一些相关指令, 感兴趣的请参看RFC7234.cache-control过于复杂,在网上看到一张图帮你决策该如何设置cache-control.
-      ![set-cache-control](/resources/http-cache-decision-tree.png)
+      ![set-cache-control](/resources/httpcache/http-cache-decision-tree.png)
  
   - Expires: 顾名思义, 用于响应中, 设置过期时间, 是一个时间点, 格式如 `Thu, 01 Dec 1994 16:00:00 GMT`.
   - Age: 前文已述.
@@ -222,7 +222,7 @@ to prevent the “lost update" problem
   
   - 请求1 -> 响应1设置header被缓存 -> 请求2直接用缓存 ->请求3 发现过期,验证 ->响应2续命.
     即如图的过程, 这个过程极好, 一定要亲自试一下.
-    ![缓存示例](/resources/HTTPStaleness.png)
+    ![缓存示例](/resources/httpcache/HTTPStaleness.png)
   - 强刷时发送的什么(no-cache).
   - chrome对过期时间的启发式算法(即Last-Modified离得越久远, 缓存过期时间会越长)
   
@@ -241,7 +241,7 @@ to prevent the “lost update" problem
 
 Vary这个Header用于响应, 其值是另一个Header的名, 常见的用法比如Vary:User-Agent和Vary:Content-Encoding. 其效果是使用uri作为一级key, 使用Vary指定header的值作为二级key, 根据二级key的不同取值 缓存分开存分开取用的效果, 具体看图
 
-![HTTPVary](/resources/HTTPVary.png)
+![HTTPVary](/resources/httpcache/HTTPVary.png)
 ## 附加内容2: 缓存爆裂Cache Busting
 缓存爆裂,是我从Ruby on Rails中看到的一个词, 是指通过一定技术手段, 强行是的浏览器端的缓存失效, 达到爆裂效果, 使得浏览器获取资源的最新版本.
 
