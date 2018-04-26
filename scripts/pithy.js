@@ -16,4 +16,9 @@ $(function () {
             $('#gotop').stop().fadeOut("fast");
         }
     });
+    $('img').on('click', function () {
+        if (this.src) {
+            window.open(this.src);
+        }
+    })
 });

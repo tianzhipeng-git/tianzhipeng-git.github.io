@@ -3,63 +3,55 @@
         <div class="nav">
             {% if page.path == "index.html" %}
             <span class="title">
-				<li>
-            <img src="/favicon.ico" alt="pickaxe">
-					<a href="/index.html">{{ site.title }}</a>
-				</li>
-			</span>
+                <li>
+                    <img src="/favicon.ico" alt="pickaxe">
+                    <a href="/index.html">{{ site.title }}</a>
+                </li>
+            </span>
             {% else %}
             <li>
                 <img src="/favicon.ico" alt="pickaxe">
                 <a href="/index.html">{{ site.title }}</a>
             </li>
-            {% endif %}
-
-            {% if page.path == "archive.html" %}
+            {% endif %} {% if page.path == "/c/archive.html" %}
             <span class="title">
-				<li>
-					<a href="/archive.html">archive</a>
-				</li>
-			</span>
+                <li>
+                    <a href="/c/archive.html">archive</a>
+                </li>
+            </span>
             {% else %}
             <li>
-                <a href="/archive.html">archive</a>
+                <a href="/c/archive.html">archive</a>
             </li>
-            {% endif %}
-
-            {% if page.path == "category.html" %}
+            {% endif %} {% if page.path == "/c/category.html" %}
             <span class="title">
-				<li>
-					<a href="/category.html">category</a>
-				</li>
-			</span>
+                <li>
+                    <a href="/c/category.html">category</a>
+                </li>
+            </span>
             {% else %}
             <li>
-                <a href="/category.html">category</a>
+                <a href="/c/category.html">category</a>
             </li>
-            {% endif %}
-
-            {% if page.path == "tags.html" %}
+            {% endif %} {% if page.path == "/c/tags.html" %}
             <span class="title">
-				<li>
-					<a href="/tags.html">tags</a>
-				</li>
-			</span>
+                <li>
+                    <a href="/c/tags.html">tags</a>
+                </li>
+            </span>
             {% else %}
             <li>
-                <a href="/tags.html">tags</a>
+                <a href="/c/tags.html">tags</a>
             </li>
-            {% endif %}
-
-            {% if page.path == "about.html" %}
+            {% endif %} {% if page.path == "/c/about.html" %}
             <span class="title">
-				<li>
-					<a href="/about.html">about</a>
-				</li>
-			</span>
+                <li>
+                    <a href="/c/about.html">about</a>
+                </li>
+            </span>
             {% else %}
             <li>
-                <a href="/about.html">about</a>
+                <a href="/c/about.html">about</a>
             </li>
             {% endif %}
         </div>
