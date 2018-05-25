@@ -38,6 +38,7 @@ comments: true
 这个方案很简单, 也最常见.
 
 这个方案的一些变种: Flat Table: 再加一个level列, 存上自己在哪级. 存上一个Order/Rank列支持排序.
+
 ---
 # Path Enumeration
 
@@ -58,7 +59,7 @@ comments: true
 这个方案的一些变种: 
 
 - 配合邻接表一起用, 也存上parent和level;
-- 不用分隔符拼接path, 而是path上每一级存一列, 无限深度的树没法用.
+- 不用分隔符拼接path, 而是path上每一级存一列, 无限深度的树没法用
 
 ---
 # Nested Sets
