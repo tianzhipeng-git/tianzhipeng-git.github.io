@@ -5,9 +5,9 @@ layout: default
     <br>
     <header class="post-header">
         <h1 class="post-title">{{ page.title }}</h1>
-        <div class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{%
-            if page.author %} • {{ page.author }}{% endif %}{%
-            if page.meta %} • {{ page.meta }}{% endif %}
+        <div class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta
+            }}{% endif %}
+            <span id="wordcount"></span>
         </div>
         <span class="tags">
           {% for tag in page.tags %}
@@ -20,22 +20,35 @@ layout: default
         {{ content }}
     </article>
 
+    <!-- word count -->
+    <script src="https://cdn.jsdelivr.net/npm/countable@3.0.0/Countable.min.js"></script>
+    <script>
+        $(function () {
+            var post = document.getElementsByClassName("post-content")[0];
+            Countable.count(post, c => {
+                $("#wordcount").text("全文共" + c.characters + "字");
+            });
+        })
+    </script>
+
     {% if page.comments %}
     <div id="disqus_thread"></div>
     <script>
-
         var disqus_config = function () {
             this.page.url = "{{ site.url }}{{ site.baseurl }}{{ page.url }}";
             this.page.identifier = "{{ site.url }}{{ site.baseurl }}{{ page.url }}";
         };
         (function () { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
+            var d = document,
+                s = d.createElement('script');
             s.src = 'https://tzp-1991.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
 
     <!--<script id="dsq-count-scr" src="//tzp-1991.disqus.com/count.js" async></script>-->
     <!--<a href="{{ site.baseurl }}{{ page.url }}#disqus_thread">Link</a>-->

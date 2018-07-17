@@ -3,7 +3,7 @@ layout: post
 title: "关系型数据库中存储树形结构数据(hierarchical data)"
 date: 2018-04-02 23:23:23
 categories: database
-tags: database tree
+tags: database tree hierarchical
 comments: true
 ---
 现实环境中总会遇到这样的需求, 在关系型数据库中存储 分类/继承/多级/树状 的数据. 比如:
@@ -129,3 +129,8 @@ comments: true
 
 - [Stack Overflow问题](https://stackoverflow.com/questions/4048151/what-are-the-options-for-storing-hierarchical-data-in-a-relational-database). 很丰富.
 - [percona大神的ppt](https://www.slideshare.net/billkarwin/models-for-hierarchical-data). 著有<<SQL反模式>>.本文等同于对这个ppt的翻译.
+
+---
+# 后续
+
+遇到需要使用LDAP的情形, 调研时发现LDAP的场景就是一个这样的场景, 忽然意识到这应该叫做 层次模型, 对于层次模型, 按理说更应该使用基于层次模型的数据库, 但比较少见...
