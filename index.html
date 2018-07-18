@@ -4,19 +4,15 @@ layout: default
 
 <div class="home">
     <ul class="post-list">
-        {% for post in site.posts %}
-        {% if forloop.index >= 11 %}
+        {% for post in site.posts %} {% if forloop.index >= 11 %}
         <!--只显示前10篇-->
-        {% break %}
-        {% endif %}
+        {% break %} {% endif %}
         <li>
             <br>
             <h3>
-                <i class="fa fa-caret-right" aria-hidden="true"></i>
-
+                <a class="em"></a>
                 <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
             </h3>
-            <span class="post-meta">{{ post.date | date: "%b %-d, %Y %H:%m" }}</span>
             <hr id="line">
             <div class="content">
                 {{ post.excerpt }}
@@ -26,3 +22,12 @@ layout: default
         {% endfor %}
     </ul>
 </div>
+<script>
+    $(function () {
+        $(".post-link").each(function(index, ele) {
+            var emojiCode = Math.abs(ele.text.hashCode()) % 950 + 127744;
+            console.log(emojiCode);
+            $(ele).parent().children().first().text(String.fromCodePoint(emojiCode));
+        })
+    })
+</script>

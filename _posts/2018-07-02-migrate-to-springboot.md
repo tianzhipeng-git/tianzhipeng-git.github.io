@@ -7,10 +7,10 @@ tags: web spring
 comments: true
 ---
 
+Spring Boot 是一个整合类的项目, 官方自称 **"约定大于配置的快速启动框架"**, 核心是快速, 开箱即用.
+
 * TOC
 {:toc}
-
-Spring Boot 是一个整合类的项目, 官方自称 **"约定大于配置的快速启动框架"**, 核心是快速, 开箱即用.
 
 1.  maven 配置更自动化: **Starters**, 不用写版本号
 2.  项目配置更自动化: **AutoConfiguration**, 提前配置有很多 default 值.  抛弃 xml, 使用 java 方式 config

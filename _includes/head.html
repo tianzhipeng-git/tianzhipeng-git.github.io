@@ -13,6 +13,12 @@
   <script src="/scripts/pithy.js"></script>
   <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   <script>
+    String.prototype.hashCode = function() {
+      for(var ret = 0, i = 0, len = this.length; i < len; i++) {
+        ret = (31 * ret + this.charCodeAt(i)) << 0;
+      }
+      return ret;
+    };
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
