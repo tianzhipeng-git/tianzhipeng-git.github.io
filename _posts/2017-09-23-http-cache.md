@@ -47,7 +47,7 @@ value则是对应的key(uri), 在之前发起请求时得到的响应消息.
 
 (value可能是多条, 这就涉及二级Key(secondary key): 当content negotiation时, 使用Vary特定的header作为二级key,[后文](#附加内容1-vary-header和缓存的二级key)详细介绍)
 
-在chrome浏览器可以通过 chrome://cache/ 页面来查看当前的所有缓存
+在chrome浏览器可以通过 chrome://cache/ 页面来查看当前的所有缓存([这个功能在chrome66版本后移除了, 玛德](https://superuser.com/questions/1316540/where-has-chrome-cache-been-moved-to))
 
 ![chrome缓存页面](/resources/httpcache/chrome-cache.png)
 
@@ -254,8 +254,10 @@ Vary这个Header用于响应, 其值是另一个Header的名, 常见的用法比
 - 资源路径上做手脚: 唯一能通知客户端的机会, 就是浏览器打开页面的时候. 所以服务器在动态生成这个页面的时候, css等资源的路径, 是加上了指纹或者版本号的.
 
   像这样https://static.zhihu.com/heifetz/main.app.20324562c3086d23dafd.css 或 https://www.facebook.com/rsrc.php/v3/yO/l/1,cross/4Y0R4Z6VSQ_.css
-  在Spring MVC中提供了一种基于文件MD5的[静态文件指纹方案](https://spring.io/blog/2014/07/24/spring-framework-4-1-handling-static-web-resources)
-  
+
+  在Spring MVC中提供了一种基于文件MD5的[静态文件指纹方案](https://spring.io/blog/2014/07/24/spring-framework-4-1-handling-static-web-resources).
+  ([新版Spring也提供了ETag等方式](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-caching))
+
 ## 总结
 那么关于 什么是缓存/怎么做缓存/为何强刷/如何不强刷 这篇博客也是够长了.
 
