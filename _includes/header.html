@@ -13,17 +13,8 @@
                 <img src="/favicon.ico" alt="pickaxe">
                 <a href="/index.html">{{ site.title }}</a>
             </li>
-            {% endif %} {% if page.path == "/c/archive.html" %}
-            <span class="title">
-                <li>
-                    <a href="/c/archive.html">archive</a>
-                </li>
-            </span>
-            {% else %}
-            <li>
-                <a href="/c/archive.html">archive</a>
-            </li>
-            {% endif %} {% if page.path == "/c/category.html" %}
+            {% endif %} 
+            {% if page.path == "c/category.html" %}
             <span class="title">
                 <li>
                     <a href="/c/category.html">category</a>
@@ -33,17 +24,19 @@
             <li>
                 <a href="/c/category.html">category</a>
             </li>
-            {% endif %} {% if page.path == "/c/tags.html" %}
+            {% endif %} 
+            {% if page.path == "c/presentation.html" %}
             <span class="title">
                 <li>
-                    <a href="/c/tags.html">tags</a>
+                    <a href="/c/presentation.html">presentation</a>
                 </li>
             </span>
             {% else %}
             <li>
-                <a href="/c/tags.html">tags</a>
+                <a href="/c/presentation.html">presentation</a>
             </li>
-            {% endif %} {% if page.path == "/c/about.html" %}
+            {% endif %} 
+            {% if page.path == "c/about.html" %}
             <span class="title">
                 <li>
                     <a href="/c/about.html">about</a>

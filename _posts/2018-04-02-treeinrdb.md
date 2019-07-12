@@ -3,7 +3,7 @@ layout: post
 title: "关系型数据库中存储树形结构数据(hierarchical data)"
 date: 2018-04-02 23:23:23
 categories: database
-tags: database tree hierarchical
+tags: database hierarchical
 comments: true
 ---
 现实环境中总会遇到这样的需求, 在关系型数据库中存储 分类/继承/多级/树状 的数据. 比如:
