@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ansible小工具分享</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="file:///usr/local/lib/python3.7/site-packages/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="file:///usr/local/lib/python3.7/site-packages/landslide/themes/default/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="file:///usr/local/lib/python3.7/site-packages/landslide/themes/default/js/slides.js"></script>
+    
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-1">
+          <div class="inner">
+            
+            <header><h1>Ansible小工具分享</h1></header>
+            
+            
+            <section><blockquote>
+<h2>ansible dmpwebservers -a "free -g"</h2>
+</blockquote>
+<p><img alt="freeg.png" src="file:///Users/tzp/Documents/private/cnm/ansible/介绍/img/freeg.png" /></p>
+<h2>By DMP Team TZP 20180131</h2></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h2>介绍</h2></header>
+            
+            
+            <section><p>搜自动化部署/自动化运维时搜到的, 被拿来和puppet之类的工具对比, 也可以和jenkins对比:</p>
+<p>Ansible更纯粹: 登录远程服务器搞一些事情</p>
+<ul>
+<li>没有什么配管, ci, cd之类的说法, 能搞一些你想到的事</li>
+<li>不需要在目标机上装agent, 只要ssh就能工作, 完美读取我们的.ssh/config</li>
+<li>不需要想jenkins那样是一个server, 就是一个命令行小工具, 拿来就用</li>
+</ul>
+<p>当然我也没用过其他的自动部署/配管工具, 所以可能说的有些偏颇</p>
+<p>刚才那条命令:</p>
+<ul>
+<li><a href="http://docs.ansible.com/ansible/latest/intro_installation.html">下载安装</a> pip install ansible</li>
+<li>创建inventory文件.(yml语法, 注意格式)</li>
+<li>为了不用每次指定inventory, 在当前工作目录搞一个ansible.cfg文件, inventory配置在里面. (复制我的即可)</li>
+<li>执行</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h2>inventory 服务器清单</h2></header>
+            
+            
+            <section><ul>
+<li>
+<p>静态清单文件 inventory.yml
+  Hosts and Groups and Variables</p>
+</li>
+<li>
+<p>动态inventory: 配合AWS/OpenStack/自己的CMDB</p>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h2>Ad-Hoc Command</h2></header>
+            
+            
+            <section><p>就是说临时的一个命令, 刚才我们执行的就是一个ad-hoc命令.</p>
+<p>用法 <code>ansible targethosts -m module -a arguments</code></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h2>module 模块</h2></header>
+            
+            
+            <section><p>内建好的各种功能的库.</p>
+<p>默认是使用command模块, 即去远程服务器执行命令</p>
+<p>一些常见的模块:</p>
+<ul>
+<li>yum(package) </li>
+<li>service</li>
+<li>file</li>
+<li>copy</li>
+<li>iptables</li>
+<li>template</li>
+<li>lineinfile/blockinfile</li>
+<li>expect</li>
+</ul>
+<p><a href="http://docs.ansible.com/ansible/latest/modules_by_category.html">modules目录</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-6">
+          <div class="inner">
+            
+            <header><h2>Playbook (test0,1)</h2></header>
+            
+            
+            <section><p>与刚才临时命令比, Playbook就是把要做的事情写到yaml语法的文件里. 这就强大多了.</p>
+<ol>
+<li>可以上git</li>
+<li>可以复用</li>
+</ol>
+<p>playbook结构:</p>
+<ul>
+<li>playbook可以包含多个play. </li>
+<li>play就是对一组服务器hosts描述一组操作tasks和roles</li>
+<li>task就是要执行的任务, 就是我们刚才说的module</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h2>变量 facts and variables (test2)</h2></header>
+            
+            
+            <section><ul>
+<li>facts: 关于服务器信息的事实. playbook会默认启用setup模块来收集fact: <code>ansible 3230 -m setup</code>, 常用:<ul>
+<li>ansible_os_family (test0 - debug: var=ansible_os_family)</li>
+<li>ansible_pkg_mgr</li>
+<li>ansible_all_ipv4_addresses</li>
+</ul>
+</li>
+<li>variables: 变化的量, 有很多地方可以定义<ul>
+<li>hosts处定义 (- debug: var=foo)</li>
+<li>play处定义 </li>
+<li>register 将task结果注册为变量</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            <header><h2>变量的使用</h2></header>
+            
+            
+            <section><p>jinja2语法:</p>
+<ul>
+<li>play里 {{}} (test02:36)</li>
+<li>templates里 (见cron dump)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h2>条件和循环</h2></header>
+            
+            
+            <section><p>简略一看</p>
+<ul>
+<li>when</li>
+<li>with_items</li>
+<li>with_file</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-10">
+          <div class="inner">
+            
+            <header><h2>Reusable 复用</h2></header>
+            
+            
+            <section><ul>
+<li>文件复用<ul>
+<li>静态import (见template_to_block)</li>
+<li>动态include 没试过</li>
+</ul>
+</li>
+<li>Role 独立自治的可重用playbooks<ul>
+<li>目录结构 (ansible-galaxy init arole)</li>
+<li><a href="galaxy.ansible.com/list#/roles">galaxy</a></li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-11">
+          <div class="inner">
+            
+            <header><h2>WARNING</h2></header>
+            
+            
+            <section><ul>
+<li>可以每次执行playbook, 都会告诉你哪些机器 ok了多少, changed了多少, failed了多少</li>
+<li>很多module的指令都是present/absent.</li>
+</ul>
+<p>因为ansible的设计哲学是: <strong>去描述服务器应该处于的状态, 而不是写你要进行的操作</strong>.</p>
+<p>所以大多内置模块的功能都已经做到了这种幂等性, 多次执行也没关系, ansible检查达到了想要的状态就不会重复操作.</p>
+<p>而一些类型command的模块, ansible无法判断目标机上的状态是否ok, 是否执行过, 就需要我们注意了.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: README.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-12">
+          <div class="inner">
+            
+            <header><h2>参考资料</h2></header>
+            
+            
+            <section><ul>
+<li><a href="http://docs.ansible.com/ansible/latest/intro.html">ansible文档</a></li>
+<li>初写playbook最容易犯的错误就是, yaml语法不允许冒号后面直接说jinja2的变量符. 如 foo: {{ bar }}</li>
+<li><a href="https://learnxinyminutes.com/docs/zh-cn/yaml-cn/">learn yaml in y minutes</a></li>
+<li><a href="http://www.yaml.org/spec/1.2/spec.html">yaml语法</a></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="README.md">README.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/12
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Ansible小工具分享</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-2" class="sub">
+          <th><a href="#slide2">介绍</a></th>
+          <td><a href="#slide2">2</a></td>
+        </tr>
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">inventory 服务器清单</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">Ad-Hoc Command</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">module 模块</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">Playbook (test0,1)</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">变量 facts and variables (test2)</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">变量的使用</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">条件和循环</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">Reusable 复用</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+        <tr id="toc-row-11" class="sub">
+          <th><a href="#slide11">WARNING</a></th>
+          <td><a href="#slide11">11</a></td>
+        </tr>
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">参考资料</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>

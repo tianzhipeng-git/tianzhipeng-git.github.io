@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>blockchain demo</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="file:///usr/local/lib/python3.7/site-packages/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="file:///usr/local/lib/python3.7/site-packages/landslide/themes/default/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="file:///usr/local/lib/python3.7/site-packages/landslide/themes/default/js/slides.js"></script>
+    
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_notes slide-1">
+          <div class="inner">
+            
+            <header><h1>blockchain demo</h1></header>
+            
+            
+            <section><p>一个分布式账本</p>
+<ul>
+<li>分布式/p2p网络</li>
+<li>密码学 (非对称RSA/哈希SHA)</li>
+<li>共识算法 (POW POS)</li>
+</ul>
+<p>by 田志鹏 20180319</p>
+<p>本文所有试验均来自: git@github.com:Haseeb-Qureshi/lets-build-a-blockchain.git</p>
+<p class="notes">分布式一致性问题</p>
+<p class="notes">链上就有序且不可改动了: 时间戳服务器</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-2">
+          <div class="inner">
+            
+            <header><h2>stage1 电子货币</h2></header>
+            
+            
+            <section><p>功能:</p>
+<ul>
+<li>账户</li>
+<li>余额</li>
+<li>转账</li>
+</ul>
+<p>问题:</p>
+<ul>
+<li>没有认证 不安全</li>
+<li>没有'去中心化'</li>
+<li>没有价值</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-3">
+          <div class="inner">
+            
+            <header><h2>stage2 gossip网络</h2></header>
+            
+            
+            <section><ul>
+<li>从1个节点开始</li>
+<li>所有节点平等, 互相gossip</li>
+<li>最终一致性</li>
+<li>随意加入离开</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-4">
+          <div class="inner">
+            
+            <header><h2>stage3 加密</h2></header>
+            
+            
+            <section><ul>
+<li>加密传输: 公钥加密 私钥解密</li>
+<li>签名: 私钥加密 公钥解密</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-5">
+          <div class="inner">
+            
+            <header><h2>stage4 POW</h2></header>
+            
+            
+            <section><h3>共识算法</h3>
+<p>哈希谜题:</p>
+<ul>
+<li>碰撞阻力. (不冲突)</li>
+<li>隐秘性. (根据结果和函数猜不出原值)</li>
+<li>谜题友好. (没有规律,只能一个一个尝试)</li>
+</ul>
+<p>特点:</p>
+<ul>
+<li>难算</li>
+<li>易于验证</li>
+<li>可调整难度(目的是控制时间/速度么?)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-6">
+          <div class="inner">
+            
+            <header><h2>stage5 块和链</h2></header>
+            
+            
+            <section><ul>
+<li>前序块hash</li>
+<li>Message</li>
+<li>Nonce</li>
+<li>自己算的hash</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-7">
+          <div class="inner">
+            
+            <header><h2>stage6 coin</h2></header>
+            
+            
+            <section><p>关于比特币的细节:</p>
+<ul>
+<li>fork choice rule</li>
+<li>转账方式</li>
+<li>6块确认交易</li>
+<li>in/out操作</li>
+<li>交易信息的梅克尔树</li>
+<li>脚本</li>
+<li>coinbase奖励</li>
+<li>挖矿难度控制</li>
+</ul>
+<p>共识算法? 有没有币/公认的价值? 币圈/链圈. 公有链/私有链联盟链</p>
+<p>存的data不同? 币/智能合约</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-8">
+          <div class="inner">
+            
+            
+            <section><p>币圈:</p>
+<ul>
+<li><del style="font-size: 1px;">货币的价值在于有人相信他有价值, 各种奇怪币, 买了的都是韭菜. </del></li>
+<li><del style="font-size: 1px;">矿工挖矿的成本 和 比特币价值 最终会达成市场均衡状态, 现在进场已无法一夜暴富, 只富了卖矿机的人.</del></li>
+<li><del style="font-size: 1px;">去中心化慢慢的中心化了?</del></li>
+<li><del style="font-size: 1px;">疯狂的大佬相信的价值网络意义何在?</del></li>
+</ul>
+<p>链圈:</p>
+<ul>
+<li><del style="font-size: 1px;">使用算力的POW不好, 如何解决?</del></li>
+<li><del style="font-size: 1px;">智能合约 应用场景?</del></li>
+</ul>
+<p>本来写的这页为什么删了呢, 怕耽误大家发财. </p>
+<p>请忘掉刚才的技术细节, 提防洗脑的同时阅读<a href="https://mp.weixin.qq.com/s?__biz=MzAwNTIwOTE4MA==&amp;mid=2649434738&amp;idx=1&amp;sn=6795ca3c421d89c06ab911d82b1d7413&amp;chksm=833fa741b4482e5710c3d6a38cec19e7454de17c0011adf594c8ac91be68861d93bd7610a383&amp;mpshare=1&amp;scene=23&amp;srcid=0307dzjY3UtXsHO2B648FmWN%23rd">三点钟无眠区块链 微信群</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: blockchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide slide-9">
+          <div class="inner">
+            
+            <header><h2>参考</h2></header>
+            
+            
+            <section><ul>
+<li><a href="https://github.com/Haseeb-Qureshi/lets-build-a-blockchain">本demo的github地址和优兔网视频</a></li>
+<li>&lt;&lt; Bitcoin and Cryptocurrency Technologies: A Comprehensive Introduction &gt;&gt; &lt;&lt;区块链 技术驱动金融&gt;&gt;</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAwNTIwOTE4MA==&amp;mid=2649434738&amp;idx=1&amp;sn=6795ca3c421d89c06ab911d82b1d7413&amp;chksm=833fa741b4482e5710c3d6a38cec19e7454de17c0011adf594c8ac91be68861d93bd7610a383&amp;mpshare=1&amp;scene=23&amp;srcid=0307dzjY3UtXsHO2B648FmWN%23rd">三点钟无眠区块链 微信群</a></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="blockchain.md">blockchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/9
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">blockchain demo</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-2" class="sub">
+          <th><a href="#slide2">stage1 电子货币</a></th>
+          <td><a href="#slide2">2</a></td>
+        </tr>
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">stage2 gossip网络</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">stage3 加密</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">stage4 POW</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">stage5 块和链</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">stage6 coin</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">-</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">参考</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
