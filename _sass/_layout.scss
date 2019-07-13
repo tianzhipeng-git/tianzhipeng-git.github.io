@@ -11,8 +11,8 @@ html, body {
 }
 
 .header-container {
-  max-width: 900px;
-  margin: 0px auto;
+  // max-width: 900px;
+  margin: 0px 0px 0px 50px;
 }
 
 .nav {
@@ -20,7 +20,6 @@ html, body {
   text-transform: uppercase;
   font-size: 16px;
   font-weight: 600;
-  font-family: "Montserrat", sans-serif;
   display: inline;
 }
 
@@ -146,7 +145,6 @@ li {
  */
 .well {
   color: #000;
-  font-family: Monaco, "Courier New", monospace;
 }
 
 .well ul {
@@ -178,15 +176,6 @@ li {
   color: #666;
 }
 
-/**
- * Footer
- */
-.footer {
-  font-size: 21px;
-  text-align: center;
-  //background-color: #515865;
-  color: #959BA6;
-}
 
 #gotop {
   position: fixed;
@@ -197,12 +186,4 @@ li {
   background: #515865;
   color: white;
   cursor: pointer;
-}
-
-//markdown-toc
-#markdown-toc {
-  position: fixed;
-  top: 150px;
-  right: 10px;
-  max-width: 300px;
 }

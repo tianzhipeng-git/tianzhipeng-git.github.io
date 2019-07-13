@@ -20,13 +20,6 @@ body {
   background-color: $background-color;
   -webkit-text-size-adjust: 100%;
 }
-//body {
-//  font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
-//  font-size: 13px;
-//  line-height: 18px;
-//  color: #737373;
-//  background-color: white;
-//}
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
@@ -75,7 +68,10 @@ li {
  * Headings
  */
 .post-header {
-  padding-bottom: 10px;
+  padding-bottom: 50px;
+}
+.post-title {
+  font-size: 40px;
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
@@ -106,10 +102,10 @@ a {
  * Wrapper
  */
 .wrapper {
-  max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-  max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
-  margin-right: auto;
-  margin-left: auto;
+  // max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+  // max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
+  margin-right: 350px;
+  margin-left: 50px;
   padding-right: $spacing-unit;
   padding-left: $spacing-unit;
   @extend %clearfix;
@@ -149,18 +145,6 @@ a {
       fill: $grey-color;
     }
   }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote {
-  margin: 0;
-  padding: 0;
 }
 
 table {
@@ -205,24 +189,24 @@ h6 {
 }
 
 h1 {
-  margin-bottom: 18px;
-  font-size: 30px;
+  margin: 18px 0;
+  font-size: 36px;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 30px;
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 h4 {
-  font-size: 16px;
+  font-size: 17px;
 }
 
 h5 {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 h6 {
@@ -255,17 +239,8 @@ blockquote {
 blockquote {
   padding: 13px 13px 21px 15px;
   margin-bottom: 18px;
-  font-family: georgia, serif;
   font-style: italic;
 }
-
-//blockquote:before {
-//  content: "\201C";
-//  font-size: 40px;
-//  margin-left: -10px;
-//  font-family: georgia, serif;
-//  color: #eee;
-//}
 
 blockquote p {
   font-size: 14px;
@@ -285,7 +260,6 @@ code {
   border-radius: 3px;
   background-color: #f5f5f5;
   padding: 1px 5px;
-  font-family: Monaco, Andale Mono, Courier New, monospace;
 }
 
 code {
@@ -316,6 +290,18 @@ pre {
     font-size: 11px;
     padding: 0;
   }
+}
+
+//markdown-toc
+#markdown-toc {
+  position: fixed;
+  top: 150px;
+  right: 10px;
+  width: 300px;
+  height: 500px;
+  overflow-y: scroll;
+  border-bottom: 2px solid;
+  border-top: 2px solid;
 }
 
 sup {

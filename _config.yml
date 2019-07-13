@@ -1,7 +1,6 @@
 # Site settings
 title: pickaxe's blog
 email: tzp_1991@qq.com
-motto: "code, thought, growth"
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://tianzhipeng.oschina.io" # the base hostname & protocol for your site
 permalink: /:year/:month/:day/:title.html
