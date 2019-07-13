@@ -4,8 +4,8 @@ title: "test asciidoc ff"
 categories: http
 tags: presentation algo bigdata
 comments: true
+excerpt: ' '
 ---
-fsdfsafsa
 
 = Sample Page
 :url-asciidoctor: http://asciidoctor.org
