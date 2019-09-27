@@ -24,7 +24,7 @@ comments: true
 # 解决方法
 
 
-[(完整源码在此)](/resources/threadprint10/thread1To10.tgz)
+[(完整源码在这里)](/resources/threadprint10/thread1To10.tgz) 或 [这里](https://gitee.com/tianzhipeng/CodeAccumulate/tree/master/src/main/java/cn/pugle/mianshi/thread1To10)
 
 虽然写了很多个类, 0是展示错误, 3和4是一样的, 所以大约提出了六七个方法吧. (代码为了展示现象打印到了100)
 
@@ -77,9 +77,24 @@ comments: true
 
 用其他的BlockingQueue也可以, 或者类似6a这种用两个对象的思路.
 
-# 总结
+# 性能/总结
 
-可能出的问题/bug:
+用jmh跑了几次benchmark, 结果如下:
+
+<pre>
+PrintToTen1   avgt   10  2.994 ± 1.799  ms/op
+PrintToTen6   avgt   10  2.869 ± 1.021  ms/op
+PrintToTen6a  avgt   10  2.836 ± 1.176  ms/op
+PrintToTen7   avgt   10  2.726 ± 1.111  ms/op
+PrintToTen2   avgt   10  2.412 ± 0.847  ms/op
+PrintToTen5   avgt   10  2.447 ± 0.988  ms/op
+PrintToTen3   avgt   10  1.847 ± 0.523  ms/op
+PrintToTen4   avgt   10  1.837 ± 0.495  ms/op
+</pre>
+
+可以看出, 无锁的方案3,4是最快的(不确定是否有bug), 其次condition和wait方案也不错. 有锁又空转的最差.
+
+解决这个问题时可能出的bug:
 1. 共享的counter变量如何传递给两个线程
 
     我这里的代码用的是匿名类, 所以可以直接访问到外层类的成员变量, 直接用的基本类型int也不会有问题, 两个线程都读的是同一个变量; 如果不是这种匿名类, 而是单独的类, 那么如何让两个类使用同一个counter就是一个问题
