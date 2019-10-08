@@ -24,7 +24,7 @@ comments: true
 # 解决方法
 
 
-[(完整源码在这里)](/resources/threadprint10/thread1To10.tgz) 或 [这里](https://gitee.com/tianzhipeng/CodeAccumulate/tree/master/src/main/java/cn/pugle/mianshi/thread1To10)
+(完整源码在 [这里](/resources/threadprint10/thread1To10.tgz) 或 [这里](https://gitee.com/tianzhipeng/CodeAccumulate/tree/master/src/main/java/cn/pugle/mianshi/thread1To10) )
 
 虽然写了很多个类, 0是展示错误, 3和4是一样的, 所以大约提出了六七个方法吧. (代码为了展示现象打印到了100)
 
@@ -61,7 +61,7 @@ comments: true
 ## 3 没有锁?
 ![3](/resources/threadprint10/3.png)
 
-这个方法还不确定有没有bug
+这个方法还不确定有没有bug, 直接用jmh run了好几分钟不出错不代表没有bug.
 ## 5 Lock + condition
 ![5](/resources/threadprint10/5.png)
 ## 6 Semaphore
@@ -92,7 +92,7 @@ PrintToTen3   avgt   10  1.847 ± 0.523  ms/op
 PrintToTen4   avgt   10  1.837 ± 0.495  ms/op
 </pre>
 
-可以看出, 无锁的方案3,4是最快的(不确定是否有bug), 其次condition和wait方案也不错. 有锁又空转的最差.
+可以看出, 无锁的方案3,4是最快的, 其次condition和wait方案也不错. 有锁又空转的最差.
 
 解决这个问题时可能出的bug:
 1. 共享的counter变量如何传递给两个线程
