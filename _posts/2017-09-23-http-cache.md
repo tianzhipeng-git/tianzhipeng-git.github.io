@@ -2,7 +2,7 @@
 layout: post
 title: "HTTP缓存机制介绍"
 date: 2017-09-22 16:23:32
-categories: http
+categories: network
 tags: http cache web rfc presentation
 comments: true
 ---

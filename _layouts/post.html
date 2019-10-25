@@ -5,15 +5,21 @@ layout: default
     <br>
     <header class="post-header">
         <h1 class="post-title">{{ page.title }}</h1>
-        <div class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta
+        <div class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} •
+            {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta
             }}{% endif %}
             <span id="wordcount"></span>
         </div>
         <span class="tags">
-          {% for tag in page.tags %}
-          <a class="tag" href="{{ site.baseurl }}/tags#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
-          {% endfor %}
-      </span>
+            {% for tag in page.tags %}
+            <a class="tag" href="{{ site.baseurl }}/c/tags#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+            {% endfor %}
+        </span>
+        <div>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+                <img class="noopen" alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+            </a>
+        </div>
     </header>
 
     <article class="post-content">
@@ -25,8 +31,10 @@ layout: default
     <script>
         $(function () {
             var post = document.getElementsByClassName("post-content")[0];
+            var noncount = $("#character-noncount").text() || 0;
             Countable.count(post, c => {
-                $("#wordcount").text("全文共" + c.characters + "字");
+                var r = c.characters - noncount
+                $("#wordcount").text("全文约" + r + "字");
             });
         })
     </script>

@@ -7,8 +7,6 @@ permalink: /:year/:month/:day/:title.html
 
 # Build settings
 markdown: kramdown
-plugins:
-- jekyll-asciidoc
 
 asciidoctor: {}
 asciidoc: {}
