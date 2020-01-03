@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "理解https原理(TLS1.3)"
+title: "理解https原理&TLS1.3"
 date: 2019-10-16 23:23:23
 categories: network
-tags: http web
+tags: http web presentation
 comments: true
 ---
 
@@ -185,6 +185,7 @@ p是一个超大的质数, g是p的一个[原根](https://zh.wikipedia.org/wiki/
 openssl ciphers -v | column -t #列出当前openssl支持的ciper suite列表
 openssl s_client  -no_ticket  -connect baidu.com:443 #作为TLS客户端建立连接
 openssl version -d #查看本地信任的CA的证书位置
+bopenssl s_client  -no_ticket  -connect www.baidu.com:443 -keylogfile=/Users/tzp/data/cer/sslkeylogfile #保存握手秘钥到文件, wireshark解包时用
 
 #[接下来几步生成一对公私钥和自签名的证书](https://www.jianshu.com/p/81dbcde4fd7c)
 openssl genrsa -out bd.key 2048 #生成私钥
@@ -261,7 +262,7 @@ TLS已经广泛运行十多年了, 有太多中间软件支持1.2版本, 而1.3�
 本来想基于历史上出现的漏洞来分析TLS协议的更新过程和目的, 这样才能更好的了解为什么协议这样设计/这样更改. 但是水平和时间有限啊.
 
 - [超全的一篇博客, 本文写到一半时看到它, 瞬间不想写自己的了, 不过它是基于TLS1.2写的, 本文1.3](https://www.cnblogs.com/thammer/p/7654925.html)
-- [RFC8846: TLS 1.3](https://tools.ietf.org/html/rfc8846); (前三个版本的RFC是2246, 4346, 5246)
+- [RFC8446: TLS 1.3](https://tools.ietf.org/html/rfc8446); (前三个版本的RFC是2246, 4346, 5246)
 - [RFC5280: X.509](https://tools.ietf.org/html/rfc5280)
 - [RFC7468: PEM](https://tools.ietf.org/html/rfc7468)
 - [RFC4492: ECC for TLS](https://tools.ietf.org/html/rfc4492)

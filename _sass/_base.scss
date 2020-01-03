@@ -73,9 +73,6 @@ li {
 .post-title {
   font-size: 40px;
 }
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;
-}
 
 .post h2, .post h3, .post h4, .post h5, .post h6 {
   font-weight: 600;
@@ -189,11 +186,13 @@ h6 {
 }
 
 h1 {
-  margin: 18px 0;
+  margin: 25px 0;
+  font-weight: 900;
   font-size: 36px;
 }
 
 h2 {
+  margin: 22px 0;
   font-size: 30px;
 }
 
