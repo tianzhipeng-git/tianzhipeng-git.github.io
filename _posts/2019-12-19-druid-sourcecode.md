@@ -36,7 +36,8 @@ DeepStorage就是文件底层存储, 我们一般都用HDFS, 有一点注意的�
 
 ## Druid数据模型
 
-![druid4](/resources/druid0/druid4.png)
+<img src="/resources/druid0/druid4.png" width="700"/>
+
 接着回忆一下druid的数据形式:
 - 所有数据是分DataSource存储, 
 - DataSource根据时间划分为segment,
@@ -44,7 +45,8 @@ DeepStorage就是文件底层存储, 我们一般都用HDFS, 有一点注意的�
 
 ## Druid源码目录结构
 
-![druid5](/resources/druid0/druid5.png)
+<img src="/resources/druid0/druid5.png" width="700"/>
+
 如图是druid源码的最外层目录结构, 我把其中关键的模块标记了出来. 其他无关的除非有需要, 否则也不用关注.
 
 这里说一下拿到这个源码我首先做的一些事吧:
@@ -56,10 +58,12 @@ DeepStorage就是文件底层存储, 我们一般都用HDFS, 有一点注意的�
 - 参考druid发行版中的启动脚本, 为Idea本地调试搭建环境, 配置Idea的run参数
 - Druid分节点的好处, 可以用打好的包跑其他节点, 只用Idea跑我关心的historical节点
 
-![druid6](/resources/druid0/druid6.png)
+<img src="/resources/druid0/druid6.png" width="700"/>
+
 然后终于能编译通过run起来了, 图中是需要修改的配置和idea的run配置
 
-![druid7](/resources/druid0/druid7.png)
+<img src="/resources/druid0/druid7.png" width="700"/>
+
 图中是一些重要的package, 从左到右分别是: 
 - cli: 各种节点的启动相关的类.
 - server: 各个节点的功能的相关类.
@@ -78,7 +82,7 @@ DeepStorage就是文件底层存储, 我们一般都用HDFS, 有一点注意的�
 
 首先我刚才提到了, 整个Druid无论查询还是管理, 都是通过http接口对外提供服务的, 作为一个写过web的选手, 我第一想法肯定是从请求发给Druid开始入手.
 
-![druid8](/resources/druid0/druid8.png)
+<img src="/resources/druid0/druid8.png" width="500"/>
 
 Druid肯定不是用的SpringMVC这类的大型框架来做的, 但是在java里做web基本都是基于servlet的, 如图最下层就是servlet包, 定义了一套接口, 像Tomcat和Jetty是Servlet容器, 是真的实现逻辑.
 而向上有一个我们不常用的接口层, 叫jax rs, java api for restful web servcies, 就是在servlet基础上, 定义了一套RESTFUL服务的api
@@ -127,14 +131,13 @@ public class QueryResource implements QueryCountStatsProvider {``
 这就是一个Jersey的HTTP请求接收的类, 可以看出, 和我们基于Spring的web接口大同小异, 里面管这个叫Resource, 只要找XXResource作为HTTP请求的入口即可. Jersey项目比较小而轻量.
 
 ## 使用Guice管理依赖注入
-
-![druid-10](/resources/druid0/druid-10.png)
+<img src="/resources/druid0/druid-10.png" width="500"/>
 
 依赖注入是干什么的大家应该都知道, Guice(发音同juice)是谷歌开源的一个依赖注入框架, 图是guice介绍视频里的, 觉得有点意思.
 
 Guice这个依赖注入框架也是很简单轻量, 只需要弄懂4个概念就行. 
 
-![druid-11](/resources/druid0/druid-11.png)
+<img src="/resources/druid0/druid-11.png" width="700"/>
 
 1. 我们知道依赖注入这个事就是管理一堆类和对象. 在guice中, `Injector`这个类就是guice管理对象的大管家, 使用guice都要获取一个injector, 它和Spring里面的ApplicationContext很像
 
