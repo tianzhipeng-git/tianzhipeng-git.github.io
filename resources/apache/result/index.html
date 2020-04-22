@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>367projects/2020.04.22</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+    <div id="app">
+        <el-button @click="clearFilter">清除所有过滤器</el-button>
+        <el-table ref="filterTable" :data="tableData" style="width: 100%" height="800"
+            :row-class-name="tableRowClassName">
+            <el-table-column type="expand">
+                <template slot-scope="props">
+                    <el-form label-position="left" inline class="demo-table-expand">
+                        <el-form-item label="name">
+                            <span>{{ props.row.name }}</span>
+                        </el-form-item>
+                        <el-form-item label="homepage">
+                            <a v-bind:href="props.row.homepage" target="_blank"
+                                rel="noopener noreferrer">{{props.row.homepage}}</a>
+                        </el-form-item>
+                        <el-form-item label="license">
+                            <span>{{ props.row.license | licensefmt }}</span>
+                        </el-form-item>
+                        <el-form-item label="repository">
+                            <span>{{ props.row.repository }}</span>
+                        </el-form-item>
+                        <el-form-item label="created">
+                            <span>{{ formattime(props.row) }}</span>
+                        </el-form-item>
+                    </el-form>
+                    <span>{{ formatdesc1(props.row) }}</span>
+                </template>
+            </el-table-column>
+
+            <el-table-column prop="name" label="名称" sortable width="200"></el-table-column>
+            <el-table-column prop="category" label="类别" width="200" sortable :filters="catefilter"
+                :filter-method="filterHandler"></el-table-column>
+            <el-table-column prop="programming-language" label="语言" width="200" sortable :filters="langfilter"
+                :filter-method="filterHandler"></el-table-column>
+            <el-table-column prop="shortdesc" label="描述" :formatter="formatdesc" width="800"></el-table-column>
+        </el-table>
+    </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="rs.js"></script>
+<script src="cst.js"></script>
+<script>
+    for (i = 0; i <= 366; i++) {
+        var nm = rs[i].name;
+        if (cst[nm]) {
+            for (j in cst[nm]) {
+                rs[i][j] = cst[nm][j]
+            }
+        }
+    }
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                langfilter: [{
+                        text: "ActionScript",
+                        value: "ActionScript"
+                    },
+                    {
+                        text: "BASH",
+                        value: "BASH"
+                    },
+                    {
+                        text: "Bash",
+                        value: "Bash"
+                    },
+                    {
+                        text: "C",
+                        value: "C"
+                    },
+                    {
+                        text: "C#",
+                        value: "C#"
+                    },
+                    {
+                        text: "C++",
+                        value: "C++"
+                    },
+                    {
+                        text: "D",
+                        value: "D"
+                    },
+                    {
+                        text: "Dart",
+                        value: "Dart"
+                    },
+                    {
+                        text: "Delphi",
+                        value: "Delphi"
+                    },
+                    {
+                        text: "Erlang",
+                        value: "Erlang"
+                    },
+                    {
+                        text: "Freemarker",
+                        value: "Freemarker"
+                    },
+                    {
+                        text: "Go",
+                        value: "Go"
+                    },
+                    {
+                        text: "Groovy",
+                        value: "Groovy"
+                    },
+                    {
+                        text: "Haskell",
+                        value: "Haskell"
+                    },
+                    {
+                        text: "Haxe",
+                        value: "Haxe"
+                    },
+                    {
+                        text: "JDBC",
+                        value: "JDBC"
+                    },
+                    {
+                        text: "JSP",
+                        value: "JSP"
+                    },
+                    {
+                        text: "Java",
+                        value: "Java"
+                    },
+                    {
+                        text: "JavaScript",
+                        value: "JavaScript"
+                    },
+                    {
+                        text: "OCaml",
+                        value: "OCaml"
+                    },
+                    {
+                        text: "ODBC",
+                        value: "ODBC"
+                    },
+                    {
+                        text: "Objective-C",
+                        value: "Objective-C"
+                    },
+                    {
+                        text: "PHP",
+                        value: "PHP"
+                    },
+                    {
+                        text: "Perl",
+                        value: "Perl"
+                    },
+                    {
+                        text: "Python",
+                        value: "Python"
+                    },
+                    {
+                        text: "R",
+                        value: "R"
+                    },
+                    {
+                        text: "Ruby",
+                        value: "Ruby"
+                    },
+                    {
+                        text: "Rust",
+                        value: "Rust"
+                    },
+                    {
+                        text: "SQL",
+                        value: "SQL"
+                    },
+                    {
+                        text: "SVG",
+                        value: "SVG"
+                    },
+                    {
+                        text: "Scala",
+                        value: "Scala"
+                    },
+                    {
+                        text: "SmallTalk",
+                        value: "SmallTalk"
+                    },
+                    {
+                        text: "Tcl",
+                        value: "Tcl"
+                    },
+                    {
+                        text: "XML",
+                        value: "XML"
+                    },
+                    {
+                        text: "node.js",
+                        value: "node.js"
+                    }
+                ],
+                catefilter: [{
+                        text: "ttt",
+                        value: "ttt"
+                    }, {
+                        text: "big-data",
+                        value: "big-data"
+                    },
+                    {
+                        text: "build-management",
+                        value: "build-management"
+                    },
+                    {
+                        text: "cloud",
+                        value: "cloud"
+                    },
+                    {
+                        text: "content",
+                        value: "content"
+                    },
+                    {
+                        text: "database",
+                        value: "database"
+                    },
+                    {
+                        text: "graphics",
+                        value: "graphics"
+                    },
+                    {
+                        text: "hadoop",
+                        value: "hadoop"
+                    },
+                    {
+                        text: "http",
+                        value: "http"
+                    },
+                    {
+                        text: "httpd-module",
+                        value: "httpd-module"
+                    },
+                    {
+                        text: "javaee",
+                        value: "javaee"
+                    },
+                    {
+                        text: "library",
+                        value: "library"
+                    },
+                    {
+                        text: "network-client",
+                        value: "network-client"
+                    },
+                    {
+                        text: "network-server",
+                        value: "network-server"
+                    },
+                    {
+                        text: "osgi",
+                        value: "osgi"
+                    },
+                    {
+                        text: "retired",
+                        value: "retired"
+                    },
+                    {
+                        text: "security",
+                        value: "security"
+                    },
+                    {
+                        text: "testing",
+                        value: "testing"
+                    },
+                    {
+                        text: "web-framework",
+                        value: "web-framework"
+                    },
+                    {
+                        text: "xml",
+                        value: "xml"
+                    }
+                ],
+                tableData: rs
+            }
+        },
+        filters: {
+            licensefmt: function (value) {
+                if (!value) return ''
+                vs = value.toString().split("/")
+                return vs[vs.length - 1];
+            }
+        },
+        methods: {
+            clearFilter() {
+                this.$refs.filterTable.clearFilter();
+            },
+            formatdesc(row, column) {
+                return row.chinesedesc || row.shortdesc;
+            },
+            formatdesc1(row) {
+                return row.description || row.shortdesc;
+            },
+            formattime(row) {
+                return row.created || row.established || row.started;
+            },
+            filterHandler(value, row, column) {
+                const property = column['property'];
+                return row[property] && row[property].indexOf(value) != -1;
+
+            },
+            tableRowClassName({
+                row,
+                rowIndex
+            }) {
+                if (row['pmc'] === 'attic') {
+                    return 'warning-row';
+                } else if (row['pmc'] === 'incubator') {
+                    return 'success-row';
+                }
+                return '';
+            }
+        }
+    })
+</script>
+<style>
+    .el-table .warning-row {
+        background: oldlace;
+    }
+
+    .el-table .success-row {
+        background: #f0f9eb;
+    }
+    .demo-table-expand {
+        font-size: 0;
+      }
+      .demo-table-expand label {
+        width: 90px;
+        color: #99a9bf;
+      }
+      .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+      }
+</style>
+
+</html>
