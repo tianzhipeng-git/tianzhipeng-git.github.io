@@ -23,9 +23,11 @@ layout: default
     </ul>
 </div>
 <script>
+    //emoji
     $(function () {
         $(".post-link").each(function(index, ele) {
-            var emojiCode = Math.abs(ele.text.hashCode()) % 950 + 127944;
+            //var emojiCode = Math.abs(ele.text.hashCode()) % 950 + 127944;
+            var emojiCode = index % 950 + 127944;
             $(ele).parent().children().first().text(String.fromCodePoint(emojiCode));
         })
     })

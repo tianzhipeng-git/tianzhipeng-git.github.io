@@ -36,9 +36,9 @@
                 </template>
             </el-table-column>
 
-            <el-table-column prop="name" label="名称" sortable width="200"></el-table-column>
+            <el-table-column prop="name" label="名称" sortable width="240"></el-table-column>
             <el-table-column prop="category" label="类别" width="200" sortable :filters="catefilter"
-                :filter-method="filterHandler"></el-table-column>
+                :filter-method="filterHandler" :filtered-value="catefilterValue"></el-table-column>
             <el-table-column prop="programming-language" label="语言" width="200" sortable :filters="langfilter"
                 :filter-method="filterHandler"></el-table-column>
             <el-table-column prop="shortdesc" label="描述" :formatter="formatdesc" width="800"></el-table-column>
@@ -283,6 +283,7 @@
                         value: "xml"
                     }
                 ],
+                catefilterValue: ["ttt", "big-data"],
                 tableData: rs
             }
         },
