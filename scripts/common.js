@@ -7,11 +7,11 @@ $(function () {
     };
     // 百度统计
     var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?a33898c3ecf1bfea5e3d5dbc35ec92dd";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7418fd40e3c901d443c89773d5ebf421";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
     })();
 
     // 向上的滚动按钮

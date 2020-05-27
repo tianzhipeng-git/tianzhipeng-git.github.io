@@ -2,7 +2,7 @@
 title: pickaxe blog
 email: tzp_1991@qq.com
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://tianzhipeng.gitee.io" # the base hostname & protocol for your site
+url: "https://tianzhipeng-git.github.io" # the base hostname & protocol for your site
 permalink: /:year/:month/:day/:title.html
 
 # Build settings
