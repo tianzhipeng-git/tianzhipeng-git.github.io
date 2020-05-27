@@ -10,3 +10,4 @@ markdown: kramdown
 
 asciidoctor: {}
 asciidoc: {}
+theme: jekyll-theme-slate
