@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -8,6 +9,11 @@ html, body {
 .header {
   padding: 15px 20px 15px;
   background-color: #515865;
+  margin-bottom: 50px;
+
+  @include media-query($on-palm) {
+    margin-bottom: 5px;
+  }
 }
 
 .header-container {
@@ -27,11 +33,17 @@ html, body {
   padding-right: 20px;
   display: inline-block;
   line-height: 1;
+
+  @include media-query($on-palm) {
+    padding-top: 10px;
+    display: block;
+    line-height: 1;
+  }
 }
 
 li {
   margin-left: 0px;
-  line-height: 1.7em;
+  line-height: 1.5;
 }
 
 .nav a {
@@ -120,10 +132,26 @@ li {
   margin-top: 20px;
   color: #666;
   font-size: 14px;
+
+  @include media-query($on-palm) {
+    margin-top: 10px;
+    font-size: 9px;
+  }
 }
 
 .post-list {
   list-style: none;
+
+  @include media-query($on-palm) {
+    margin-left: $spacing-unit / 2;
+  }
+}
+
+.post-list li {
+  margin-bottom: 40px;
+  @include media-query($on-palm) {
+    margin-bottom: 20px;
+  }
 }
 
 .post-list li h3 {

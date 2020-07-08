@@ -1,17 +1,34 @@
-/**
- * Reset some basic elements
- */
-body, h1, h2, h3, h4, h5, h6,
-p, blockquote, pre, hr,
-dl, dd, ol, ul, figure {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+hr,
+dl,
+dd,
+ol,
+ul,
+figure {
   margin: 0;
   padding: 0;
 }
 
-/**
- * Basic styling
- */
+%clearfix {
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 body {
+  -moz-osx-font-smoothing: grayscale;
   font-family: $base-font-family;
   font-size: $base-font-size;
   line-height: $base-line-height;
@@ -20,29 +37,35 @@ body {
   background-color: $background-color;
   -webkit-text-size-adjust: 100%;
 }
+@include media-query($on-palm) {
+  body {
+    font-size: 15px;
+  }
+}
 
-/**
- * Set `margin-bottom` to maintain vertical rhythm
- */
-h1, h2, h3, h4, h5, h6,
-p, blockquote, pre,
-ul, ol, dl, figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+ul,
+ol,
+dl,
+figure,
 %vertical-rhythm {
   margin-bottom: $spacing-unit / 2;
 }
 
-/**
- * Images
- */
 img {
   max-width: 100%;
   vertical-align: middle;
 }
 
-/**
- * Figures
- */
-figure > img {
+figure>img {
   display: block;
 }
 
@@ -50,37 +73,24 @@ figcaption {
   font-size: $small-font-size;
 }
 
-/**
- * Lists
- */
-ul, ol {
+ul,
+ol {
   margin-left: $spacing-unit;
 }
 
 li {
-  > ul,
-  > ol {
+
+  >ul,
+  >ol {
     margin-bottom: 0;
   }
 }
 
-/**
- * Headings
- */
-.post-header {
-  padding-bottom: 50px;
-}
-.post-title {
-  font-size: 40px;
+li {
+  margin-left: 0px;
+  line-height: 1.5;
 }
 
-.post h2, .post h3, .post h4, .post h5, .post h6 {
-  font-weight: 600;
-}
-
-/**
- * Links
- */
 a {
   color: $brand-color;
   text-decoration: none;
@@ -95,61 +105,13 @@ a {
   }
 }
 
-/**
- * Wrapper
- */
-.wrapper {
-  // max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-  // max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
-  margin-right: 350px;
-  margin-left: 50px;
-  padding-right: $spacing-unit;
-  padding-left: $spacing-unit;
-  @extend %clearfix;
-
-  @include media-query($on-laptop) {
-    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
-    max-width: calc(#{$content-width} - (#{$spacing-unit}));
-    padding-right: $spacing-unit / 2;
-    padding-left: $spacing-unit / 2;
-  }
-}
-
-/**
- * Clearfix
- */
-%clearfix {
-
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
-
-/**
- * Icons
- */
-.icon {
-
-  > svg {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-
-    path {
-      fill: $grey-color;
-    }
-  }
-}
-
 table {
   margin: 10px 0 15px 0;
   border-collapse: collapse;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #ddd;
   padding: 3px 10px;
 }
@@ -182,7 +144,6 @@ h4,
 h5,
 h6 {
   color: #404040;
-  line-height: 36px;
 }
 
 h1 {
@@ -204,31 +165,44 @@ h4 {
   font-size: 17px;
 }
 
-h5 {
-  font-size: 15px;
-}
-
-h6 {
-  font-size: 13px;
-}
-
 hr {
   margin: 0 0 19px;
   border: 0;
   border-bottom: 1px solid #ccc;
 }
 
+@include media-query($on-palm) {
+  h1 {
+    margin: 12px 0;
+    font-size: 18px;
+  }
 
-/**
- * Blockquotes
- */
+  h2 {
+    margin: 11px 0;
+    font-size: 15px;
+  }
+
+  h3 {
+    font-size: 10px;
+  }
+
+  h4 {
+    font-size: 8px;
+  }
+
+  hr {
+    margin: 0 0 9px;
+  }
+}
+
+
 blockquote {
   color: $grey-color;
   border-left: 4px solid $grey-color-light;
   padding: 13px 13px 21px 15px;
   padding-left: $spacing-unit / 2;
   margin-bottom: 18px;
-  
+
   font-size: 20px;
   font-style: italic;
   font-weight: 300;
@@ -240,10 +214,6 @@ blockquote {
   }
 }
 
-
-/**
- * Code formatting
- */
 pre,
 code {
   font-size: 15px;
@@ -254,7 +224,7 @@ code {
 }
 
 code {
-  background-color: rgba(245,249,196,0.5);
+  background-color: rgba(245, 249, 196, 0.5);
   color: rgba(0, 0, 0, 0.75);
   padding: 1px 3px;
   font-size: 15px;
@@ -274,7 +244,7 @@ pre {
   white-space: pre-wrap;
   word-wrap: break-word;
 
-  > code {
+  >code {
     border: 0;
     background-color: transparent;
     color: #737373;
@@ -283,39 +253,288 @@ pre {
   }
 }
 
-//markdown-toc
-#markdown-toc {
-  position: fixed;
-  top: 150px;
-  right: 10px;
-  width: 300px;
-  height: 500px;
-  overflow-y: scroll;
-  border-bottom: 2px solid;
-  border-top: 2px solid;
-}
+.wrapper {
+  margin-right: 350px;
+  margin-left: 50px;
+  padding-right: $spacing-unit;
+  padding-left: $spacing-unit;
+  @extend %clearfix;
 
-sup {
-  font-size: 0.83em;
-  vertical-align: super;
-  line-height: 0;
-}
-
-* {
-  -webkit-print-color-adjust: exact;
-}
-
-@media print {
-  body, code, pre code, h1, h2, h3, h4, h5, h6 {
-    color: black;
-  }
-  table, pre {
-    page-break-inside: avoid;
+  @include media-query($on-laptop) {
+    margin: 0;
+    padding: $spacing-unit /2;
   }
 }
 
-// mine
+.icon {
+  >svg {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+
+    path {
+      fill: $grey-color;
+    }
+  }
+}
 
 .tag {
   margin: 0 10px 0 0;
+}
+
+.header {
+
+  @include media-query($on-palm) {
+    margin-bottom: 5px;
+  }
+
+  padding: 15px 20px 15px;
+  background-color: #515865;
+  margin-bottom: 50px;
+}
+
+.header-container {
+  margin: 0px 0px 0px 50px;
+
+  @include media-query($on-palm) {
+    margin: 0px;
+  }
+}
+
+.nav {
+  display: inline;
+  color: #707070;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.nav li {
+
+  @include media-query($on-palm) {
+    padding-top: 10px;
+  }
+
+  display: inline-block;
+  padding-right: 20px;
+  line-height: 1;
+}
+
+.nav a {
+  color: #959BA6;
+}
+
+.nav a:link {
+  opacity: 1;
+  transition: all 0.15s linear 0s;
+  text-decoration: none;
+}
+
+.nav li a:visited {
+  opacity: 1;
+  transition: all 0.15s linear 0s;
+  text-decoration: none;
+}
+
+.nav li a:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.title li a {
+  color: #FFF;
+}
+
+.title li a:link {
+  color: #FFF;
+}
+
+.title li a:visited {
+  opacity: 1;
+  transition: all 0.15s linear 0s;
+  text-decoration: none;
+}
+
+.title li a:hover {
+  opacity: 1;
+  color: #FFF;
+}
+
+.description {
+  padding-top: 10px;
+  font-size: 12px;
+  line-height: 1.5em;
+  color: #EEE;
+}
+
+.social-links {
+  padding-top: 10px;
+  margin-left: 0px;
+}
+
+.social-links li {
+  display: inline;
+  padding-right: 10px;
+  line-height: 0;
+}
+
+.social-links a {
+  color: #959BA6;
+}
+
+.social-links a:active {
+  opacity: 0.6;
+}
+
+.social-links a:hover {
+  opacity: 0.6;
+}
+
+.page-content {
+  min-height: 100%;
+  height: 100%;
+}
+
+.content {
+  @include media-query($on-palm) {
+    margin-top: 10px;
+    font-size: 9px;
+  }
+
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.post-meta {
+  color: #666;
+  font-size: 12px;
+  margin-left: 0px;
+}
+
+.post-list {
+  list-style: none;
+}
+
+.post-header {
+  padding-bottom: 50px;
+}
+
+.post-title {
+  font-size: 40px;
+}
+
+.post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
+  font-weight: 600;
+}
+
+.post-list li {
+  @include media-query($on-palm) {
+    margin-bottom: 20px;
+  }
+
+  margin-bottom: 40px;
+}
+
+.post-list li h3 {
+  margin-bottom: 5px;
+  font-weight: 500px;
+}
+
+.post-list li a {
+  color: #000;
+}
+
+//关于post的所有mobile
+@include media-query($on-palm) {
+  .post-list {
+    margin-left: $spacing-unit / 2;
+
+  }
+
+  .post-title {
+    font-size: 20px;
+  }
+
+  .post-list li {
+    margin-bottom: 20px;
+  }
+
+  .post-header {
+    padding-bottom: 10px;
+  }
+}
+
+#line {
+  opacity: 0.2;
+  color: #000;
+}
+
+.well {
+  color: #000;
+}
+
+.well ul {
+  color: #AAA;
+  font-size: 14px;
+  list-style: none;
+}
+
+.well ul a {
+  text-decoration: underline;
+}
+
+.well ul a:hover {
+  color: #000;
+}
+
+.category-box {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.about {
+  color: #666;
+}
+
+@include media-query($on-laptop) {
+  #markdown-toc {
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    width: 300px;
+    height: 500px;
+    overflow-y: scroll;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+  }
+}
+
+@include media-query($on-palm) {
+  #markdown-toc {
+    position: static;
+    overflow-y: scroll;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#gotop {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px 15px;
+  font-size: 20px;
+  background: #515865;
+  color: white;
+  cursor: pointer;
 }

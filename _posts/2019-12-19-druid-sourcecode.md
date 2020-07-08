@@ -215,7 +215,7 @@ System.out.println(animal1.getClass());
 <div id="json1"></div>
 在里面多加了一个`type: dog`. 重点是什么, 比如这个json字符串, 反序列化的时候, 只需要告诉Jackson, 你给我反序列化成Animal, Jackson会根据type自动给到你的是一个Dog对象!!
 
-用过druid的同学可能会想到, druid的查询用的就是json, 他的查询有多种查询(Query接口有多个实现类如GroupByQuery, ScanQuery), 有多种过滤方式(Filter接口有多个实现类如LikeFilter, SelectorFilter), 等等, 都是用的Jackson的这个功能方面的处理的.
+用过druid的同学可能会想到, druid的查询用的就是json, 他的查询有多种查询(Query接口有多个实现类如GroupByQuery, ScanQuery), 有多种过滤方式(Filter接口有多个实现类如LikeFilter, SelectorFilter), 等等, 都是用的Jackson的这个功能方便的处理的.
 
 **这里再提第二个Jackson的重要feature: Jackson module**. (和前文guice的module无关)
 

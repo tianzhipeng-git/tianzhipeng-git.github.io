@@ -1,22 +1,30 @@
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width initial-scale=1">
+
+  <meta name="viewport"
+    content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=yes;" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="HandheldFriendly" content="true">
+
 
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <meta name="keywords" content="{{ page.tags | join: ', ' | escape }}"/> 
+  <meta name="description"
+    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="keywords" content="{{ page.tags | join: ', ' | escape }}" />
   <meta name="google-site-verification" content="VXwOaOJJDalAOXDx8dKryUNrm1lM6YoQj_PEn7-NMos" />
-  
+
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
-  <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}"
+    href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+  <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    type="text/css" />
 
   <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
   <script src="/scripts/common.js"></script>
 
-  <link href="https://cdn.staticfile.org/jquery-jsonview/1.2.3/jquery.jsonview.min.css" rel="stylesheet" type="text/css"/>
+  <link href="https://cdn.staticfile.org/jquery-jsonview/1.2.3/jquery.jsonview.min.css" rel="stylesheet"
+    type="text/css" />
   <script src="https://cdn.staticfile.org/jquery-jsonview/1.2.3/jquery.jsonview.min.js"></script>
-    
+
 </head>
