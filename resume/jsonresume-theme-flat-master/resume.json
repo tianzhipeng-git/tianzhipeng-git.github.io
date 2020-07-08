@@ -1,0 +1,92 @@
+{
+  "basics": {
+    "name": "田志鹏",
+    "label": "技术总监/大数据/后端",
+    "picture": "",
+    "email": "847379570@qq.com",
+    "phone": "17600149279",
+    "website": "https://tianzhipeng-git.github.io/",
+    "location": {
+      "city": "北京市朝阳区"
+    },
+    "profiles": [
+      {
+        "network": "gitee",
+        "url": "https://gitee.com/tianzhipeng"
+      },
+      {
+        "network": "Stack Overflow",
+        "url": "https://stackoverflow.com/users/5142886"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "明略科技集团",
+      "position": "技术副总监",
+      "website": "http://mininglamp.com",
+      "startDate": "2015-06-01",
+      "endDate": "now",
+      "summary": "中国领先的一站式企业级人工智能产品与服务平台, 致力于营销智能,运营智能,数据智能等企业级服务.",
+      "highlights": [
+        "云服务中心数据工程组技术负责人",
+        "带领20余人技术团队, 包括前后端, 大数据和算法",
+        "负责公司内部数据中台, 数据服务, 数据挖掘相关工作"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "南开大学",
+      "area": "计算机科学与技术",
+      "studyType": "本科结业",
+      "startDate": "2011-06-01",
+      "endDate": "2015-06-01"
+    }
+  ],
+  "skills": [
+    {
+      "name": "大数据",
+      "level": "Master",
+      "keywords": [
+        "Hadoop相关: Hadoop/HBase/Hive/ZooKeeper",
+        "Spark",
+        "Druid/ElasticSearch",
+        "JanusGraph",
+        "Kafka"
+      ]
+    },
+    {
+      "name": "Java后端开发",
+      "level": "Master",
+      "keywords": [
+        "Spring",
+        "MySQL/Mybatis",
+        "Maven",
+        "Netty",
+        "Nginx",
+        "Redis"
+      ]
+    },
+    {
+      "name": "微服务",
+      "level": "Master",
+      "keywords": [
+        "Kong",
+        "Consul",
+        "Spring Cloud",
+        "Docker/k8s"
+      ]
+    },
+    {
+      "name": "其他",
+      "level": "Master",
+      "keywords": [
+        "基础的机器学习算法",
+        "前端开发,Vue/CSS3",
+        "Python,Scala,Shell,Lua",
+        "CI/CD: Jenkins/Nexus/Ansible"
+      ]
+    }
+  ]
+}
