@@ -9,9 +9,8 @@
     "location": {
       "city": "北京市朝阳区"
     },
-    "profiles": [
-      {
-        "network": "gitee",
+    "profiles": [{
+        "network": "Gitee",
         "url": "https://gitee.com/tianzhipeng"
       },
       {
@@ -20,32 +19,107 @@
       }
     ]
   },
-  "work": [
-    {
-      "company": "明略科技集团",
-      "position": "技术副总监",
-      "website": "http://mininglamp.com",
-      "startDate": "2015-06-01",
-      "endDate": "now",
-      "summary": "中国领先的一站式企业级人工智能产品与服务平台, 致力于营销智能,运营智能,数据智能等企业级服务.",
-      "highlights": [
-        "云服务中心数据工程组技术负责人",
-        "带领20余人技术团队, 包括前后端, 大数据和算法",
-        "负责公司内部数据中台, 数据服务, 数据挖掘相关工作"
-      ]
-    }
-  ],
-  "education": [
-    {
-      "institution": "南开大学",
-      "area": "计算机科学与技术",
-      "studyType": "本科结业",
-      "startDate": "2011-06-01",
-      "endDate": "2015-06-01"
-    }
-  ],
-  "skills": [
-    {
+  "work": [{
+    "company": "明略科技集团",
+    "position": "技术副总监",
+    "website": "http://mininglamp.com",
+    "startDate": "2015-06-01",
+    "endDate": "now",
+    "summary": "中国领先的一站式企业级人工智能产品与服务平台, 致力于营销智能,运营智能,数据智能等企业级服务.",
+    "highlights": [
+      "云服务中心数据工程组技术负责人",
+      "带领20余人技术团队, 包括前后端, 大数据和算法",
+      "负责公司内部数据中台: 数据仓库, 数据服务, 数据挖掘相关工作"
+    ]
+  }],
+  "project": [{
+    "name": "数据中台",
+    "position": "团队负责人",
+    "startDate": "2015-06-01",
+    "endDate": "now",
+    "summary": "公司内部数据中台组技术负责人",
+    "highlights": [
+      "数据仓库: 数据接入, 元数据管理, ETL, 数仓分层建模, 数据传输管理, sql数据开发等",
+      "数据服务: 即下一项目相关内容",
+      "数据挖掘: 各种创新类数据挖掘探索, 如跨媒体id打通, 位置数据(POI/春运/疫情/wifi/企业ip等), App分析"
+    ]
+  },{
+    "name": "数据中台-数据服务",
+    "position": "团队负责人",
+    "startDate": "2015-06-01",
+    "endDate": "2017-06-01",
+    "summary": "集团内部中台体系中负责数据服务相关系统. 包括基于灵活数据源和DSL制定规则进行'打标签', 用样本和模型进行'打标签'; 为给定的设备id包进行多维度画像分析等等",
+    "highlights": [
+      "标签服务",
+      "画像服务",
+      "实时查询报表服务"
+    ]
+  },{
+    "name": "微服务网关系统",
+    "position": "项目负责人/团队负责人",
+    "startDate": "2019-01-01",
+    "endDate": "2019-12-01",
+    "summary": "集成了微服务架构中常用的服务注册发现, api网关, 日志等功能的一个系统",
+    "highlights": [
+      "使用Consul负责注册发现,dns",
+      "使用Kong做反向代理, 网关, 鉴权, 限流等",
+      "使用Kafka/Druid做日志报表",
+      "多可用区设计"
+    ]
+  },{
+    "name": "数据分析平台",
+    "position": "核心开发人员/项目负责人",
+    "startDate": "2017-06-01",
+    "endDate": "2019-06-01",
+    "summary": "内部孵化出多个数据分析平台. 根据业务同学遇到的数据分析场景, 开发相应的系统功能",
+    "highlights": [
+      "Data+ 根据需求定制的任务平台: ",
+      "DataInsight-设备id包画像图表分析: Hadoop/ElasticSearch/ECharts",
+      "DataListening-'打标签'系统: Hive/Hadoop",
+      "寻迹-位置信息查询分析系统: HBase/Spark/GeoMesa"
+    ]
+  },{
+    "name": "营销数据管理平台(DMP)",
+    "position": "主力开发人员",
+    "startDate": "2015-06-01",
+    "endDate": "2017-06-01",
+    "summary": "DMP是数字营销行业常用的解决方案, 用于将广告主在各个渠道可获得的用户数据收集处理, 指导广告投放和精准营销",
+    "highlights": [
+      "DMP网站多个模块的主力开发:  SpringMVC/Mybatis/Redis/MySQL/Velocity/JQuery/多租户设计",
+      "后端任务调度系统开发:  SpringMVC/Mybatis/Quartz/ECharts/Hadoop",
+      "各种数据处理转换任务开发:  Hadoop/ETL设计",
+      "投放系统AdServing开发:  Spring/Struts",
+      "高性能标签查询API: Netty"
+    ]
+  },{
+    "name": "广告监测相关系统",
+    "position": "主力开发人员",
+    "startDate": "2015-06-01",
+    "endDate": "2017-06-01",
+    "summary": "秒针广告监测是国内领先的三方广告监测方案, 监测系统后端模块众多, 参与了其中部分",
+    "highlights": [
+      "媒体标准信息库系统",
+      "反作弊任务",
+      "可视曝光"
+    ]
+  }],
+  "education": [{
+    "institution": "南开大学",
+    "area": "计算机科学与技术",
+    "studyType": "本科结业",
+    "startDate": "2011-06-01",
+    "endDate": "2015-06-01"
+  }],
+  "other-edu": [{
+    "title": "英语6级",
+    "date": "2014-11-01",
+    "summary": "无障碍阅读英文技术资料"
+  }, {
+    "title": "PMP",
+    "date": "2020-11-01",
+    "summary": "项目管理专业资格"
+  }],
+  "skills": [{
       "name": "大数据",
       "level": "Master",
       "keywords": [

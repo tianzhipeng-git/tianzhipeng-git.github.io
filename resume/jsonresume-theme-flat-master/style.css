@@ -106,6 +106,9 @@ h4 span:first-child {
 #education .studyType {
 	margin-left: 25px;
 }
+#education .other-edu {
+	margin-top: 20px;
+}
 #awards .summary,
 #publications .summary {
 	margin-top: 8px;
