@@ -254,15 +254,16 @@ pre {
 }
 
 .wrapper {
-  margin-right: 350px;
-  margin-left: 50px;
-  padding-right: $spacing-unit;
-  padding-left: $spacing-unit;
   @extend %clearfix;
+  @include media-query($on-palm) {
+    margin-left: 50px;
+    padding: $spacing-unit / 2;
+  }
 
   @include media-query($on-laptop) {
-    margin: 0;
-    padding: $spacing-unit /2;
+    width: 80%;
+    margin: auto;
+    padding: $spacing-unit / 2;
   }
 }
 
@@ -291,7 +292,7 @@ pre {
 
   padding: 15px 20px 15px;
   background-color: #515865;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 .header-container {
@@ -419,7 +420,7 @@ pre {
 }
 
 .post-header {
-  padding-bottom: 50px;
+  padding-bottom: 25px;
 }
 
 .post-title {
@@ -503,20 +504,20 @@ pre {
   color: #666;
 }
 
-@include media-query($on-laptop) {
-  #markdown-toc {
-    position: fixed;
-    top: 150px;
-    right: 10px;
-    width: 300px;
-    height: 500px;
-    overflow-y: scroll;
-    border-bottom: 2px solid;
-    border-top: 2px solid;
-  }
-}
+// @include media-query($on-laptop) {
+//   #markdown-toc {
+//     position: fixed;
+//     top: 150px;
+//     right: 10px;
+//     width: 300px;
+//     height: 500px;
+//     overflow-y: scroll;
+//     border-bottom: 2px solid;
+//     border-top: 2px solid;
+//   }
+// }
 
-@include media-query($on-palm) {
+// @include media-query($on-palm) {
   #markdown-toc {
     position: static;
     overflow-y: scroll;
@@ -526,7 +527,7 @@ pre {
     width: 100%;
     height: 100%;
   }
-}
+// }
 
 #gotop {
   position: fixed;
