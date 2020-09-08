@@ -327,7 +327,7 @@ QueryRunnerFactory, QueryToolChest, QueryEngine这三个, 是和具体某种查�
 
 ## 查询时Broker的逻辑
 
-前面提到过, broker的功能是将查询转发给真正持有数据的Historical或者middleManager, 所以本事的逻辑较为简单.
+前面提到过, broker的功能是将查询转发给真正持有数据的Historical或者middleManager, 所以本身的逻辑较为简单.
 
 <img src="/resources/druid0/druid-18.png" width="900"/>
 
