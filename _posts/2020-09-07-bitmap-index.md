@@ -205,12 +205,31 @@ Roaring Bitmap内部是两层结构:
 
 # Bitmap Index in Druid
 
-TODO
+- Druid中默认为每个维度列创建Bitmap索引, 都是先做字典在做bitmap
+- segment文件中对于每列, 包含一个字典, 一个原值list, 一个bitmap list.
+- 没有使用任何纵向的压缩技术/encoding, 就是一个值一个bitmap
+
+本来以为Bitmap和Druid的结合能有一些内容, 结果Druid就是最简单的使用了RoaringBitmap而已..
 
 # More
-只是概述的讲了bitmap概念和几种算法, 其实内容很多. 比如我忽略了很多其实挺有意思的点:
+只是概述的讲了bitmap概念和几种算法, 其实相关的内容很多. 比如我忽略了很多其实挺有意思的点:
 - 如上各类的bitmap和压缩方案的生成算法.
 - 如上各类的bitmap和压缩方案中, 压缩之后如何进行各种条件查询, 如何进行各类逻辑运算的算法.
 
 
 # Reference
+参考基本都是论文:
+1. Druid:
+   1. Optimizing Druid with Roaring bitmaps
+   2. Druid - A Real-time Analytical Data Store
+   3. The anatomy of a Druid segment file
+2. encoding
+   1. Improved Query Performance with Variant Indexes
+   2. Multi-level and Multi-component Bitmap Encoding for Efficient Search Operations
+   3. Using Bitmaps to Perform Range Queries - Pilosa
+3. compress
+   1. Concise: Compressed ’n’ Composable Integer Set (Concise)
+   2. Better bitmap performance with Roaring bitmaps
+   3. Consistently faster and smaller compressed bitmaps with Roaring 
+   4. A Survey of Bitmap Index Compression Algorithms for Big Data
+   5. Compressing Bitmap Indexes for Faster Search Operations (WAH)
