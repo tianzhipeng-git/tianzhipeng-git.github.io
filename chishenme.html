@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1000px, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>吃什么</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+        }
+
+        .title {
+            width: 200px;
+            margin: auto;
+        }
+
+        .container {
+            width: 900px;
+            height: 500px;
+            margin: auto;
+        }
+
+        .left {
+            float: left;
+            width: 400px;
+            height: 500px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        .right {
+            float: left;
+            width: 400px;
+            height: 500px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            font-size: 24px
+        }
+
+        textarea {
+            border: none;
+            width: 400px;
+            height: 500px;
+            font-size: 24px
+        }
+
+        .result {
+            border-bottom: 1px solid black;
+            width: 200px;
+            margin: 30px auto;
+        }
+
+        .error {
+            font-size: 12px;
+            width: 200px;
+            margin: 30px auto;
+            color: orange;
+        }
+
+        .mybutton {
+            width: 200px;
+            margin: 30px auto;
+            font-size: 24px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 class="title">{{ message }}</h1>
+        <div class="container">
+            <div class="left">
+                <textarea v-model="restrauntsInput" placeholder="add multiple lines"></textarea>
+            </div>
+            <div class="right">
+                <p class="result">{{ result }}</p>
+                <input type="button" class="mybutton" :value="triggerText" @click="triggerStart" />
+                <p class="error">{{ error }}</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '中午吃什么?',
+                randoming: false,
+                triggerText: "开始",
+                restrauntsInput: "潇湘阁\n明洞邦\n春饼\n吃山\n麻辣香锅\n渝是乎\n渝乡人家\n黄渤米线\n杨国福麻辣烫\n小恒水饺\n无名缘米粉\n有璟阁\n东方宫拉面\n新疆大盘鸡\n姐夫很面",
+                result: "吃什么",
+                error: "",
+                timer: undefined,
+            },
+            computed: {
+                restraunts: {
+                    // getter
+                    get: function () {
+                        let inputLines = this.restrauntsInput.trim();
+                        if (inputLines === "") {
+                            return [];
+                        } else {
+                            return inputLines.split('\n').sort((a, b) => a.localeCompare(b, 'zh-Hans-CN', {sensitivity: 'accent'}));
+                        }
+                    }
+                }
+            },
+            methods: {
+                triggerStart: function () {
+                    if (this.randoming) {
+                        localStorage.setItem('restrauntsInput', this.restrauntsInput);//保存
+
+                        console.log("stop randoming")
+                        this.randoming = false;
+                        this.triggerText = "开始";
+                        clearInterval(this.timer);
+                    } else {
+                        this.restrauntsInput = this.restraunts.join('\n');
+                        this.error = "";
+                        if (this.restraunts.length == 0) {
+                            this.error = "请在左侧输入可选值list";
+                        } else if (this.restraunts.length == 1) {
+                            this.result = this.restraunts[0];
+                            this.error = "就一个,kidding me?";
+                        } else {
+                            console.log("begin randoming")
+                            this.randoming = true;
+                            this.triggerText = "停止";
+                        
+                            let that = this;
+                            this.timer = setInterval(function () {
+                                let rand = (Math.random() * (that.restraunts.length-1)).toFixed(0);
+                                that.result = that.restraunts[rand]
+                                console.log("random " + rand + that.restraunts[rand]);
+                            }, 100);
+                        }
+                    }
+                }
+            },
+            mounted() {
+                let lsRestraunts = localStorage.getItem('restrauntsInput');
+                if (lsRestraunts && lsRestraunts.length > 3) {
+                    this.restrauntsInput = lsRestraunts;
+                    console.log("load restraunts " + lsRestraunts);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
