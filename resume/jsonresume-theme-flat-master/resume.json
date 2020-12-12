@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "田志鹏",
-    "label": "技术总监/大数据/后端",
+    "label": "大数据/后端/团队管理",
     "picture": "",
     "email": "847379570@qq.com",
     "phone": "17600149279",
@@ -9,157 +9,177 @@
     "location": {
       "city": "北京市朝阳区"
     },
-    "profiles": [{
-        "network": "Gitee",
-        "url": "https://gitee.com/tianzhipeng"
-      },
-      {
-        "network": "Stack Overflow",
-        "url": "https://stackoverflow.com/users/5142886"
-      }
-    ]
+    "profiles": []
   },
-  "work": [{
-    "company": "明略科技集团",
-    "position": "技术副总监",
-    "website": "http://mininglamp.com",
-    "startDate": "2015-06-01",
-    "endDate": "now",
-    "summary": "中国领先的一站式企业级人工智能产品与服务平台, 致力于营销智能,运营智能,数据智能等企业级服务.",
-    "highlights": [
-      "云服务中心数据工程组技术负责人",
-      "带领20余人技术团队, 包括前后端, 大数据和算法",
-      "负责公司内部数据中台: 数据仓库, 数据服务, 数据挖掘相关工作"
-    ]
-  }],
-  "project": [{
-    "name": "数据中台",
-    "position": "团队负责人",
-    "startDate": "2015-06-01",
-    "endDate": "now",
-    "summary": "公司内部数据中台组技术负责人",
-    "highlights": [
-      "数据仓库: 数据接入, 元数据管理, ETL, 数仓分层建模, 数据传输管理, sql数据开发等",
-      "数据服务: 即下一项目相关内容",
-      "数据挖掘: 各种创新类数据挖掘探索, 如跨媒体id打通, 位置数据(POI/春运/疫情/wifi/企业ip等), App分析"
-    ]
-  },{
-    "name": "数据中台-数据服务",
-    "position": "团队负责人",
-    "startDate": "2015-06-01",
-    "endDate": "2017-06-01",
-    "summary": "集团内部中台体系中负责数据服务相关系统. 包括基于灵活数据源和DSL制定规则进行'打标签', 用样本和模型进行'打标签'; 为给定的设备id包进行多维度画像分析等等",
-    "highlights": [
-      "标签服务",
-      "画像服务",
-      "实时查询报表服务"
-    ]
-  },{
-    "name": "微服务网关系统",
-    "position": "项目负责人/团队负责人",
-    "startDate": "2019-01-01",
-    "endDate": "2019-12-01",
-    "summary": "集成了微服务架构中常用的服务注册发现, api网关, 日志等功能的一个系统",
-    "highlights": [
-      "使用Consul负责注册发现,dns",
-      "使用Kong做反向代理, 网关, 鉴权, 限流等",
-      "使用Kafka/Druid做日志报表",
-      "多可用区设计"
-    ]
-  },{
-    "name": "数据分析平台",
-    "position": "核心开发人员/项目负责人",
-    "startDate": "2017-06-01",
-    "endDate": "2019-06-01",
-    "summary": "内部孵化出多个数据分析平台. 根据业务同学遇到的数据分析场景, 开发相应的系统功能",
-    "highlights": [
-      "Data+ 根据需求定制的任务平台: ",
-      "DataInsight-设备id包画像图表分析: Hadoop/ElasticSearch/ECharts",
-      "DataListening-'打标签'系统: Hive/Hadoop",
-      "寻迹-位置信息查询分析系统: HBase/Spark/GeoMesa"
-    ]
-  },{
-    "name": "营销数据管理平台(DMP)",
-    "position": "主力开发人员",
-    "startDate": "2015-06-01",
-    "endDate": "2017-06-01",
-    "summary": "DMP是数字营销行业常用的解决方案, 用于将广告主在各个渠道可获得的用户数据收集处理, 指导广告投放和精准营销",
-    "highlights": [
-      "DMP网站多个模块的主力开发:  SpringMVC/Mybatis/Redis/MySQL/Velocity/JQuery/多租户设计",
-      "后端任务调度系统开发:  SpringMVC/Mybatis/Quartz/ECharts/Hadoop",
-      "各种数据处理转换任务开发:  Hadoop/ETL设计",
-      "投放系统AdServing开发:  Spring/Struts",
-      "高性能标签查询API: Netty"
-    ]
-  },{
-    "name": "广告监测相关系统",
-    "position": "主力开发人员",
-    "startDate": "2015-06-01",
-    "endDate": "2017-06-01",
-    "summary": "秒针广告监测是国内领先的三方广告监测方案, 监测系统后端模块众多, 参与了其中部分",
-    "highlights": [
-      "媒体标准信息库系统",
-      "反作弊任务",
-      "可视曝光"
-    ]
-  }],
-  "education": [{
-    "institution": "南开大学",
-    "area": "计算机科学与技术",
-    "studyType": "本科结业",
-    "startDate": "2011-06-01",
-    "endDate": "2015-06-01"
-  }],
-  "other-edu": [{
-    "title": "英语6级",
-    "date": "2014-11-01",
-    "summary": "无障碍阅读英文技术资料"
-  }, {
-    "title": "PMP",
-    "date": "2020-11-01",
-    "summary": "项目管理专业资格"
-  }],
-  "skills": [{
+  "work": [
+    {
+      "company": "明略科技集团",
+      "startDate": "2015-06",
+      "endDate": "now",
+      "summary": "中国领先的一站式企业级人工智能产品与服务平台, 致力于营销智能,运营智能,数据智能等企业级服务",
+      "subprojects": [
+        "云服务中心数据工程组负责人",
+        "带领20余人技术团队, 包括前后端、大数据和算法",
+        "负责公司内部数据中台, 分为数据仓库、数据服务、数据挖掘等相关工作"
+      ]
+    }
+  ],
+  "project": [
+    {
+      "name": "数据中台-数据服务",
+      "position": "团队/项目负责人",
+      "startDate": "2018-06",
+      "endDate": "now",
+      "summary": "基于数仓的数据, 将一些通用的需求提炼成数据服务提供给上层应用",
+      "subprojects": [
+        "标签服务:  基于灵活数据源和'DSL规则', MR/Spark计算, 对设备ID进行'打标签'",
+        "画像服务:  分析用户在各数据上行为表现, 对比universal情况, 提供多维度的查询",
+        "报表即席查询服务:  将核心数据和维度表关联, 轻度聚合后批量进Druid, 提供报表查询/BI分析",
+        "机器学习模型服务: 提供一些预置的机器学习算法, 为分析师提供平台进行模型训练, 参数调整和效果评估"
+      ],
+      "results": [
+          "为10+其他部门和项目进行API对接和服务",
+          "日均服务数十个批量任务和数百次Ad-Hoc查询"
+      ]
+    },
+    {
+      "name": "数据中台-数据仓库",
+      "position": "团队负责人",
+      "startDate": "2019-01",
+      "endDate": "now",
+      "summary": "公司内部数仓, 接入和处理多个部门的数据",
+      "subprojects": [
+        "数据接入: 从Kafka/MySQL/FTP等来源接入数据到HDFS",
+        "ETL和数仓分层建模: 为每种数据制定ETL规则, 设计分层模型, 进行数据管理",
+        "元数据管理: 基本Hive搭建的数仓元数据/数据血缘管理系统",
+        "数据开发: 基于Hive提供给分析师SQL数据开发功能",
+        "数据传输管理: 数据对外传输管控"
+      ],
+      "results": [
+          "接入公司内大部分自有数据",
+          "TB级日均数据量, PB级总量"
+      ]
+    },
+    {
+      "name": "数据中台-数据挖掘",
+      "position": "团队/项目负责人",
+      "startDate": "2019-01",
+      "endDate": "now",
+      "summary": "创新类数据挖掘项目的试验和落地",
+      "subprojects": [
+        "位置数据分析: 寻迹/POI/wifi/企业IP等分析项目",
+        "跨媒体ID打通方案",
+        "知识图谱探索: 基于图数据库JanusGraph"
+      ],
+      "results": [
+          "落地多个创新型项目, 为业务端额外增加数百万收入"
+      ]
+    },
+    {
+      "name": "数据分析平台",
+      "position": "项目负责人/核心开发人员",
+      "startDate": "2018-01",
+      "endDate": "now",
+      "summary": "基于上述服务和数据, 孵化出的多个数据分析类平台, 面向内部用户",
+      "subprojects": [
+        "Data+: 根据需求定制的任务平台",
+        "Data+2.0: 通过拖拽和配置'算子', 进行灵活数据分析任务",
+        "DataListening: 综合多种方案, 生产和管理'标签'设备ID包",
+        "DataInsight: 设备id包画像图表分析, 快速输出图表Report, Hadoop/Druid/ES/ECharts",
+        "寻迹: 基于HBase/Spark/GeoMesa的位置信息查询分析系统"
+      ]
+    },
+    {
+      "name": "微服务网关系统",
+      "position": "项目负责人/核心开发人员",
+      "startDate": "2019-01",
+      "endDate": "2019-12",
+      "summary": "集成了微服务架构中常用的服务注册发现, api网关, 日志等功能的一个系统",
+      "subprojects": [
+        "使用Kong做反向代理, 网关, 鉴权, 限流等",
+        "使用Consul负责注册发现, dns, 多可用区交互",
+        "使用Kafka/Druid做日志报表"
+      ]
+    },
+    {
+      "name": "广告营销数据管理平台DMP",
+      "position": "主力开发人员",
+      "startDate": "2015-06",
+      "endDate": "2018-01",
+      "summary": "DMP是广告营销行业常用的解决方案, 用于将广告主在各个渠道可获得的用户数据收集处理, 指导广告投放和精准营销",
+      "subprojects": [
+        "DMP网站: 多个模块的主力开发, SpringMVC/Mybatis/Redis/MySQL/Velocity/JQuery/多租户设计",
+        "后端任务调度系统: 任务DAG调度, SpringMVC/Mybatis/Quartz/ECharts",
+        "数据处理ETL任务: 基于MR的数据处理转换",
+        "投放系统AdServing: 基于SSH框架的管理模块的开发",
+        "高性能标签查询API: 基于Netty搭建高性能HTTP API"
+      ]
+    },
+    {
+      "name": "广告监测相关系统",
+      "position": "主力开发人员",
+      "startDate": "2015-06",
+      "endDate": "2017-01",
+      "summary": "秒针广告监测是国内领先的三方广告监测方案, 参与了监测系统部门模块开发",
+      "subprojects": [
+        "媒体标准信息库系统",
+        "反作弊任务",
+        "可视曝光"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "南开大学",
+      "summary": "计算机科学与技术",
+      "date": "本科结业",
+      "startDate": "2011-06",
+      "endDate": "2015-06"
+    }
+  ],
+  "other-edu": [
+    {
+      "title": "英语六级",
+      "date": "2014-11"
+    }
+  ],
+  "skills": [
+    {
       "name": "大数据",
       "level": "Master",
       "keywords": [
-        "Hadoop相关: Hadoop/HBase/Hive/ZooKeeper",
-        "Spark",
-        "Druid/ElasticSearch",
-        "JanusGraph",
-        "Kafka"
+        "Hadoop/Hive/Spark 计算引擎",
+        "HBase/Druid/ES 存储分析",
+        "Kafka 消息队列",
+        "ZooKeeper 协调服务"
       ]
     },
     {
       "name": "Java后端开发",
       "level": "Master",
       "keywords": [
-        "Spring",
-        "MySQL/Mybatis",
-        "Maven",
-        "Netty",
-        "Nginx",
-        "Redis"
+        "Spring MVC框架",
+        "MySQL/Mybatis 数据库",
+        "Nginx 反向代理",
+        "Redis 缓存"
       ]
     },
     {
       "name": "微服务",
       "level": "Master",
       "keywords": [
-        "Kong",
-        "Consul",
+        "Nginx/Kong 网关",
         "Spring Cloud",
-        "Docker/k8s"
+        "Docker/k8s 容器相关"
       ]
     },
     {
       "name": "其他",
       "level": "Master",
       "keywords": [
-        "基础的机器学习算法",
-        "前端开发,Vue/CSS3",
-        "Python,Scala,Shell,Lua",
-        "CI/CD: Jenkins/Nexus/Ansible"
+        "Vue/ElementUI 前端开发",
+        "Python/Scala 开发语言",
+        "Jenkins/Nexus/Ansible CI/CD"
       ]
     }
   ]

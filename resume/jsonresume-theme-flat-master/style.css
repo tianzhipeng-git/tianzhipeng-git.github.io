@@ -4,7 +4,9 @@
 body {
 	background: #fff;
 	font-family: Lato, sans-serif;
+	font-size: 16px;
 	margin: 0 0 80px;
+	word-break: break-all;
 }
 a {
 	color: #2ecc71;
@@ -28,7 +30,7 @@ h4 {
 	margin-top: 0
 }
 section {
-	margin-top: 30px;
+	margin-top: 18px;
 }
 li {
 	line-height: 1.8;
@@ -45,7 +47,7 @@ li:before {
 }
 blockquote {
 	border-left: 5px solid #e7e9ec;
-	font-size: 14px;
+	font-size: 16px;
 }
 em {
 	color: #95a5a6;
@@ -57,7 +59,7 @@ h4 span:first-child {
 	font-weight: bold;
 }
 .container {
-	max-width: 750px;
+	width: 100%;
 	padding: 0 30px;
 }
 .col-sm-6 {
@@ -71,8 +73,8 @@ h4 span:first-child {
 }
 #header {
 	background: #f4f6f6;
-	padding: 50px 0;
-	margin-bottom: 30px;
+	padding: 30px 0;
+	margin-bottom: 20px;
 }
 #header h2 {
 	color: #95a5a6;
@@ -80,12 +82,12 @@ h4 span:first-child {
 }
 #content h3 {
 	color: #f1c40f;
-	font-size: 26px;
+	font-size: 22px;
 	margin-top: -4px;
 }
 #content aside {
 	text-align: right;
-	padding-right: 30px;
+	/* padding-right: 30px; */
 }
 #profiles .network {
 	text-transform: capitalize;
@@ -117,62 +119,30 @@ h4 span:first-child {
 	content: attr(href);
 }
 
-@media (min-width: 480px) {
-	.strike-through {
-		border-top: 1px solid #f4f6f6;
-		height: 20px;
-		margin-top: 12px;
-		margin-bottom: -2px;
-		position: relative;
-	}
-	.strike-through span,
-	.strike-through a {
-		background: #fff;
-		position: absolute;
-	}
-	.strike-through span:first-child {
-		padding-right: 20px;
-		margin-top: -12px;
-	}
-	.strike-through span + span {
-		font-size: 14px;
-		margin-top: -10px;
-		padding-left: 20px;
-		right: 0;
-	}
+
+.strike-through {
+	border-top: 1px solid #f4f6f6;
+	height: 20px;
+	margin-top: 12px;
+	margin-bottom: -2px;
+	position: relative;
 }
-@media (max-width: 768px) {
-	.col-sm-6:last-child {
-		margin-bottom: 0px;
-	}
-	#content aside {
-		margin-bottom: 20px;
-		padding-right: 0;
-		text-align: left;
-	}
-	#publications .website a:before {
-		content: "View publication";
-	}
+.strike-through span,
+.strike-through a {
+	background: #fff;
+	position: absolute;
 }
-@media (max-width: 480px) {
-	h1 {
-		font-size: 26px;
-	}
-	.date {
-		font-size: 14px;
-		margin-bottom: 5px;
-	}
-	.strike-through span:first-child {
-		margin-bottom: 7px;
-	}
-	.strike-through span {
-		display: block;
-	}	
-	#header {
-		margin-bottom: 10px;
-		padding: 40px 0;
-	}
-	#actions {
-		display: none;
-	}
+.strike-through span:first-child {
+	padding-right: 20px;
+	margin-top: -12px;
+}
+.strike-through span + span {
+	font-size: 16px;
+	margin-top: -10px;
+	padding-left: 20px;
+	right: 0;
+}
+
+.col-sm-12 + .col-sm-12 {
+    margin-top: 14px;
 }

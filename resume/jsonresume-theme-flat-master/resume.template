@@ -1,11 +1,12 @@
 <!doctype html>
 <html>
 	<head>
-	<!-- TODO 完善建立: 印象笔记(核心技术能力),gitlab,techtree -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
 	
 	<title>个人简历-{{#resume.basics}}{{name}}{{/resume.basics}}</title>
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/crypto-js@4.0.0/crypto-js.js"></script>
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
@@ -41,7 +42,7 @@
 
 	{{#resume.basics}}
 	<section id="contact" class="row">
-		<aside class="col-sm-3">
+		<aside class="col-sm-2">
 			<h3>联系方式</h3>
 		</aside>
 		<div class="col-sm-9">
@@ -60,7 +61,7 @@
 			{{/phone}}
 			{{#location}}
 			<div class="col-sm-6">
-				<strong>居住地</strong>
+				<strong>Location</strong>
 				<div class="website">
 					{{city}}
 				</div>
@@ -71,7 +72,7 @@
 			<div class="col-sm-6">
 				<strong>Website</strong>
 				<div class="website">
-					<a href="{{.}}">{{.}}</a>
+					{{.}}
 				</div>
 			</div>
 			{{/website}}
@@ -106,103 +107,10 @@
 		</div>
 	</section>
 	{{/resume.basics}}
-	
-	{{#if resume.education.length}}
-	<section id="education" class="row">
-		<aside class="col-sm-3">
-			<h3>教育经历</h3>
-		</aside>
-		<div class="col-sm-9">
-			<div class="row">
-			{{#each resume.education}}
-			<div class="col-sm-12">
-				<h4 class="strike-through">
-					<span>{{institution}}</span>
-					<span class="date">
-						{{startDate}} — {{endDate}}
-					</span>
-				</h4>
-				{{#area}}
-				<div class="area">
-					{{.}}
-				</div>
-				{{/area}}
-				{{#studyType}}
-				<div class="studyType">
-					{{.}}
-				</div>
-				{{/studyType}}
-				{{#if courses.length}}
-				<h4>Courses</h4>
-				<ul class="courses">
-					{{#courses}}
-					<li>{{.}}</li>
-					{{/courses}}
-				</ul>
-				{{/if}}
-			</div>
-			{{/each}}
-			</div>
-			<div class="row">
-			<div class="col-sm-12">
-			{{#each resume.other-edu}}
-				<h4 class="strike-through other-edu">
-					<span>{{title}}</span>
-				</h4>
-				{{#date}}
-				<div class="date pull-right">
-					{{.}}
-				</div>
-				{{/date}}
-				{{#summary}}
-				<div class="summary">
-					{{.}}
-				</div>
-				{{/summary}}
-				<!-- <h4 class="strike-through other-edu">
-					<span>{{title}}</span>
-					<span class="date">
-						{{date}}
-					</span>
-				</h4> -->
-			{{/each}}
-			</div>
-			</div>
-		</div>
-	</section>
-	{{/if}}
-	
-	{{#if resume.skills.length}}
-	<section id="skills" class="row">
-		<aside class="col-sm-3">
-			<h3>技能</h3>
-		</aside>
-		<div class="col-sm-9">
-			<div class="row">
-			{{#each resume.skills}}
-			<div class="col-sm-6">
-				{{#name}}
-				<div class="name">
-					<h4>{{.}}</h4>
-				</div>
-				{{/name}}
-				{{#if keywords.length}}
-				<ul class="keywords">
-					{{#keywords}}
-					<li>{{.}}</li>
-					{{/keywords}}
-				</ul>
-				{{/if}}
-			</div>
-			{{/each}}
-			</div>
-		</div>
-	</section>
-	{{/if}}
 
 	{{#if resume.work.length}}
 	<section id="work" class="row">
-		<aside class="col-sm-3">
+		<aside class="col-sm-2">
 			<h3>工作经历</h3>
 		</aside>
 		<div class="col-sm-9">
@@ -230,12 +138,12 @@
 					<p>{{.}}</p>
 				</div>
 				{{/summary}}
-				{{#if highlights.length}}
+				{{#if subprojects.length}}
 				<h4>个人职责</h4>
-				<ul class="highlights">
-					{{#highlights}}
+				<ul class="subprojects">
+					{{#subprojects}}
 					<li class="bullet">{{.}}</li>
-					{{/highlights}}
+					{{/subprojects}}
 				</ul>
 				{{/if}}
 			</div>
@@ -247,7 +155,7 @@
 
 	{{#if resume.project.length}}
 	<section id="project" class="row">
-		<aside class="col-sm-3">
+		<aside class="col-sm-2">
 			<h3>项目经历</h3>
 		</aside>
 		<div class="col-sm-9">
@@ -278,12 +186,117 @@
 				</div>
 				{{/position}}
 				
-				{{#if highlights.length}}
-				<h5>职责</h5>
-				<ul class="highlights">
-					{{#highlights}}
+				{{#if subprojects.length}}
+				<h5>职责:</h5>
+				<ul class="subprojects">
+					{{#subprojects}}
 					<li class="bullet">{{.}}</li>
-					{{/highlights}}
+					{{/subprojects}}
+				</ul>
+				{{/if}}
+
+				{{#if results.length}}
+				<h5>成效:</h5>
+				<ul class="results">
+					{{#results}}
+					<li class="bullet">{{.}}</li>
+					{{/results}}
+				</ul>
+				{{/if}}
+			</div>
+			{{/each}}
+			</div>
+		</div>
+	</section>
+	{{/if}}
+
+{{#if resume.education.length}}
+	<section id="education" class="row">
+		<aside class="col-sm-2">
+			<h3>教育经历</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			{{#each resume.education}}
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>{{institution}}</span>
+					<span class="date">
+						{{startDate}} — {{endDate}}
+					</span>
+				</h4>
+				{{#area}}
+				<div class="area">
+					{{.}}
+				</div>
+				{{/area}}
+				{{#studyType}}
+				<div class="studyType">
+					{{.}}
+				</div>
+				{{/studyType}}
+				{{#date}}
+				<div class="date pull-right">
+					{{.}}
+				</div>
+				{{/date}}
+				{{#summary}}
+				<div class="summary">
+					{{.}}
+				</div>
+				{{/summary}}
+				{{#if courses.length}}
+				<h4>Courses</h4>
+				<ul class="courses">
+					{{#courses}}
+					<li>{{.}}</li>
+					{{/courses}}
+				</ul>
+				{{/if}}
+			</div>
+			{{/each}}
+			</div>
+			<div class="row">
+			<div class="col-sm-12">
+			{{#each resume.other-edu}}
+				<h4 class="strike-through other-edu">
+					<span>{{title}}</span>
+					<span class="date">
+						{{date}}
+					</span>
+				</h4>
+				
+				{{#summary}}
+				<div class="summary">
+					{{.}}
+				</div>
+				{{/summary}}
+			{{/each}}
+			</div>
+			</div>
+		</div>
+	</section>
+	{{/if}}
+
+	{{#if resume.skills.length}}
+	<section id="skills" class="row">
+		<aside class="col-sm-2">
+			<h3>专业技能</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			{{#each resume.skills}}
+			<div class="col-sm-6">
+				{{#name}}
+				<div class="name">
+					<h4>{{.}}</h4>
+				</div>
+				{{/name}}
+				{{#if keywords.length}}
+				<ul class="keywords">
+					{{#keywords}}
+					<li>{{.}}</li>
+					{{/keywords}}
 				</ul>
 				{{/if}}
 			</div>
