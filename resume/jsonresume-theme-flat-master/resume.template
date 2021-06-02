@@ -43,7 +43,7 @@
 	{{#resume.basics}}
 	<section id="contact" class="row">
 		<aside class="col-sm-2">
-			<h3>联系方式</h3>
+			<h3>基本信息</h3>
 		</aside>
 		<div class="col-sm-9">
 			<div class="row">
@@ -59,14 +59,20 @@
 				<div class="phone">{{.}}</div>
 			</div>
 			{{/phone}}
-			{{#location}}
+			{{#workyear}}
+			<div class="col-sm-6">
+				<strong>WorkYear</strong>
+				<div class="workyear">{{.}}</div>
+			</div>
+			{{/workyear}}
+			<!-- {{#location}}
 			<div class="col-sm-6">
 				<strong>Location</strong>
 				<div class="website">
 					{{city}}
 				</div>
 			</div>
-			{{/location}}
+			{{/location}} -->
 
 			{{#website}}
 			<div class="col-sm-6">
@@ -139,7 +145,6 @@
 				</div>
 				{{/summary}}
 				{{#if subprojects.length}}
-				<h4>个人职责</h4>
 				<ul class="subprojects">
 					{{#subprojects}}
 					<li class="bullet">{{.}}</li>
@@ -187,7 +192,7 @@
 				{{/position}}
 				
 				{{#if subprojects.length}}
-				<h5>职责:</h5>
+				<h5>内容:</h5>
 				<ul class="subprojects">
 					{{#subprojects}}
 					<li class="bullet">{{.}}</li>
@@ -210,7 +215,7 @@
 	</section>
 	{{/if}}
 
-{{#if resume.education.length}}
+	{{#if resume.education.length}}
 	<section id="education" class="row">
 		<aside class="col-sm-2">
 			<h3>教育经历</h3>
