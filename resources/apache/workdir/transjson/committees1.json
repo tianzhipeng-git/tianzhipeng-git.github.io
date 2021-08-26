@@ -1,6 +1,6 @@
 [
   {
-    "chair": "mjwall",
+    "chair": "edcoleman",
     "charter": "The mission of Apache Accumulo is the creation and maintenance of software related to a robust, scalable, distributed key/value store with cell-based access control and customizable server-side processing.",
     "established": "2012-03",
     "group": "accumulo",
@@ -96,6 +96,18 @@
     "shortdesc": "Anything to Triples"
   },
   {
+    "chair": "wenming",
+    "charter": "The mission of Apache APISIX is the creation and maintenance of software related to a cloud-native microservices API gateway",
+    "established": "2020-07",
+    "group": "apisix",
+    "homepage": "http://apisix.apache.org",
+    "id": "apisix",
+    "name": "Apache APISIX",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/apisix.rdf",
+    "reporting": 1,
+    "shortdesc": "a cloud-native microservices API gateway"
+  },
+  {
     "chair": "olamy",
     "charter": "The mission of Archiva is the creation and maintenance of software related to Build Artifact Repository Manager",
     "established": "2008-03",
@@ -120,7 +132,7 @@
     "shortdesc": "Enterprise OSGi application programming model"
   },
   {
-    "chair": "jacques",
+    "chair": "wesm",
     "charter": "The mission of Apache Arrow is the creation and maintenance of software related to columnar in-memory processing and data interchange",
     "established": "2016-01",
     "group": "arrow",
@@ -156,7 +168,7 @@
     "shortdesc": "scalable and extensible set of core foundational governance services"
   },
   {
-    "chair": "mads",
+    "chair": "hboutemy",
     "charter": "The mission of Attic is the creation and maintenance of software related to A home for dormant projects",
     "established": "2008-11",
     "group": "attic",
@@ -168,7 +180,7 @@
     "shortdesc": "A home for dormant projects"
   },
   {
-    "chair": "busbey",
+    "chair": "iemejia",
     "charter": "The mission of Avro is the creation and maintenance of software related to A Serialization System",
     "established": "2010-04",
     "group": "avro",
@@ -216,7 +228,7 @@
     "shortdesc": "Programming model, SDKs, and runners for defining and executing data processing pipelines"
   },
   {
-    "chair": "junhe",
+    "chair": "sekikn",
     "charter": "Bigtop is a project for the development of packaging and tests of the Apache Hadoop ecosystem. The primary goal of Bigtop is to build a community around the packaging and interoperability testing of Hadoop-related projects. This includes testing at various levels (packaging, platform, runtime, upgrade, etc...) developed by a community with a focus on the system as a whole, rather than individual projects. In short we strive to be for Hadoop what Debian is to Linux.",
     "established": "2012-09",
     "group": "bigtop",
@@ -288,7 +300,7 @@
     "shortdesc": "JSR-303 Bean Validation Implementation and Extensions"
   },
   {
-    "chair": "zabetak",
+    "chair": "hyuan",
     "charter": "The mission of Calcite is the creation and maintenance of software related to Dynamic data management framework",
     "established": "2015-10",
     "group": "calcite",
@@ -384,7 +396,7 @@
     "shortdesc": "Semantically linked data for OSGi"
   },
   {
-    "chair": "svogel",
+    "chair": "gabriel",
     "charter": "The mission of CloudStack is the creation and maintenance of software related to Infrastructure as a Service solution",
     "established": "2013-03",
     "group": "cloudstack",
@@ -420,7 +432,7 @@
     "shortdesc": "Reusable Java components"
   },
   {
-    "chair": "sharan",
+    "chair": "swapnilmmane",
     "charter": "The mission of Community Development is the creation and maintenance of software related to Resources to help people become involved with Apache projects",
     "established": "2009-11",
     "group": "comdev",
@@ -468,18 +480,6 @@
     "shortdesc": "Comprehension and auditing of software distributions"
   },
   {
-    "chair": "jwills",
-    "charter": "The mission of Crunch is the creation and maintenance of software related to Simple and Efficient MapReduce Pipelines",
-    "established": "2013-02",
-    "group": "crunch",
-    "homepage": "http://crunch.apache.org/",
-    "id": "crunch",
-    "name": "Apache Crunch",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/crunch.rdf",
-    "reporting": 1,
-    "shortdesc": "Simple and Efficient MapReduce Pipelines"
-  },
-  {
     "chair": "chenpei",
     "charter": "The mission of cTAKES is the creation and maintenance of software related to Natural language processing (NLP) tool for information extraction from electronic medical record clinical free-text",
     "established": "2013-03",
@@ -492,7 +492,7 @@
     "shortdesc": "Natural language processing (NLP) tool for information extraction from electronic medical record clinical free-text"
   },
   {
-    "chair": "randgalt",
+    "chair": "eolivelli",
     "charter": "The mission of Curator is the creation and maintenance of software related to Java libraries that make using Apache ZooKeeper easier",
     "established": "2013-09",
     "group": "curator",
@@ -516,7 +516,19 @@
     "shortdesc": "Service Framework"
   },
   {
-    "chair": "mhayes",
+    "chair": "mbeckerle",
+    "charter": "The mission of Apache Daffodil is the creation and maintenance of software related to an implementation of the Data Format Description Language (DFDL) used to convert between fixed format data and more readily processed forms such as XML or JSON",
+    "established": "2021-02",
+    "group": "daffodil",
+    "homepage": "http://daffodil.apache.org",
+    "id": "daffodil",
+    "name": "Apache Daffodil",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/daffodil.rdf",
+    "reporting": 3,
+    "shortdesc": "an implementation of the Data Format Description Language (DFDL) used to convert between fixed format data and more readily processed forms such as XML or JSON"
+  },
+  {
+    "chair": "eyal",
     "charter": "The mission of Apache DataFu is the creation and maintenance of software related to well-tested libraries that help developers solve common data problems in Hadoop and similar distributed systems",
     "established": "2018-02",
     "group": "datafu",
@@ -526,6 +538,18 @@
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/datafu.rdf",
     "reporting": 1,
     "shortdesc": "well-tested libraries that help developers solve common data problems in Hadoop and similar distributed systems"
+  },
+  {
+    "chair": "leerho",
+    "charter": "The mission of Apache DataSketches is the creation and maintenance of software related to an open source, high-performance library of streaming algorithms commonly called \"sketches\" in the data sciences. Sketches are small, stateful programs that process massive data as a stream and can provide approximate answers, with mathematical guarantees, to computationally difficult queries orders-of-magnitude faster than traditional, exact methods",
+    "established": "2020-12",
+    "group": "datasketches",
+    "homepage": "http://datasketches.apache.org",
+    "id": "datasketches",
+    "name": "Apache DataSketches",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/datasketches.rdf",
+    "reporting": 2,
+    "shortdesc": "an open source, high-performance library of streaming algorithms commonly called \"sketches\" in the data sciences. Sketches are small, stateful programs that process massive data as a stream and can provide approximate answers, with mathematical guarantees, to computationally difficult queries orders-of-magnitude faster than traditional, exact methods"
   },
   {
     "chair": "bpendleton",
@@ -564,16 +588,16 @@
     "shortdesc": "Apache Directory Server"
   },
   {
-    "chair": "magicaltrout",
-    "charter": "The mission of Apache Distributed Release Audit Tool is the creation and maintenance of software related to large scale code license analysis, auditing and reporting.",
-    "established": "2017-09",
-    "group": "drat",
-    "homepage": "http://drat.apache.org/",
-    "id": "drat",
-    "name": "Apache DRAT",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/drat.rdf",
-    "reporting": 2,
-    "shortdesc": "large scale code license analysis, auditing and reporting"
+    "chair": "lidongdai",
+    "charter": "The mission of Apache DolphinScheduler is the creation and maintenance of software related to a distributed and extensible workflow scheduler platform with powerful DAG visual interfaces",
+    "established": "2021-03",
+    "group": "dolphinscheduler",
+    "homepage": "http://dolphinscheduler.apache.org",
+    "id": "dolphinscheduler",
+    "name": "Apache DolphinScheduler",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/dolphinscheduler.rdf",
+    "reporting": 1,
+    "shortdesc": "a distributed and extensible workflow scheduler platform with powerful DAG visual interfaces"
   },
   {
     "chair": "cgivre",
@@ -612,16 +636,16 @@
     "shortdesc": "a high-performance, lightweight, java based RPC framework."
   },
   {
-    "chair": "yonzhang2012",
-    "charter": "The mission of Apache Eagle is the creation and maintenance of software related to a distributed monitoring solution for identifying security and performance issues in real time on big data platforms, including Apache Hadoop and Apache Spark.",
-    "established": "2016-12",
-    "group": "eagle",
-    "homepage": "http://eagle.apache.org/",
-    "id": "eagle",
-    "name": "Apache Eagle",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/eagle.rdf",
+    "chair": "ovilia",
+    "charter": "The mission of Apache ECharts is the creation and maintenance of software related to a charting and data visualization library written in JavaScript",
+    "established": "2020-12",
+    "group": "echarts",
+    "homepage": "http://echarts.apache.org",
+    "id": "echarts",
+    "name": "Apache ECharts",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/echarts.rdf",
     "reporting": 3,
-    "shortdesc": "open source analytics solution for identifying security and performance issues instantly on big data platforms"
+    "shortdesc": "a charting and data visualization library written in JavaScript"
   },
   {
     "chair": "doebele",
@@ -648,7 +672,7 @@
     "shortdesc": "OSGi Framework and components."
   },
   {
-    "chair": "vishwasbabu",
+    "chair": "awasum",
     "charter": "The mission of Apache Fineract is the creation and maintenance of software related to a core banking platform that provides a reliable, robust, and affordable solution for entrepreneurs, financial institutions, and service providers to offer financial services to the world's underbanked and unbanked.",
     "established": "2017-04",
     "group": "fineract",
@@ -720,7 +744,7 @@
     "shortdesc": "a template engine."
   },
   {
-    "chair": "kmiller",
+    "chair": "upthewaterspout",
     "charter": "The mission of Apache Geode is the creation and maintenance of software related to a data management platform that provides real-time, consistent access to data-intensive applications throughout widely distributed cloud architectures.",
     "established": "2016-11",
     "group": "geode",
@@ -754,6 +778,18 @@
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/giraph.rdf",
     "reporting": 2,
     "shortdesc": "Iterative graph processing system built for high scalability"
+  },
+  {
+    "chair": "abti",
+    "charter": "The mission of Apache Gobblin is the creation and maintenance of software related to a distributed data integration framework that simplifies common aspects of big data integration such as data ingestion, replication, organization and lifecycle management for both streaming and batch data ecosystems",
+    "established": "2021-01",
+    "group": "gobblin",
+    "homepage": "http://gobblin.apache.org",
+    "id": "gobblin",
+    "name": "Apache Gobblin",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/gobblin.rdf",
+    "reporting": 3,
+    "shortdesc": "a distributed data integration framework that simplifies common aspects of big data integration such as data ingestion, replication, organization and lifecycle management for both streaming and batch data ecosystems"
   },
   {
     "chair": "djkevincr",
@@ -816,7 +852,7 @@
     "shortdesc": "Continuous integration of open source projects"
   },
   {
-    "chair": "vinodkv",
+    "chair": "weichiu",
     "charter": "The mission of Hadoop is the creation and maintenance of software related to Distributed computing platform",
     "established": "2008-01",
     "group": "hadoop",
@@ -876,7 +912,7 @@
     "shortdesc": "Data warehouse infrastructure using the Apache Hadoop Database"
   },
   {
-    "chair": "humbedooh",
+    "chair": "jorton",
     "charter": "The mission of HTTP Server is the creation and maintenance of software related to Apache Web Server (httpd)",
     "established": "1995-02",
     "group": "httpd",
@@ -888,7 +924,7 @@
     "shortdesc": "Apache Web Server (httpd)"
   },
   {
-    "chair": "asankha",
+    "chair": "michaelo",
     "charter": "The mission of HttpComponents is the creation and maintenance of software related to Java toolset of low level HTTP components",
     "established": "2007-11",
     "group": "httpcomponents",
@@ -898,6 +934,30 @@
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/httpcomponents.rdf",
     "reporting": 2,
     "shortdesc": "Java toolset of low level HTTP components"
+  },
+  {
+    "chair": "vinoth",
+    "charter": "The mission of Apache Hudi is the creation and maintenance of software related to providing atomic upserts and incremental data streams on Big Data",
+    "established": "2020-05",
+    "group": "hudi",
+    "homepage": "http://hudi.apache.org",
+    "id": "hudi",
+    "name": "Apache Hudi",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/hudi.rdf",
+    "reporting": 3,
+    "shortdesc": "providing atomic upserts and incremental data streams on Big Data"
+  },
+  {
+    "chair": "blue",
+    "charter": "The mission of Apache Iceberg is the creation and maintenance of software related to managing huge analytic datasets using a standard at-rest table format that is designed for high performance and ease of use",
+    "established": "2020-05",
+    "group": "iceberg",
+    "homepage": "http://iceberg.apache.org",
+    "id": "iceberg",
+    "name": "Apache Iceberg",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/iceberg.rdf",
+    "reporting": 3,
+    "shortdesc": "managing huge analytic datasets using a standard at-rest table format that is designed for high performance and ease of use"
   },
   {
     "chair": "dpavlov",
@@ -932,8 +992,19 @@
     "id": "incubator",
     "name": "Apache Incubator",
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/incubator.rdf",
-    "reporting": 0,
     "shortdesc": "Entry path for projects and codebases wishing to become part of the Foundation's efforts"
+  },
+  {
+    "chair": "hxd",
+    "charter": "The mission of Apache IoTDB is the creation and maintenance of software related to an IoT native database with high performance for data management and analysis",
+    "established": "2020-09",
+    "group": "iotdb",
+    "homepage": "http://iotdb.apache.org",
+    "id": "iotdb",
+    "name": "Apache IoTDB",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/iotdb.rdf",
+    "reporting": 3,
+    "shortdesc": "an IoT native database with high performance for data management and analysis"
   },
   {
     "chair": "jdoornenbal",
@@ -972,7 +1043,7 @@
     "shortdesc": "Java Apache Mail Enterprise Server"
   },
   {
-    "chair": "nacx",
+    "chair": "gaul",
     "charter": "The mission of jclouds is the creation and maintenance of software related to Java cloud APIs and abstractions",
     "established": "2013-10",
     "group": "jclouds",
@@ -1092,7 +1163,7 @@
     "shortdesc": "Server-side OSGi distribution"
   },
   {
-    "chair": "rbowen",
+    "chair": "sharan",
     "charter": "The mission of Apache Kibble is the creation and maintenance of software related to an interactive project activity analyzer and aggregator",
     "established": "2017-10",
     "group": "kibble",
@@ -1116,7 +1187,7 @@
     "shortdesc": "Simplify and normalize the deployment and implementation of secure Hadoop clusters"
   },
   {
-    "chair": "adar",
+    "chair": "awong",
     "charter": "The mission of Apache Kudu is the creation and maintenance of software related to a distributed columnar storage engine built for the Apache Hadoop ecosystem.",
     "established": "2016-07",
     "group": "kudu",
@@ -1138,30 +1209,6 @@
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/kylin.rdf",
     "reporting": 2,
     "shortdesc": "Extreme OLAP Engine for Big Data"
-  },
-  {
-    "chair": "danny",
-    "charter": "The mission of Labs is the creation and maintenance of software related to A place for innovation where committers of the foundation can experiment with new ideas",
-    "established": "2006-11",
-    "group": "labs",
-    "homepage": "http://labs.apache.org/",
-    "id": "labs",
-    "name": "Apache Labs",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/labs.rdf",
-    "reporting": 3,
-    "shortdesc": "A place for innovation where committers of the foundation can experiment with new ideas"
-  },
-  {
-    "chair": "amareshwari",
-    "charter": "Lens provides an Unified Analytics interface. Lens aims to cut the Data Analytics silos by providing a single view of data across multiple tiered data stores and optimal execution environment for the analytical query. It seamlessly integrates Hadoop with traditional data warehouses to appear like one.",
-    "established": "2015-08",
-    "group": "lens",
-    "homepage": "http://lens.apache.org/",
-    "id": "lens",
-    "name": "Apache Lens",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/lens.rdf",
-    "reporting": 2,
-    "shortdesc": "Unified analytics platform"
   },
   {
     "chair": "tomaz",
@@ -1188,7 +1235,7 @@
     "shortdesc": "Cross-language logging services"
   },
   {
-    "chair": "anshum",
+    "chair": "sokolov",
     "charter": "The mission of Lucene is the creation and maintenance of software related to Search engine library",
     "established": "2005-01",
     "group": "lucene",
@@ -1224,7 +1271,7 @@
     "shortdesc": "Scalable, Big Data, SQL-driven machine learning framework for Data Scientists"
   },
   {
-    "chair": "akm",
+    "chair": "rawkintrevo",
     "charter": "The mission of Mahout is the creation and maintenance of software related to Scalable machine learning library",
     "established": "2010-04",
     "group": "mahout",
@@ -1248,18 +1295,6 @@
     "shortdesc": "Framework for connecting source content repositories to target repositories or indexes."
   },
   {
-    "chair": "jakob",
-    "charter": "The mission of Marmotta is the creation and maintenance of software related to An Open Platform for Linked Data",
-    "established": "2013-11",
-    "group": "marmotta",
-    "homepage": "http://marmotta.apache.org/",
-    "id": "marmotta",
-    "name": "Apache Marmotta",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/marmotta.rdf",
-    "reporting": 2,
-    "shortdesc": "An Open Platform for Linked Data"
-  },
-  {
     "chair": "rfscholte",
     "charter": "The mission of Maven is the creation and maintenance of software related to Java project management and comprehension tools",
     "established": "2003-03",
@@ -1272,7 +1307,7 @@
     "shortdesc": "Java project management and comprehension tools"
   },
   {
-    "chair": "vinodkone",
+    "chair": "qianzhang",
     "charter": "The mission of Mesos is the creation and maintenance of software related to a cluster manager that provides efficient resource isolation and sharing across distributed applications",
     "established": "2013-06",
     "group": "mesos",
@@ -1282,30 +1317,6 @@
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/mesos.rdf",
     "reporting": 1,
     "shortdesc": "a cluster manager that provides efficient resource isolation and sharing across distributed applications"
-  },
-  {
-    "chair": "kaspersor",
-    "charter": "The mission of MetaModel is the creation and maintenance of software related to common interface for discovery, exploration of metadata and querying of different types of data sources",
-    "established": "2014-11",
-    "group": "metamodel",
-    "homepage": "http://metamodel.apache.org/",
-    "id": "metamodel",
-    "name": "Apache MetaModel",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/metamodel.rdf",
-    "reporting": 2,
-    "shortdesc": "common interface for discovery, exploration of metadata and querying of different types of data sources"
-  },
-  {
-    "chair": "cestella",
-    "charter": "The mission of Apache Metron is the creation and maintenance of software related to a security analytics platform for big data use cases.",
-    "established": "2017-04",
-    "group": "metron",
-    "homepage": "http://metron.apache.org/",
-    "id": "metron",
-    "name": "Apache Metron",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/metron.rdf",
-    "reporting": 1,
-    "shortdesc": "Real-time big data security"
   },
   {
     "chair": "gnodet",
@@ -1320,9 +1331,9 @@
     "shortdesc": "Multipurpose Infrastructure for Network Application"
   },
   {
-    "chair": "garyw",
+    "chair": "yzhao",
     "charter": "The mission of Apache Mnemonic is the creation and maintenance of software related to a transparent nonvolatile hybrid memory oriented library for Big data, High-performance computing, and Analytics",
-    "established": "2017-11",
+    "established": "2020-12",
     "group": "mnemonic",
     "homepage": "http://mnemonic.apache.org/",
     "id": "mnemonic",
@@ -1344,7 +1355,7 @@
     "shortdesc": "JavaServer(tm) Faces implementation and components"
   },
   {
-    "chair": "jmclean",
+    "chair": "janc",
     "charter": "The mission of Apache Mynewt is the creation and maintenance of software related to an embedded OS optimized for networking and built for remote management of constrained devices that are incapable of running either Linux or Android",
     "established": "2017-06",
     "group": "mynewt",
@@ -1399,7 +1410,7 @@
     "homepage": "http://ofbiz.apache.org/",
     "id": "ofbiz",
     "name": "Apache OFBiz",
-    "rdf": "http://ofbiz.apache.org/pmc/ofbiz.rdf",
+    "rdf": "https://ofbiz.apache.org/pmc/ofbiz.rdf",
     "reporting": 3,
     "shortdesc": "Enterprise automation software"
   },
@@ -1438,18 +1449,6 @@
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/oozie.rdf",
     "reporting": 2,
     "shortdesc": "A workflow scheduler system to manage Apache Hadoop jobs."
-  },
-  {
-    "chair": "huikyole",
-    "charter": "The mission of Open Climate Workbench is the creation and maintenance of software related to Climate model evaluation",
-    "established": "2014-02",
-    "group": "climate",
-    "homepage": "http://climate.apache.org/",
-    "id": "climate",
-    "name": "Apache Open Climate Workbench",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/climate.rdf",
-    "reporting": 2,
-    "shortdesc": "Climate model evaluation"
   },
   {
     "chair": "struberg",
@@ -1524,7 +1523,7 @@
     "shortdesc": "a platform for building serverless applications with functions"
   },
   {
-    "chair": "omalley",
+    "chair": "dongjoon",
     "charter": "The mission of ORC is the creation and maintenance of software related to the smallest, fastest columnar storage for Hadoop workloads",
     "established": "2015-04",
     "group": "orc",
@@ -1536,7 +1535,19 @@
     "shortdesc": "the smallest, fastest columnar storage for Hadoop workloads"
   },
   {
-    "chair": "julien",
+    "chair": "sammichen",
+    "charter": "The mission of Apache Ozone is the creation and maintenance of software related to a distributed object store for Hadoop-based and Cloud-native environments",
+    "established": "2020-10",
+    "group": "ozone",
+    "homepage": "http://ozone.apache.org",
+    "id": "ozone",
+    "name": "Apache Ozone",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/ozone.rdf",
+    "reporting": 2,
+    "shortdesc": "a distributed object store for Hadoop-based and Cloud-native environments"
+  },
+  {
+    "chair": "shangxinli",
     "charter": "The mission of Parquet is the creation and maintenance of software related to columnar storage format available to any project in the Apache Hadoop ecosystem",
     "established": "2015-04",
     "group": "parquet",
@@ -1560,7 +1571,7 @@
     "shortdesc": "Java library for working with PDF documents"
   },
   {
-    "chair": "gozer",
+    "chair": "stevehay",
     "charter": "The mission of Perl is the creation and maintenance of software related to Dynamic websites using Perl",
     "established": "2000-03",
     "group": "perl",
@@ -1606,6 +1617,18 @@
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/pig.rdf",
     "reporting": 3,
     "shortdesc": "Platform for analyzing large data sets"
+  },
+  {
+    "chair": "kishoreg",
+    "charter": "The mission of Apache Pinot is the creation and maintenance of software related to distributed OLAP data store to provide Real-time Analytics to power wide variety of analytical use case",
+    "established": "2021-07",
+    "group": "pinot",
+    "homepage": "http://pinot.apache.org",
+    "id": "pinot",
+    "name": "Apache Pinot",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/pinot.rdf",
+    "reporting": 2,
+    "shortdesc": "distributed OLAP data store to provide Real-time Analytics to power wide variety of analytical use case"
   },
   {
     "chair": "rwhitcomb",
@@ -1668,18 +1691,6 @@
     "shortdesc": "Portal technology"
   },
   {
-    "chair": "donald",
-    "charter": "The mission of Apache Predictionio is the creation and maintenance of software related to a machine learning server built on top of state-of-the-art open source stack, that enables developers to manage and deploy production-ready predictive services for various kinds of machine learning tasks",
-    "established": "2017-10",
-    "group": "predictionio",
-    "homepage": "http://predictionio.apache.org/",
-    "id": "predictionio",
-    "name": "Apache PredictionIO",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/predictionio.rdf",
-    "reporting": 3,
-    "shortdesc": "a machine learning server built on top of state-of-the-art open source stack, that enables developers to manage and deploy production-ready predictive services for various kinds of machine learning tasks"
-  },
-  {
     "chair": "mmerli",
     "charter": "The mission of Apache Pulsar is the creation and maintenance of software related to highly scalable, low latency messaging platform running on commodity hardware",
     "established": "2018-09",
@@ -1716,6 +1727,18 @@
     "shortdesc": "framework to enable, monitor and manage comprehensive data security across the Hadoop platform."
   },
   {
+    "chair": "szetszwo",
+    "charter": "The mission of Apache Ratis is the creation and maintenance of software related to a highly customizable Raft protocol implementation in Java",
+    "established": "2021-02",
+    "group": "ratis",
+    "homepage": "http://ratis.apache.org",
+    "id": "ratis",
+    "name": "Apache Ratis",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/ratis.rdf",
+    "reporting": 1,
+    "shortdesc": "a highly customizable Raft protocol implementation in Java"
+  },
+  {
     "chair": "motus",
     "charter": "The mission of REEF is the creation and maintenance of software related to Retainable Evaluator Execution Framework",
     "established": "2015-11",
@@ -1728,7 +1751,7 @@
     "shortdesc": "Retainable Evaluator Execution Framework"
   },
   {
-    "chair": "peter_firmstone",
+    "chair": "fielding",
     "charter": "The mission of River is the creation and maintenance of software related to Jini service oriented architecture",
     "established": "2011-01",
     "group": "river",
@@ -1812,18 +1835,6 @@
     "shortdesc": "XML Security in Java and C++"
   },
   {
-    "chair": "kalyan",
-    "charter": "The mission of Sentry is the creation and maintenance of software related to Fine grained authorization to data and metadata in Apache Hadoop",
-    "established": "2016-03",
-    "group": "sentry",
-    "homepage": "http://sentry.apache.org/",
-    "id": "sentry",
-    "name": "Apache Sentry",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/sentry.rdf",
-    "reporting": 3,
-    "shortdesc": "Fine grained authorization to data and metadata in Apache Hadoop"
-  },
-  {
     "chair": "jerenkrantz",
     "charter": "The mission of the Apache Serf project is creating and maintening of software related to HTTP and associated protocols.",
     "established": "2015-08",
@@ -1872,7 +1883,7 @@
     "shortdesc": "a database clustering system providing data sharding, distributed transactions, and distributed database management"
   },
   {
-    "chair": "lhazlewood",
+    "chair": "bdemers",
     "charter": "The mission of Shiro is the creation and maintenance of software related to Powerful and easy-to-use application security framework",
     "established": "2010-09",
     "group": "shiro",
@@ -1932,6 +1943,18 @@
     "shortdesc": "Web Framework for JCR Content Repositories"
   },
   {
+    "chair": "janhoy",
+    "charter": "The mission of Apache Solr is the creation and maintenance of software related to highly scalable distributed document search and analytics",
+    "established": "2021-02",
+    "group": "solr",
+    "homepage": "http://solr.apache.org",
+    "id": "solr",
+    "name": "Apache Solr",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/solr.rdf",
+    "reporting": 2,
+    "shortdesc": "highly scalable distributed document search and analytics"
+  },
+  {
     "chair": "sidney",
     "charter": "The mission of SpamAssassin is the creation and maintenance of software related to Mail filter to identify spam",
     "established": "2004-06",
@@ -1954,18 +1977,6 @@
     "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/spark.rdf",
     "reporting": 2,
     "shortdesc": "Fast and general engine for large-scale data processing"
-  },
-  {
-    "chair": "venkatrangan",
-    "charter": "The mission of Sqoop is the creation and maintenance of software related to Bulk Data Transfer for Apache Hadoop and Structured Datastores",
-    "established": "2012-03",
-    "group": "sqoop",
-    "homepage": "http://sqoop.apache.org/",
-    "id": "sqoop",
-    "name": "Apache Sqoop",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/sqoop.rdf",
-    "reporting": 1,
-    "shortdesc": "Bulk Data Transfer for Apache Hadoop and Structured Datastores"
   },
   {
     "chair": "humbedooh",
@@ -2040,6 +2051,18 @@
     "shortdesc": "Version Control"
   },
   {
+    "chair": "maximebeauchemin",
+    "charter": "The mission of Apache Superset is the creation and maintenance of software related to data exploration, analysis, visualization, and dashboarding",
+    "established": "2020-11",
+    "group": "superset",
+    "homepage": "http://superset.apache.org",
+    "id": "superset",
+    "name": "Apache Superset",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/superset.rdf",
+    "reporting": 2,
+    "shortdesc": "data exploration, analysis, visualization, and dashboarding"
+  },
+  {
     "chair": "isudana",
     "charter": "The mission of Synapse is the creation and maintenance of software related to Enterprise Service Bus and Mediation Framework",
     "established": "2007-12",
@@ -2064,28 +2087,16 @@
     "shortdesc": "Managing digital identities in enterprise environments"
   },
   {
-    "chair": "deron",
-    "charter": "The mission of Apache SystemML is the creation and maintenance of software related to declarative, large-scale machine learning that compiles to hybrid runtime execution plans ranging from single node, in-memory computations, to distributed computations such as on Apache Hadoop MapReduce or Apache Spark.",
+    "chair": "mboehm7",
+    "charter": "The mission of Apache SystemDS is the creation and maintenance of software related to declarative, large-scale machine learning that compiles to hybrid runtime execution plans ranging from single node, in-memory computations, to distributed computations such as on Apache Hadoop MapReduce or Apache Spark.",
     "established": "2017-05",
-    "group": "systemml",
-    "homepage": "http://systemml.apache.org/",
-    "id": "systemml",
-    "name": "Apache SystemML",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/systemml.rdf",
+    "group": "systemds",
+    "homepage": "http://systemds.apache.org/",
+    "id": "systemds",
+    "name": "Apache SystemDS",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/systemds.rdf",
     "reporting": 2,
     "shortdesc": "A machine learning platform optimal for big data"
-  },
-  {
-    "chair": "hyunsik",
-    "charter": "The mission of Tajo is the creation and maintenance of software related to Big data warehouse system on Apache Hadoop",
-    "established": "2014-03",
-    "group": "tajo",
-    "homepage": "http://tajo.apache.org/",
-    "id": "tajo",
-    "name": "Apache Tajo",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/tajo.rdf",
-    "reporting": 3,
-    "shortdesc": "Big data warehouse system on Apache Hadoop"
   },
   {
     "chair": "thiagohp",
@@ -2112,7 +2123,7 @@
     "shortdesc": "Dynamic websites using TCL"
   },
   {
-    "chair": "jeagles",
+    "chair": "abstractdog",
     "charter": "Apache Tez is an effort to develop a generic application framework which can be used to process arbitrarily complex DAGs of data-processing tasks and also a re-usable set of data-processing primitives which can be used by other projects.",
     "established": "2014-07",
     "group": "tez",
@@ -2184,7 +2195,7 @@
     "shortdesc": "Java EE Web Profile built on Apache Tomcat"
   },
   {
-    "chair": "neuman",
+    "chair": "friede",
     "charter": "The mission of Apache Traffic Control is the creation and maintenance of software related to building, monitoring, configuring, and provisioning a large scale content delivery network (CDN)",
     "established": "2018-05",
     "group": "trafficcontrol",
@@ -2208,18 +2219,6 @@
     "shortdesc": "A fast, scalable and extensible HTTP/1.1 compliant caching proxy server"
   },
   {
-    "chair": "pierresmits",
-    "charter": "The mission of Apache Trafodion is the creation and maintenance of software related to webscale SQL-on-Hadoop solution enabling transactional or operational workloads.",
-    "established": "2017-12",
-    "group": "trafodion",
-    "homepage": "http://trafodion.apache.org/",
-    "id": "trafodion",
-    "name": "Apache Trafodion",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/trafodion.rdf",
-    "reporting": 3,
-    "shortdesc": "webscale SQL-on-Hadoop solution enabling transactional or operational workloads."
-  },
-  {
     "chair": "gk",
     "charter": "The mission of Turbine is the creation and maintenance of software related to A Java Servlet Web Application Framework and associated component library",
     "established": "2007-05",
@@ -2232,19 +2231,19 @@
     "shortdesc": "A Java Servlet Web Application Framework and associated component library"
   },
   {
-    "chair": "chtyim",
-    "charter": "The mission of Twill is the creation and maintenance of software related to Use Apache Hadoop YARN's distributed capabilities with a programming model that is similar to running threads",
-    "established": "2016-06",
-    "group": "twill",
-    "homepage": "http://twill.apache.org/",
-    "id": "twill",
-    "name": "Apache Twill",
-    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/twill.rdf",
+    "chair": "tqchen",
+    "charter": "The mission of Apache TVM is the creation and maintenance of software related to compilation of machine learning models to run on a wide range of hardware platforms",
+    "established": "2020-11",
+    "group": "tvm",
+    "homepage": "http://tvm.apache.org",
+    "id": "tvm",
+    "name": "Apache TVM",
+    "rdf": "https://svn.apache.org/repos/asf/comdev/projects.apache.org/trunk/data/committees/tvm.rdf",
     "reporting": 3,
-    "shortdesc": "Use Apache Hadoop YARN's distributed capabilities with a programming model that is similar to running threads"
+    "shortdesc": "compilation of machine learning models to run on a wide range of hardware platforms"
   },
   {
-    "chair": "schor",
+    "chair": "rec",
     "charter": "Apache UIMA (*) software provides frameworks, tools and annotators, facilitating the analysis of unstructured content such as text, audio and video. (*) Unstructured Information Management Architecture.",
     "established": "2010-03",
     "group": "uima",
@@ -2316,7 +2315,7 @@
     "shortdesc": "Projects related to Web Services"
   },
   {
-    "chair": "rubys",
+    "chair": "curcuru",
     "charter": "The mission of Apache Whimsy is the creation and maintenance of software related to tools that help automate various administrative tasks or information lookup activities",
     "established": "2015-05",
     "group": "whimsy",

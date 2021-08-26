@@ -1,9 +1,9 @@
 Apache .NET Ant Library
-Apache ACE
-Apache APISIX
 Apache Abdera
 Apache Accumulo
+Apache ACE
 Apache ActiveMQ
+Apache AGE
 Apache Airavata
 Apache Airflow
 Apache Allura
@@ -14,27 +14,27 @@ Apache Ant
 Apache AntUnit
 Apache Any23
 Apache Apex
+Apache APISIX
 Apache Archiva
 Apache Aries
 Apache Arrow
 Apache AsterixDB
 Apache Atlas
-Apache Attic
 Apache Avro
 Apache Axiom
-Apache Axis
 Apache Axis2
-Apache BVal
 Apache Bahir
 Apache Batik
 Apache Beam
 Apache Beehive
 Apache Bigtop
 Apache Bloodhound
+Apache BlueMarlin
 Apache BookKeeper
 Apache Brooklyn
+Apache brpc
 Apache Buildr
-Apache CXF
+Apache BVal
 Apache Calcite
 Apache Camel
 Apache CarbonData
@@ -48,46 +48,49 @@ Apache Clerezza
 Apache Click
 Apache CloudStack
 Apache Cocoon
-Apache Commons
 Apache Commons BCEL
-Apache Commons BSF
 Apache Commons BeanUtils
-Apache Commons CLI
+Apache Commons BSF
 Apache Commons Chain
+Apache Commons CLI
 Apache Commons Codec
 Apache Commons Collections
 Apache Commons Compress
 Apache Commons Configuration
-Apache Commons DBCP
+Apache Commons Crypto
+Apache Commons CSV
 Apache Commons Daemon
+Apache Commons DBCP
 Apache Commons DbUtils
 Apache Commons Digester
-Apache Commons Discovery
-Apache Commons EL
 Apache Commons Email
 Apache Commons Exec
 Apache Commons FileUpload
 Apache Commons Functor
+Apache Commons Geometry
 Apache Commons HttpClient
+Apache Commons Imaging
 Apache Commons IO
 Apache Commons JCI
 Apache Commons JCS
+Apache Commons Jelly
 Apache Commons JEXL
 Apache Commons JXPath
-Apache Commons Jelly
 Apache Commons Lang
-Apache Commons Launcher
 Apache Commons Logging
 Apache Commons Math
-Apache Commons Modeler
 Apache Commons Net
+Apache Commons Numbers
 Apache Commons OGNL
 Apache Commons Pool
 Apache Commons Proxy
+Apache Commons RDF
 Apache Commons RNG
 Apache Commons SCXML
-Apache Commons VFS
+Apache Commons Statistics
+Apache Commons Text
 Apache Commons Validator
+Apache Commons VFS
 Apache Commons Weaver
 Apache Community Development
 Apache Compress Ant Library
@@ -95,17 +98,16 @@ Apache Continuum
 Apache Cordova
 Apache CouchDB
 Apache Crail
-Apache Creadur
 Apache Crunch
+Apache cTAKES
 Apache Curator
-Apache DB
-Apache DLab
-Apache DRAT
+Apache CXF
 Apache Daffodil
 Apache DataFu
+Apache DataLab
 Apache DataSketches
-Apache DeltaSpike
 Apache Deltacloud
+Apache DeltaSpike
 Apache Derby
 Apache DeviceMap
 Apache DirectMemory
@@ -117,15 +119,13 @@ Apache Doris
 Apache Drill
 Apache Druid
 Apache Dubbo
-Apache ECS
 Apache ECharts
-Apache ESME
-Apache Eagle
-Apache Edgent
+Apache ECS
 Apache Empire-db
+Apache ESME
 Apache Etch
+Apache EventMesh
 Apache Excalibur
-Apache FOP
 Apache Falcon
 Apache Felix
 Apache Fineract
@@ -136,8 +136,10 @@ Apache Flume
 Apache Fluo
 Apache Fluo Recipes
 Apache Fluo YARN
+Apache FOP
 Apache Forrest
 Apache Fortress
+Apache FreeMarker
 Apache FreeMarker
 Apache FtpServer
 Apache Geode
@@ -149,38 +151,39 @@ Apache Griffin
 Apache Groovy
 Apache Guacamole
 Apache Gump
-Apache HAWQ
-Apache HBase
-Apache HTTP Server
 Apache Hadoop
 Apache Hama
 Apache Harmony
+Apache HAWQ
+Apache HBase
 Apache Helix
 Apache Heron
 Apache Hive
 Apache Hivemall
 Apache Hivemind
-Apache HttpComponents
+Apache Hop
+Apache HTTP Server
 Apache HttpComponents Client
 Apache HttpComponents Core
 Apache Hudi
 Apache Iceberg
 Apache Ignite
 Apache Impala
-Apache Incubator
+Apache InLong
+Apache IoTDB
 Apache IoTDB
 Apache Isis
 Apache Ivy
 Apache IvyDE
-Apache JAMES
-Apache JMeter
-Apache JSPWiki
 Apache Jackrabbit
 Apache Jakarta Cactus
-Apache James
+Apache JAMES
+Apache jclouds
 Apache Jena
+Apache JMeter
 Apache Johnzon
 Apache Joshua
+Apache JSPWiki
 Apache Juneau
 Apache Kafka
 Apache Karaf
@@ -189,21 +192,20 @@ Apache Kibble
 Apache Knox
 Apache Kudu
 Apache Kylin
-Apache Labs
+Apache Kyuubi
 Apache Lens
 Apache Lenya
 Apache Libcloud
+Apache Liminal
 Apache Livy
+Apache log4cxx
 Apache Log4j 2
-Apache Logging Services
-Apache Lucene
+Apache log4net
+Apache log4php
 Apache Lucene Core
 Apache Lucene.Net
 Apache Lucy
 Apache MADlib
-Apache MINA
-Apache MRUnit
-Apache MXNet
 Apache Mahout
 Apache ManifoldCF
 Apache Marmotta
@@ -212,24 +214,26 @@ Apache Maven
 Apache Maven Doxia
 Apache Mesos
 Apache MetaModel
-Apache Metron
 Apache Milagro
+Apache MINA
 Apache Mnemonic
+Apache mod_ftp
+Apache mod_perl
+Apache MRUnit
+Apache MXNet
 Apache MyFaces
 Apache Mynewt
-Apache NLPCraft
 Apache Nemo
 Apache NetBeans
 Apache NiFi
+Apache NLPCraft
 Apache Nutch
 Apache NuttX
 Apache ODE
 Apache OFBiz
-Apache OODT
-Apache ORC
-Apache ORO
 Apache Olingo
 Apache Oltu - Parent
+Apache OODT
 Apache Oozie
 Apache Open Climate Workbench
 Apache OpenJPA
@@ -238,63 +242,66 @@ Apache OpenNLP
 Apache OpenOffice
 Apache OpenWebBeans
 Apache OpenWhisk
-Apache PDFBox
-Apache PLC4X
-Apache POI
+Apache ORC
+Apache ORO
+Apache Ozone
 Apache PageSpeed
 Apache Parquet
+Apache PDFBox
+Apache Pegasus
 Apache Petri
 Apache Phoenix
 Apache Pig
 Apache Pinot
+Apache Pinot
 Apache Pivot
+Apache PLC4X
+Apache POI
 Apache Polygene
 Apache Pony Mail
 Apache Portable Runtime
-Apache Portable Runtime (APR)
 Apache Portals
 Apache PredictionIO
 Apache Props Ant Library
 Apache Pulsar
+Apache PyLucene
 Apache Qpid
-Apache REEF
 Apache Ranger
 Apache Rat
 Apache Ratis
+Apache REEF
 Apache Regexp
-Apache Reusable Dialog Components (RDC) Taglib
 Apache River
 Apache Rivet
 Apache RocketMQ
 Apache Roller
 Apache Royale
 Apache Rya
-Apache S2Graph
-Apache SAMOA
-Apache SDAP
-Apache SINGA
-Apache SIS
-Apache SSHD
 Apache Samza
 Apache Sandesha2
 Apache Santuario
 Apache Scout
-Apache Sentry
+Apache SDAP
+Apache Sedona
 Apache Serf
 Apache ServiceComb
 Apache ServiceMix
 Apache Shale
 Apache ShardingSphere
+Apache ShenYu
 Apache Shindig
 Apache Shiro
+Apache SINGA
 Apache SkyWalking
 Apache Sling
 Apache Solr
+Apache Solr Operator
 Apache SpamAssassin
 Apache Spark
 Apache Spatial Information System
 Apache Spot
 Apache Sqoop
+Apache SSHD
 Apache Stanbol
 Apache Steve
 Apache Storm
@@ -307,13 +314,9 @@ Apache Subversion
 Apache Superset
 Apache Synapse
 Apache Syncope
-Apache SystemML
-Apache TVM
+Apache SystemDS
 Apache Tajo
-Apache Tamaya
 Apache Tapestry
-Apache Taverna
-Apache Tcl
 Apache Teaclave
 Apache Tentacles
 Apache Texen
@@ -323,33 +326,30 @@ Apache Tika
 Apache Tiles
 Apache TinkerPop
 Apache Tobago
-Apache TomEE
 Apache Tomcat
+Apache TomEE
 Apache Toree
 Apache Torque
 Apache Traffic Control
 Apache Traffic Server
 Apache Trafodion
 Apache Training
-Apache TubeMQ
 Apache Turbine
 Apache Tuscany
 Apache Tuweni
-Apache Twill
+Apache TVM
 Apache UIMA
 Apache Unomi
 Apache Usergrid
 Apache VCL
-Apache VSS Ant Library
-Apache VXQuery
 Apache Velocity
 Apache Velocity DVSL
 Apache Velocity Tools
+Apache VSS Ant Library
+Apache VXQuery
 Apache Vysper
-Apache Warble
-Apache Web Services
+Apache Wayang
 Apache Websh
-Apache Weex
 Apache Whimsy
 Apache Whirr
 Apache Whisker
@@ -357,29 +357,17 @@ Apache Wicket
 Apache Wink
 Apache Woden
 Apache Wookie
-Apache XML Commons External
-Apache XML Commons Resolver
-Apache XML Graphics
-Apache XML Graphics Commons
-Apache XMLBeans
-Apache Xalan
 Apache Xalan for C++ XSLT Processor
 Apache Xalan for Java XSLT Processor
-Apache Xerces
 Apache Xerces for C++ XML Parser
 Apache Xerces for Java XML Parser
 Apache Xerces for Perl XML Parser
 Apache Xindice
+Apache XML Commons External
+Apache XML Commons Resolver
+Apache XML Graphics Commons
+Apache XMLBeans
 Apache Yetus
 Apache YuniKorn
 Apache Zeppelin
 Apache ZooKeeper
-Apache brpc
-Apache cTAKES
-Apache jUDDI
-Apache jclouds
-Apache log4cxx
-Apache log4net
-Apache log4php
-Apache mod_ftp
-Apache mod_perl
