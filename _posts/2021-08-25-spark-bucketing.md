@@ -308,4 +308,6 @@ Bucket pruning（请参阅Jira）——使用过滤器减少 I/O。
 
 # 译者补充
 ## 与hive的分桶
-目前spark的分桶与hive的分桶是两个不同的东西, 不兼容.
+目前spark的分桶与hive的分桶是两个不同的东西, 不兼容:
+- 不可读hive分桶表, 不可写hive分桶表!
+- spark分桶表, 在hive中是普通表, 只不过表的TBLPROPERTIES能看出, spark保存了自己的分桶信息.
