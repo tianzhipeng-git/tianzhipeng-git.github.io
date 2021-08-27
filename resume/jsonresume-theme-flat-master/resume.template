@@ -43,7 +43,7 @@
 	{{#resume.basics}}
 	<section id="contact" class="row">
 		<aside class="col-sm-2">
-			<h3>联系方式</h3>
+			<h3>基本信息</h3>
 		</aside>
 		<div class="col-sm-9">
 			<div class="row">

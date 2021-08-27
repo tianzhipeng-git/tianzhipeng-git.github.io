@@ -4,10 +4,16 @@ License Available under [the MIT license](http://mths.be/mit).
 Fork from [flat theme](https://github.com/erming/jsonresume-theme-flat)
 
 ## 使用
-安装: npm install
+
+安装: 
+npm install -g resume-cli@3.0.0
+npm install
+
 serve: npm run start
 
-
+export:
+resume export resume.pdf
+resume export resume.html
 
 
 //encrypt
