@@ -224,10 +224,10 @@ code {
 }
 
 code {
-  background-color: rgba(245, 249, 196, 0.5);
+  font-weight: 400;
   color: rgba(0, 0, 0, 0.75);
   padding: 1px 3px;
-  font-size: 15px;
+  font-size: 17px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -235,11 +235,11 @@ code {
 
 pre {
   padding: 8px 12px;
-  overflow-x: scroll;
+  overflow-x: auto;
   display: block;
   margin: 0 0 18px;
-  line-height: 16px;
-  font-size: 11px;
+  line-height: 18px;
+  font-size: 15px;
   border: 1px solid #d9d9d9;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -247,8 +247,7 @@ pre {
   >code {
     border: 0;
     background-color: transparent;
-    color: #737373;
-    font-size: 11px;
+    font-size: 15px;
     padding: 0;
   }
 }
