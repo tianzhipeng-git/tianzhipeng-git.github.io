@@ -13,6 +13,7 @@ comments: true
 {:toc}
 
 > 写本文时, druid的github地址中的/apache/incubator-druid悄悄变成/apache/druid, 应该是要毕业了.
+> 本文基于Druid 0.14.0版本.
 
 # #0 Druid源码结构
 

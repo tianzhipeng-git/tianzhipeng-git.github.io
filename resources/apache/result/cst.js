@@ -227,4 +227,7 @@ var cst = {
     "Apache Fluo" :{
         "chinesedesc": "增量数据处理系统, 将新数据连续地合并到大型现有数据集, 类似但不同于Flink这种. 使用Accumulo做存储",
     },
+    "Apache Livy (Incubating)" : {
+        "chinesedesc": "用REST方式提交Spark",
+    },
 }
