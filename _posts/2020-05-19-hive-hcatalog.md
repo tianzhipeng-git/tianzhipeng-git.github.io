@@ -3,7 +3,7 @@ layout: post
 title: "HCatalog简介"
 date: 2020-05-19 23:23:23
 categories: bigdata
-tags: bigdata
+tags: bigdata hive
 comments: true
 ---
 

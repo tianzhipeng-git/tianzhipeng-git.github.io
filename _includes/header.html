@@ -36,6 +36,18 @@
                 <a href="/c/tags.html">tags</a>
             </li>
             {% endif %} 
+            {% if page.path == "c/archive.html" %}
+            <span class="title">
+                <li>
+                    <a href="/c/archive.html">archive</a>
+                </li>
+            </span>
+            {% else %}
+            <li>
+                <a href="/c/archive.html">archive</a>
+            </li>
+            {% endif %}
+
             {% if page.path == "c/about.html" %}
             <span class="title">
                 <li>

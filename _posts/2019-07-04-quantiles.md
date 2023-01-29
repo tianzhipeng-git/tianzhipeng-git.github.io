@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "两个分位点和直方图算法"
-categories: bigdata
+categories: algo
 tags: presentation algo bigdata
 comments: true
 excerpt: ' '

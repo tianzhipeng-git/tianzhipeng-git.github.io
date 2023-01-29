@@ -3,7 +3,7 @@ layout: post
 title: "[译]开源大数据OLAP系统对比: ClickHouse Druid Pinot"
 date: 2020-03-30 23:23:23
 categories: bigdata
-tags: bigdata translation
+tags: bigdata translation druid
 comments: true
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "可视曝光"
 date: 2016-11-29 23:23:23
 categories: web
-tags: presentation web
+tags: presentation web js
 comments: true
 excerpt_separator: <!--more-->
 ---

@@ -2,8 +2,8 @@
 layout: post
 title: "Bitmap Index和在Druid中的应用"
 date: 2020-09-07 23:23:23
-categories: bigdata
-tags: bigdata druid database
+categories: algo
+tags: bigdata druid database datastructure
 comments: true
 ---
 
