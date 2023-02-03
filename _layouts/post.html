@@ -39,7 +39,7 @@ layout: default
     </script>
 
     {% if page.comments %}
-    <div id="disqus_thread"></div>
+    <!-- <div id="disqus_thread"></div>
     <script>
         var disqus_config = function () {
             this.page.url = "{{ site.url }}{{ site.baseurl }}{{ page.url }}";
@@ -55,9 +55,17 @@ layout: default
     </script>
     <noscript>Please enable JavaScript to view the
         <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-    </noscript>
+    </noscript> -->
 
     <!--<script id="dsq-count-scr" src="//tzp-1991.disqus.com/count.js" async></script>-->
     <!--<a href="{{ site.baseurl }}{{ page.url }}#disqus_thread">Link</a>-->
+
+    <script src="https://utteranc.es/client.js"
+        repo="tianzhipeng-git/tianzhipeng-git.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
     {% endif %}
 </div>
