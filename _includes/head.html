@@ -10,7 +10,8 @@
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description"
     content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <meta name="keywords" content="{{ page.tags | join: ', ' | escape }}" />
+  {% assign keywords = page.keywords | default: ""| split: " " %}
+  <meta name="keywords" content="{{ page.tags | concat: keywords | join: ', ' | escape}}" />
   <meta name="google-site-verification" content="VXwOaOJJDalAOXDx8dKryUNrm1lM6YoQj_PEn7-NMos" />
 
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">

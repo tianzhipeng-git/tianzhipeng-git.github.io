@@ -3,7 +3,7 @@ layout: post
 title: "[译]spark-sql分桶最佳实践"
 date: 2021-08-25 23:23:23
 categories: bigdata
-tags: bigdata  translation
+tags: bigdata translation spark
 comments: true
 ---
 

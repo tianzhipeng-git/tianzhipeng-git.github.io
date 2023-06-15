@@ -18,11 +18,14 @@ Hive已经成为数仓管理的通用工具了, 其子项目HCatalog其实也很
 - sql转换成MapReduce任务执行在yarn上
 
 而HCatalog是Hive的一个子项目/子组件,"HCatalog is a table and storage management layer for Hadoop that enables users with different data processing tools — Pig, MapReduce — to more easily read and write data on the grid", 中文说就是一个Hadoop上的表管理层, 让用户通过不同工具(mr, pig, spark等)轻松读写表格式的数据的.
+
 <img src="/resources/hcatalog/4.jpg" width="700"/>
+
 ## Deploy architecture
 我们通过内部结构或者说部署架构, 就能更好的理解HCatalog是什么了. 
 
 先看Hive, 下图是我从hive deployment modes文档中截取的几种模式:
+
 <img src="/resources/hcatalog/1.png" width="700"/>
 
 其中的MetaStore功能就Hive用来管理表元信息的, 比如数据库信息, 表信息, 各种参数, 字段信息, 分区信息等等, 这些信息都是存储在一个关系数据库中的, 比如默认的Derby, 我们一般用Mysql.

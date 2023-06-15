@@ -3,7 +3,7 @@ layout: post
 title: "spark-sql窗口函数介绍/原理/bug分析"
 date: 2021-11-14 23:23:23
 categories: bigdata
-tags: bigdata
+tags: bigdata spark
 comments: true
 ---
 
