@@ -119,27 +119,27 @@ t4:
 ## 小优化1
 其实在做这次优化前, 对这个多表连续join做过一个小的优化方案, 对于上述join的问题4, 就是倾斜二叉树/并行度不够的问题, 可以修改sql语句使其DAG变成完全二叉
 树. 伪代码示意一下:
-```
+{% highlight sql %}
 (
-	t1 FULL OUTER JOIN t2
+  t1 FULL OUTER JOIN t2
 ) t12
 FULL OUTER JOIN
 (
-	t3 FULL OUTER JOIN t4
+  t3 FULL OUTER JOIN t4
 ) t34
-```
+{% endhighlight %}
 可以看出通过额外加一些括号, 将执行计划变成完全二叉树的样子, 这种方法不会使整体执行内容变少, 只不过改变执行顺序/并行度.
 
 # 优化方案
 我优化的思路就是直接开发一个新的Join执行计划, 支持多个input, 好处一个是不需要两两join的串行等待, 二是不需要额外的`Exchange和Sort`了.
 
 1. 首先这是一个特殊的功能, 不打算扩展到sql语言中使用(实际还不了解spark的sql解析这一块), 只在dataframe上使用就够了, 借助通过LogicalPlan构造Dataset的功能作为入口: 
-  ```
-	val x = MyFullJoin(inputs.map(x => (x._1.queryExecution.analyzed, x._1(x._2).expr)))
-    new Dataset[Row](spark, x, RowEncoder(x.schema))
-  ```
-2. 构建MyFullJoin逻辑算子和负责解析这个逻辑算子的Strategy
-   ```
+  {% highlight scala %}
+  val x = MyFullJoin(inputs.map(x => (x._1.queryExecution.analyzed, x._1(x._2).expr)))
+  new Dataset[Row](spark, x, RowEncoder(x.schema))
+  {% endhighlight %}
+1. 构建MyFullJoin逻辑算子和负责解析这个逻辑算子的Strategy
+   {% highlight scala %}
    case class MyFullJoin(inputs: List[(LogicalPlan, Expression)]) extends LogicalPlan
 
    object MyFullJoinStrategy extends Strategy {
@@ -152,21 +152,21 @@ FULL OUTER JOIN
    }
    
    spark.experimental.extraStrategies = Seq(MyFullJoinStrategy)
-   ```
-3. 参考SortMergeJoinExec, 编写自己的MyFullJoinExec, 下面详细介绍.
+   {% endhighlight %}
+2. 参考SortMergeJoinExec, 编写自己的MyFullJoinExec, 下面详细介绍.
 
 ## MyFullJoinExec
 
 对spark-sql的物理节点, 首先要定义输入和输出的情况, 实现如前所述的`requiredChildOrdering`, `outputOrdering`等几个方法.
 
 然后实现核心的doExecute方法, 根据自己的下级物理节点(SparkPlan), 构造自己的输出数据, 输出的是一个新RDD[InternalRow]. 一般doExecute内部, 都要借助RDD上的各种transform算子来实现自己的逻辑, 我这个Join, 仿照原始的SMJ逻辑, 用的是zipPartitions算子:
-```
+{% highlight scala %}
     rdd0.zipPartitions(rdds(0), rdds(1), rdds(2))((i0, i1, i2, i3) => { // fixme zipPartitions至多支持4个输入
       val iterators = Seq(i0, i1, i2, i3).map(RowIterator.fromScala)
       new FullOuterIterator(iterators, keyOrdering, keyGenerators,
         nullRows, resultProj, numOutputRows).toScala
     })
-```
+{% endhighlight %}
 
 `zipPartitions`将多个RDD按照相同分区号进行并联处理, 接受一个Function(输入4个Iterator, 输出1个Iterator).
 
@@ -177,7 +177,7 @@ FULL OUTER JOIN
 因为要返回多个输入join之后的数据, 所以原来的JoinedRow类不够使用, 新开发一个`class MultiJoinedRow(val rows: Array[InternalRow]) extends InternalRow`, 内部用数组存放join的多个输入row, 取数据的时候, 根据索引去对应row里取.
 
 因为输入的多个Iterator是已经排好顺序的, 所以FullOuterIterator的执行逻辑也很简化了:
-```
+{% highlight scala %}
 override def advanceNext(): Boolean = {
     // 如果buffer中已有数据
     if (scanNextInBuffered()) {
@@ -196,7 +196,7 @@ override def advanceNext(): Boolean = {
       false
     }
 }
-```
+{% endhighlight %}
 画了个示意图:
 
 <img src="/resources/sparkfulljoin/3.png" width="900" alt="JoinExec的迭代器"/>
@@ -216,7 +216,7 @@ override def advanceNext(): Boolean = {
 
 因为最终输出其实就是4个buffer的元素进行笛卡尔组合(图中例子是1*2*1*2 输出4中row的组合来), 所以让gpt帮忙生成N个数组的元素进行笛卡尔组合的代码, 要求它返回迭代器.
 
-```
+{% highlight scala %}
 1 def cartesianProduct[T](xs: Seq[Iterable[T]]): Iterator[Seq[T]] = {
 2   xs match {
 3     case Seq() => Iterator(Seq())    
@@ -226,7 +226,7 @@ override def advanceNext(): Boolean = {
 7     } yield Seq(i) ++ rest     
 8   }
 9 }
-```
+{% endhighlight %}
 
 - 3行 递归跳出条件; 如果输入xs是一个空序列，那么函数就返回一个只有一个空序列的迭代器
 - 4行 如果输入xs不是一个空序列，那么就将xs的第一个元素赋值给h，并将剩下的元素（可能没有）赋值给t。
@@ -268,16 +268,16 @@ java.lang.IllegalStateException: Couldn't find a#8 in []
   - CollapseProject
 
 接下来就没啥好说的了, 单步调试优化规则的执行, 发现确实是在**列裁剪ColumnPruning中将字段搞没的**:
-```
-    case p @ Project(_, child) if !child.isInstanceOf[Project] =>
-      val required = child.references ++ p.references
-      if (!child.inputSet.subsetOf(required)) {
-        val newChildren = child.children.map(c => prunedChild(c, required))
-        p.copy(child = child.withNewChildren(newChildren))
-      } else {
-        p
-      }
-```
+{% highlight scala %}
+case p @ Project(_, child) if !child.isInstanceOf[Project] =>
+  val required = child.references ++ p.references
+  if (!child.inputSet.subsetOf(required)) {
+    val newChildren = child.children.map(c => prunedChild(c, required))
+    p.copy(child = child.withNewChildren(newChildren))
+  } else {
+    p
+  }
+{% endhighlight %}
 
 - 当父节点是Project, 子节点是我们MyFullJoin, 进入上述case条件.
 - 根据当前节点的references和子节点的references判断必须的字段
@@ -320,7 +320,7 @@ java.lang.NullPointerException
 
 经过原始join和自己join, debug断点到这挨个对比, 发现expressions变量不一样:
 
-```
+{% highlight scala %}
 我的:
 StructField(a,StringType,false)
 StructField(b,StringType,true)
@@ -328,18 +328,18 @@ StructField(c,StringType,false)
 ...
 原始:
 全是StructField(b,StringType,true) 
-```
+{% endhighlight %}
 
 这个变量从哪生成? 从logicalPlan的output
 
 **bug原因及解决:**
-```
+{% highlight scala %}
 MyFullJoin的output少加了 .map(_.withNullability(true))
 
   override def output: Seq[Attribute] = {
     inputs.flatMap(i => i._1.output).这里
   }
-```
+{% endhighlight %}
 
 # 效果不好
 ## 4个30亿的表
