@@ -4,6 +4,8 @@ title: "HCatalog简介"
 date: 2020-05-19 23:23:23
 categories: bigdata
 tags: bigdata hive
+keywords: hive元数据 hcatalog hive-metastore
+excerpt: 理解hive元数据服务hcatalog, Hive MetaStore Server
 comments: true
 ---
 

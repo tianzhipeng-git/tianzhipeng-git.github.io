@@ -9,9 +9,11 @@
 
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description"
-    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  {% assign keywords = page.keywords | default: ""| split: " " %}
-  <meta name="keywords" content="{{ page.tags | concat: keywords | join: ', ' | escape}}" />
+    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+  {% assign mkeywords = page.keywords | default: "技术" | split: " " | join: ', '%}
+  {% assign mtags = page.tags | join: ', ' %}
+  <meta name="keywords" content="{{ mkeywords | append: ', ' | append: mtags | escape}}" />
+
   <meta name="google-site-verification" content="VXwOaOJJDalAOXDx8dKryUNrm1lM6YoQj_PEn7-NMos" />
 
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">

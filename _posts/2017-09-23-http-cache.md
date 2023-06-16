@@ -4,10 +4,12 @@ title: "HTTP浏览器缓存机制介绍"
 date: 2017-09-22 16:23:32
 categories: network
 tags: http cache web rfc presentation
+keywords: http缓存 浏览器缓存 缓存爆裂 expire-header 缓存时效
+excerpt: 深入理解http浏览器缓存机制, 理解Expires/Cache Control等header的作用, 理解缓存时效, 使用缓存爆裂解决缓存更新问题
 comments: true
 ---
 
-这是前端时间做的一次分享, 起因是我们的网站在更新的时候若js等有变动, 需要用户强刷才能获取最新内容, 借这个机会了解了HTTP浏览器缓存的机制. 本文的主要内容基本上取自RFC-7234, 翻译整理加自己的理解, 加上一些其他资料和图片.
+这是前段时间做的一次分享, 起因是我们的网站在更新的时候若js等有变动, 需要用户强刷才能获取最新内容, 借这个机会了解了HTTP浏览器缓存的机制. 本文的主要内容基本上取自RFC-7234, 翻译整理加自己的理解, 加上一些其他资料和图片.
 
 * TOC
 {:toc}

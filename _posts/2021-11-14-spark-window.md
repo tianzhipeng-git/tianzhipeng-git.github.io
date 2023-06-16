@@ -4,6 +4,8 @@ title: "spark-sql窗口函数介绍/原理/bug分析"
 date: 2021-11-14 23:23:23
 categories: bigdata
 tags: bigdata spark
+keywords: Spark窗口函数 UDAF Spark窗口原理 Spark窗口聚合 WindowExec 扩张框
+excerpt: Spark SQL中使用自定义窗口函数的时候遇到了bug, 自定义Spark UDAF, 深入理解Spark窗口执行原理WindowExec, 扩张框
 comments: true
 ---
 

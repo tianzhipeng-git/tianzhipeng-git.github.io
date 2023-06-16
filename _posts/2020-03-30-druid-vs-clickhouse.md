@@ -4,6 +4,7 @@ title: "[译]开源大数据OLAP系统对比: ClickHouse Druid Pinot"
 date: 2020-03-30 23:23:23
 categories: bigdata
 tags: bigdata translation druid
+keywords: Druid对比 ClickHouse对比 Pinot对比 OLAP对比
 comments: true
 ---
 

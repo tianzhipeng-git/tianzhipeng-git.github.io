@@ -4,6 +4,8 @@ title: "[译]spark-sql分桶最佳实践"
 date: 2021-08-25 23:23:23
 categories: bigdata
 tags: bigdata translation spark
+keywords: spark分桶 spark分桶表聚合 spark分桶原理
+excerpt: spark sql中使用分桶能极大提高join/采样/聚合等操作的效率, 这里分析其原理并讲解使用方法.
 comments: true
 ---
 

@@ -4,6 +4,8 @@ title: "[转]An In-Depth Look at the HBase Architecture"
 date: 2023-01-27 23:23:23
 categories: bigdata
 tags: bigdata hbase
+keywords: HBase架构 HBase读写 HBase深入分析
+excerpt: in depth look hbase architecture 一文讲懂HBase架构
 comments: true
 ---
 

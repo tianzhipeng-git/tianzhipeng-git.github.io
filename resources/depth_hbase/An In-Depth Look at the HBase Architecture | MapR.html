@@ -1,268 +1,998 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 9.6.3 (469890)"/><meta name="created" content="2019-07-09 02:54:00 +0000"/><meta name="source" content="web.clip7"/><meta name="source-application" content="webclipper.evernote"/><meta name="source-url" content="https://mapr.com/blog/in-depth-look-hbase-architecture/"/><meta name="updated" content="2019-07-09 02:54:00 +0000"/><title>An In-Depth Look at the HBase Architecture | MapR</title></head><body>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="exporter-version" content="Evernote Mac 9.6.3 (469890)" />
+  <meta name="created" content="2019-07-09 02:54:00 +0000" />
+  <meta name="source" content="web.clip7" />
+  <meta name="source-application" content="webclipper.evernote" />
+  <meta name="source-url" content="https://mapr.com/blog/in-depth-look-hbase-architecture/" />
+  <meta name="updated" content="2019-07-09 02:54:00 +0000" />
+  <meta name="description" content="in depth look hbase architecture 一文讲懂HBase架构" />
+  <meta name="keywords" content="HBase架构, HBase读写, HBase深入分析, bigdata, hbase" />
+  <title>An In-Depth Look at the HBase Architecture | MapR</title>
+</head>
+
+<body>
   <div style="--en-clipped-content:simplified">
-<div><br/></div><div style="font-size: 16px; display:block; min-width: 100%; "> <div style="background-color:transparent;font:inherit;vertical-align:baseline;"><div style="background-color:transparent;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;font-size:16px;line-height:1.5em;color:rgb(31, 9, 9);text-align:left;"><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;"><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;z-index:200;padding-left:2em;padding-right:2em;margin-left:auto;margin-right:auto;position:relative;width:36em;"><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;position:relative;margin-left:-25px;margin-right:25px;"><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;position:relative;padding-top:0px;padding-bottom:9em;"><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;position:relative;margin-bottom:0px;"><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;"><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;"><h1 style="border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-size:35px;font-weight:normal;line-height:35px;margin-bottom:20px;padding:0px;margin:0px;">An In-Depth Look at the HBase Architecture</h1><div style="padding:0px;border:0px;font:inherit;vertical-align:baseline;position:relative;height:1em;line-height:1;text-align:center;margin:0px;padding-top:1.5em;padding-bottom:1.5em;margin-bottom:0px;"><div style="padding:0px;border:0px;font:inherit;vertical-align:baseline;position:absolute;left:-4em;top:50%;z-index:10;width:100%;padding-left:4em;padding-right:4em;height:0.1em;opacity:0.5;margin:0px;background:-webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%);margin-bottom:0px;"><span style="font:inherit;position:absolute;left:-4em;top:50%;z-index:10;width:100%;padding-left:4em;padding-right:4em;height:0.1em;margin:0px;opacity:0.5;background:-webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%);"/></div></div></div>
+    <div><br /></div>
+    <div style="font-size: 16px; display:block; min-width: 100%; ">
+      <div style="background-color:transparent;font:inherit;vertical-align:baseline;">
+        <div
+          style="background-color:transparent;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;font-size:16px;line-height:1.5em;color:rgb(31, 9, 9);text-align:left;">
+          <div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">
+            <div
+              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;z-index:200;padding-left:2em;padding-right:2em;margin-left:auto;margin-right:auto;position:relative;width:36em;">
+              <div
+                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;position:relative;margin-left:-25px;margin-right:25px;">
+                <div
+                  style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;position:relative;padding-top:0px;padding-bottom:9em;">
+                  <div
+                    style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                    <div
+                      style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;position:relative;margin-bottom:0px;">
+                      <div
+                        style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                          <h1
+                            style="border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-size:35px;font-weight:normal;line-height:35px;margin-bottom:20px;padding:0px;margin:0px;">
+                            An In-Depth Look at the HBase Architecture</h1>
+                          <div
+                            style="padding:0px;border:0px;font:inherit;vertical-align:baseline;position:relative;height:1em;line-height:1;text-align:center;margin:0px;padding-top:1.5em;padding-bottom:1.5em;margin-bottom:0px;">
+                            <div
+                              style="padding:0px;border:0px;font:inherit;vertical-align:baseline;position:absolute;left:-4em;top:50%;z-index:10;width:100%;padding-left:4em;padding-right:4em;height:0.1em;opacity:0.5;margin:0px;background:-webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%);margin-bottom:0px;">
+                              <span
+                                style="font:inherit;position:absolute;left:-4em;top:50%;z-index:10;width:100%;padding-left:4em;padding-right:4em;height:0.1em;margin:0px;opacity:0.5;background:-webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%);" />
+                            </div>
+                          </div>
+                        </div>
 
-<div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;position:relative;margin-top:0px;padding-top:0px;"><span style="font:inherit;position:absolute;left:25%;top:0px;z-index:10;width:50%;padding-left:0px;padding-right:0px;height:0.1em;margin:0px;opacity:0.25;display:none !important;background:-webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%);" />
-  <div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
-    <div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
-      <a href="https://mapr.com/blog/" target="_blank" style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">Blog</a>
-          <a href="https://mapr.com/blog/nosql/" target="_blank" style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">NoSQL</a>
-      <a target="_blank" style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">Current Post</a>
-    </div>
-  </div>
-</div>
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;position:relative;margin-top:0px;padding-top:0px;">
+                          <span
+                            style="font:inherit;position:absolute;left:25%;top:0px;z-index:10;width:50%;padding-left:0px;padding-right:0px;height:0.1em;margin:0px;opacity:0.25;display:none !important;background:-webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%);" />
+                          <div
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                            <div
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                              <a href="https://mapr.com/blog/" target="_blank"
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">Blog</a>
+                              <a href="https://mapr.com/blog/nosql/" target="_blank"
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">NoSQL</a>
+                              <a target="_blank"
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">Current
+                                Post</a>
+                            </div>
+                          </div>
+                        </div>
 
 
 
 
-  
-    
-      
 
-        
 
-        
 
-        <div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
-          <p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;"><strong style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">18 min read</strong></p>
+
+
+
+
+
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          <p
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                            <strong
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">18
+                              min read</strong></p>
+                        </div>
+
+
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          In this blog post, I’ll give you an in-depth look at the HBase architecture and its main
+                          benefits over NoSQL data store solutions. Be sure and read the first blog post in this series,
+                          titled<br /><a
+                            href="https://mapr.com/blog/hbase-and-mapr-db-designed-distribution-scale-and-speed#.VcKFNflVhBc"
+                            target="_blank"
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">“HBase
+                            and MapR Database: Designed for Distribution, Scale, and Speed.”</a></p>
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Architectural Components</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Physically, HBase is composed of three types of servers in a master slave type of
+                          architecture. Region servers serve data for reads and writes. When accessing data, clients
+                          communicate with HBase RegionServers directly. Region assignment, DDL (create, delete tables)
+                          operations are handled by the HBase Master process. Zookeeper, which is part of HDFS,
+                          maintains a live cluster state.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          The Hadoop DataNode stores the data that the Region Server is managing. All HBase data is
+                          stored in HDFS files. Region Servers are collocated with the HDFS DataNodes, which enable data
+                          locality (putting the data close to where it is needed) for the data served by the
+                          RegionServers. HBase data is local when it is written, but when a region is moved, it is not
+                          local until compaction.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          The NameNode maintains metadata information for all the physical data blocks that comprise the
+                          files.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/246A71C4-05BA-4465-9C55-F42A6E54A588.png"
+                            height="343" width="632" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Regions</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          HBase Tables are divided horizontally by row key range into “Regions.” A region contains all
+                          rows in the table between the region’s start key and end key. Regions are assigned to the
+                          nodes in the cluster, called “Region Servers,” and these serve data for reads and writes. A
+                          region server can serve about 1,000 regions.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/9EF87E40-0E84-4CE5-A936-E739756487C4.png"
+                            height="337" width="724" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase HMaster</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Region assignment, DDL (create, delete tables) operations are handled by the HBase Master.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          A master is responsible for:</p>
+                        <ul
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            <p
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                              Coordinating the region servers</p>
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">-
+                              Assigning regions on startup , re-assigning regions for recovery or load balancing</dd>
+
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">-
+                              Monitoring all RegionServer instances in the cluster (listens for notifications from
+                              zookeeper)</dd>
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            <p
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                              Admin functions</p>
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">-
+                              Interface for creating, deleting, updating tables</dd>
+
+                          </li>
+                        </ul>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/387C90D3-0CF6-4DC5-953A-66A90DAEA140.png"
+                            height="367" width="722" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          ZooKeeper: The Coordinator</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          HBase uses ZooKeeper as a distributed coordination service to maintain server state in the
+                          cluster. Zookeeper maintains which servers are alive and available, and provides server
+                          failure notification. Zookeeper uses consensus to guarantee common shared state. Note that
+                          there should be three or five machines for consensus.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/ECB65E84-F3E1-44EF-9E23-02B80B59DE9A.png"
+                            height="318" width="703" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          How the Components Work Together</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Zookeeper is used to coordinate shared state information for members of distributed systems.
+                          Region servers and the active HMaster connect with a session to ZooKeeper. The ZooKeeper
+                          maintains ephemeral nodes for active sessions via heartbeats.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/263A297D-E002-4735-810A-4904E5631682.png"
+                            height="329" width="722" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Each Region Server creates an ephemeral node. The HMaster monitors these nodes to discover
+                          available region servers, and it also monitors these nodes for server failures. HMasters vie
+                          to create an ephemeral node. Zookeeper determines the first one and uses it to make sure that
+                          only one master is active. The active HMaster sends heartbeats to Zookeeper, and the inactive
+                          HMaster listens for notifications of the active HMaster failure.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          If a region server or the active HMaster fails to send a heartbeat, the session is expired and
+                          the corresponding ephemeral node is deleted. Listeners for updates will be notified of the
+                          deleted nodes. The active HMaster listens for region servers, and will recover region servers
+                          on failure. The Inactive HMaster listens for active HMaster failure, and if an active HMaster
+                          fails, the inactive HMaster becomes active.</p>
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase First Read or Write</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          There is a special HBase Catalog table called the META table, which holds the location of the
+                          regions in the cluster. ZooKeeper stores the location of the META table.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          This is what happens the first time a client reads or writes to HBase:</p>
+                        <ol
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:decimal;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            The client gets the Region server that hosts the META table from ZooKeeper.</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            The client will query the .META. server to get the region server corresponding to the row
+                            key it wants to access. The client caches this information along with the META table
+                            location.</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            It will get the Row from the corresponding Region Server.</li>
+                        </ol>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          For future reads, the client uses the cache to retrieve the META location and previously read
+                          row keys. Over time, it does not need to query the META table, unless there is a miss because
+                          a region has moved; then it will re-query and update the cache.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/4777DF5C-3967-4CA7-8AEA-5DDD749D102E.png"
+                            height="356" width="590" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Meta Table</h2>
+                        <ul
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            This META table is an HBase table that keeps a list of all regions in the system.</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            The .META. table is like a b tree.</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            <p
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                              The .META. table structure is as follows:</p>
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Key:
+                              region start key,region id</dd>
+
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">-
+                              Values: RegionServer</dd>
+
+                          </li>
+                        </ul>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/51DBF1DA-40F8-4817-BF74-5B4C7A30D83F.png"
+                            height="362" width="736" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Region Server Components</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          A Region Server runs on an HDFS data node and has the following components:</p>
+                        <ul
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            WAL: Write Ahead Log is a file on the distributed file system. The WAL is used to store new
+                            data that hasn't yet been persisted to permanent storage; it is used for recovery in the
+                            case of failure.</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            BlockCache: is the read cache. It stores frequently read data in memory. Least Recently Used
+                            data is evicted when full.</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            MemStore: is the write cache. It stores new data which has not yet been written to disk. It
+                            is sorted before writing to disk. There is one MemStore per column family per region.</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Hfiles store the rows as sorted KeyValues on disk.</li>
+                        </ul>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/93221825-90D5-443A-A5FB-97799A39B7DA.png"
+                            height="366" width="675" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Write Steps (1)</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          When the client issues a Put request, the first step is to write the data to the write-ahead
+                          log, the WAL:</p>
+                        <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Edits are
+                          appended to the end of the WAL file that is stored on disk.</dd>
+
+                        <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- The WAL is
+                          used to recover not-yet-persisted data in case a server crashes.</dd>
+
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/4F61010E-5C06-4935-8F1B-9625F9A6755F.png"
+                            height="363" width="716" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Write Steps (2)</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Once the data is written to the WAL, it is placed in the MemStore. Then, the put request
+                          acknowledgement returns to the client.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/94256426-9C62-4FFE-A1C6-9353E6EAFF0F.png"
+                            height="298" width="664" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase MemStore</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          The MemStore stores updates in memory as sorted KeyValues, the same as it would be stored in
+                          an HFile. There is one MemStore per column family. The updates are sorted per column family.
+                        </p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/5A37C568-2AD4-4FE4-BCF6-5F12FCCA1FC9.png"
+                            height="351" width="719" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Region Flush</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          When the MemStore accumulates enough data, the entire sorted set is written to a new HFile in
+                          HDFS. HBase uses multiple HFiles per column family, which contain the actual cells, or
+                          KeyValue instances. These files are created over time as KeyValue edits sorted in the
+                          MemStores are flushed as files to disk.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Note that this is one reason why there is a limit to the number of column families in HBase.
+                          There is one MemStore per CF; when one is full, they all flush. It also saves the last written
+                          sequence number so the system knows what was persisted so far.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          The highest sequence number is stored as a meta field in each HFile, to reflect where
+                          persisting has ended and where to continue. On region startup, the sequence number is read,
+                          and the highest is used as the sequence number for new edits.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/E180EA62-7E2E-4D48-8295-9C396887CD69.png"
+                            height="248" width="622" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase HFile</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Data is stored in an HFile which contains sorted key/values. When the MemStore accumulates
+                          enough data, the entire sorted KeyValue set is written to a new HFile in HDFS. This is a
+                          sequential write. It is very fast, as it avoids moving the disk drive head.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/F191CDE6-279B-4C04-81A4-EC74B1A8ED07.png"
+                            height="351" width="698" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase HFile Structure</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          An HFile contains a multi-layered index which allows HBase to seek to the data without having
+                          to read the whole file. The multi-level index is like a b+tree:</p>
+                        <ul
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Key value pairs are stored in increasing order</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Indexes point by row key to the key value data in 64KB “blocks”</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Each block has its own leaf-index</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            The last key of each block is put in the intermediate index</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            The root index points to the intermediate index</li>
+                        </ul>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          The trailer points to the meta blocks, and is written at the end of persisting the data to the
+                          file. The trailer also has information like bloom filters and time range info. Bloom filters
+                          help to skip files that do not contain a certain row key. The time range info is useful for
+                          skipping the file if it is not in the time range the read is looking for.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/DE1272CA-CE5E-4C0A-8F24-4315D98116F8.png"
+                            height="349" width="688" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HFile Index</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          The index, which we just discussed, is loaded when the HFile is opened and kept in memory.
+                          This allows lookups to be performed with a single disk seek.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/5B9552D5-9E41-4C1B-A50B-D6FC7987DD74.png"
+                            height="341" width="772" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Read Merge</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          We have seen that the KeyValue cells corresponding to one row can be in multiple places, row
+                          cells already persisted are in Hfiles, recently updated cells are in the MemStore, and
+                          recently read cells are in the Block cache. So when you read a row, how does the system get
+                          the corresponding cells to return? A Read merges Key Values from the block cache, MemStore,
+                          and HFiles in the following steps:</p>
+                        <ol
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:decimal;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            First, the scanner looks for the Row cells in the Block cache - the read cache. Recently
+                            Read Key Values are cached here, and Least Recently Used are evicted when memory is needed.
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Next, the scanner looks in the MemStore, the write cache in memory containing the most
+                            recent writes.</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            If the scanner does not find all of the row cells in the MemStore and Block Cache, then
+                            HBase will use the Block Cache indexes and bloom filters to load HFiles into memory, which
+                            may contain the target row cells.</li>
+                        </ol>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/879460FC-E54E-4CBD-9803-27FD801F73BA.png"
+                            height="278" width="769" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Read Merge</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          As discussed earlier, there may be many HFiles per MemStore, which means for a read, multiple
+                          files may have to be examined, which can affect the performance. This is called read
+                          amplification.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/B0E30988-4034-4233-A3A6-6CEE94FF44E7.png"
+                            height="307" width="596" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Minor Compaction</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          HBase will automatically pick some smaller HFiles and rewrite them into fewer bigger Hfiles.
+                          This process is called minor compaction. Minor compaction reduces the number of storage files
+                          by rewriting smaller files into fewer but larger ones, performing a merge sort.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/E2219BDF-35A5-4084-8AA7-46DE7A1975F7.png"
+                            height="329" width="723" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Major Compaction</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Major compaction merges and rewrites all the HFiles in a region to one HFile per column
+                          family, and in the process, drops deleted or expired cells. This improves read performance;
+                          however, since major compaction rewrites all of the files, lots of disk I/O and network
+                          traffic might occur during the process. This is called write amplification.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Major compactions can be scheduled to run automatically. Due to write amplification, major
+                          compactions are usually scheduled for weekends or evenings. Note that MapR Database has made
+                          improvements and does not need to do compactions. A major compaction also makes any data files
+                          that were remote, due to server failure or load balancing, local to the region server.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/2CCC906E-1F54-49B4-9477-01BB07C3A910.png"
+                            height="339" width="653" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Region = Contiguous Keys</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Let’s do a quick review of regions:</p>
+                        <ul
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            A table can be divided horizontally into one or more regions. A region contains a
+                            contiguous, sorted range of rows between a start key and an end key</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Each region is 1GB in size (default)</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            A region of a table is served to the client by a RegionServer</li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            A region server can serve about 1,000 regions (which may belong to the same table or
+                            different tables)</li>
+                        </ul>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/3CACB402-641C-4BBB-9D6C-4DDB82AC9D66.png"
+                            height="334" width="653" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Region Split</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Initially there is one region per table. When a region grows too large, it splits into two
+                          child regions. Both child regions, representing one-half of the original region, are opened in
+                          parallel on the same Region server, and then the split is reported to the HMaster. For load
+                          balancing reasons, the HMaster may schedule for new regions to be moved off to other servers.
+                        </p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/29FF2D1C-62FD-487A-A7E9-183E834E5855.png"
+                            height="361" width="675" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Read Load Balancing</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          Splitting happens initially on the same region server, but for load balancing reasons, the
+                          HMaster may schedule for new regions to be moved off to other servers. This results in the new
+                          Region server serving data from a remote HDFS node until a major compaction moves the data
+                          files to the Regions server’s local node. HBase data is local when it is written, but when a
+                          region is moved (for load balancing or recovery), it is not local until major compaction.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/490A742F-B6DD-4923-B285-314841FE2B47.png"
+                            height="358" width="714" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HDFS Data Replication</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          All writes and Reads are to/from the primary node. HDFS replicates the WAL and HFile blocks.
+                          HFile block replication happens automatically. HBase relies on HDFS to provide the data safety
+                          as it stores its files. When data is written in HDFS, one copy is written locally, and then it
+                          is replicated to a secondary node, and a third copy is written to a tertiary node.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/C4F38E08-6259-4660-86F0-AAC23B867412.png"
+                            height="302" width="641" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HDFS Data Replication (2)</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          The WAL file and the Hfiles are persisted on disk and replicated, so how does HBase recover
+                          the MemStore updates not persisted to HFiles? See the next section for the answer.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/1A3B9E47-ECAC-4A84-A797-12B83B7EB364.png"
+                            height="349" width="679" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          HBase Crash Recovery</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          When a RegionServer fails, Crashed Regions are unavailable until detection and recovery steps
+                          have happened. Zookeeper will determine Node failure when it loses region server heart beats.
+                          The HMaster will then be notified that the Region Server has failed.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          When the HMaster detects that a region server has crashed, the HMaster reassigns the regions
+                          from the crashed server to active Region servers. In order to recover the crashed region
+                          server’s memstore edits that were not flushed to disk. The HMaster splits the WAL belonging to
+                          the crashed region server into separate files and stores these file in the new region servers’
+                          data nodes. Each Region Server then replays the WAL from the respective split WAL, to rebuild
+                          the memstore for that region.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/2D32869D-93E5-484B-A026-8C04A338B0C2.png"
+                            height="368" width="708" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Data Recovery</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          WAL files contain a list of edits, with one edit representing a single put or delete. Edits
+                          are written chronologically, so, for persistence, additions are appended to the end of the WAL
+                          file that is stored on disk.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          What happens if there is a failure when the data is still in memory and not persisted to an
+                          HFile? The WAL is replayed. Replaying a WAL is done by reading the WAL, adding and sorting the
+                          contained edits to the current MemStore. At the end, the MemStore is flush to write changes to
+                          an HFile.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/2E8C9300-AF9C-45A7-B792-EC88BE4E06C8.png"
+                            height="378" width="724" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Apache HBase Architecture Benefits</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          HBase provides the following benefits:</p>
+                        <ul
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            <p
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                              <strong
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Strong
+                                consistency model</strong></p>
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- When a
+                              write returns, all readers will see same value</dd>
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            <p
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                              <strong
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Scales
+                                automatically</strong></p>
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">-
+                              Regions split when data grows too large</dd>
+
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Uses
+                              HDFS to spread and replicate data</dd>
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            <p
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                              <strong
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Built-in
+                                recovery</strong></p>
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Using
+                              Write Ahead Log (similar to journaling on file system)</dd>
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            <p
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                              <strong
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Integrated
+                                with Hadoop</strong></p>
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">-
+                              MapReduce on HBase is straightforward</dd>
+
+                          </li>
+                        </ul>
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Apache HBase Has Problems Too…</h2>
+                        <ul
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            <p
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                              <strong
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Business
+                                continuity reliability:</strong></p>
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- WAL
+                              replay slow</dd>
+
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Slow
+                              complex crash recovery</dd>
+
+                            <dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Major
+                              Compaction I/O storms</dd>
+
+                          </li>
+                        </ul>
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          MapR Database with MapR XD does not have these problems</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          The diagram below compares the application stacks for Apache HBase on top of HDFS on the left,
+                          Apache HBase on top of MapR's read/write file system MapR XD in the middle, and MapR Database
+                          and MapR XD in a Unified Storage Layer on the right.</p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/8BEF7915-A1E5-4F7F-8B4E-072169005F92.png"
+                            height="345" width="708" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          MapR Database exposes the same HBase API and the <a
+                            href="https://mapr.com/blog/in-depth-look-hbase-architecture/#training-module_dev320-mod2"
+                            target="_blank"
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">Data
+                            model</a> for MapR Database is the same as for Apache HBase. However the MapR Database
+                          implementation integrates table storage into the MapR Distributed File and Object Store,
+                          eliminating all JVM layers and interacting directly with disks for both file and table
+                          storage.</p>
+
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+
+
+                          <div
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                            <div
+                              style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+
+                              <div
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                                <div
+                                  style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                                  <p
+                                    style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                                    If you need to learn more about the <em
+                                      style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-style:italic;">HBase
+                                      data model</em>, we have 4 lessons that will help you. Module 2 of the <b
+                                      style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">FREE
+                                      course</b>, <a
+                                      href="https://mapr.com/training/on-demand/dev-320-apache-hbase-data-model-and-architecture/#2-apache-hbase-data-model"
+                                      target="_blank"
+                                      style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">DEV
+                                      320 - Apache HBase Data Model and Architecture</a> will walk you through
+                                    everything you need to know.</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          MapR Database offers many benefits over HBase, while maintaining the virtues of the HBase API
+                          and the idea of data being sorted according to primary key. MapR Database provides operational
+                          benefits such as no compaction delays and automated region splits that do not impact the
+                          performance of the database. The tables in MapR Database can also be isolated to certain
+                          machines in a cluster by utilizing the topology feature of MapR. The final differentiator is
+                          that MapR Database is just plain fast, due primarily to the fact that it is tightly integrated
+                          into the MapR Distributed File and Object Store itself, rather than being layered on top of a
+                          distributed file system that is layered on top of a conventional file system.</p>
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Key differences between MapR Database and Apache HBase</h2>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;">
+                          <img
+                            src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/7409251C-22A1-4494-AF2D-2CE12EF7DCD9.png"
+                            height="256" width="544" /></div>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;" />
+                        <ul
+                          style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Tables part of the MapR Read/Write File system<ul
+                              style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
+                              <li
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                                Guaranteed data locality</li>
+                            </ul>
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Smarter load balancing<ul
+                              style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
+                              <li
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                                Uses container Replicas</li>
+                            </ul>
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Smarter fail over<ul
+                              style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
+                              <li
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                                Uses container replicas</li>
+                            </ul>
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Multiple small WALs<ul
+                              style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
+                              <li
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                                Faster recovery</li>
+                            </ul>
+                          </li>
+                          <li
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                            Memstore Flushes Merged into Read/Write File System<ul
+                              style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
+                              <li
+                                style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">
+                                No compaction !</li>
+                            </ul>
+                          </li>
+                        </ul>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          <a href="https://mapr.com/training/hadoop-demand-training/hde-110" target="_blank"
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">You
+                            can take this free On Demand training to learn more about MapR XD and MapR Database</a></p>
+                        <p
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
+                          In this blog post, you learned more about the HBase architecture and its main benefits over
+                          NoSQL data store solutions. If you have any questions about HBase, please ask them in the
+                          comments section below.</p>
+                        <h2
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">
+                          Want to learn more?</h2>
+
+
+
+                        <div
+                          style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
+                          <h6
+                            style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:16px;margin-bottom:1.5em;">
+                            <br />
+                            This blog post was published August 07, 2015.
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;position:absolute;top:-1000px;left:-1000px;">
+                    Measure</div>
+                  <div
+                    style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;position:absolute;top:-1000px;left:-1000px;line-height:1;margin-bottom:0px;">
+                    Measure</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        
-          <p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">In this blog post, I’ll give you an in-depth look at the HBase architecture and its main benefits over NoSQL data store solutions. Be sure and read the first blog post in this series, titled<br/><a href="https://mapr.com/blog/hbase-and-mapr-db-designed-distribution-scale-and-speed#.VcKFNflVhBc" target="_blank" style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">“HBase and MapR Database: Designed for Distribution, Scale, and Speed.”</a></p>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Architectural Components</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Physically, HBase is composed of three types of servers in a master slave type of architecture. Region servers serve data for reads and writes. When accessing data, clients communicate with HBase RegionServers directly. Region assignment, DDL (create, delete tables) operations are handled by the HBase Master process. Zookeeper, which is part of HDFS, maintains a live cluster state.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The Hadoop DataNode stores the data that the Region Server is managing. All HBase data is stored in HDFS files. Region Servers are collocated with the HDFS DataNodes, which enable data locality (putting the data close to where it is needed) for the data served by the RegionServers. HBase data is local when it is written, but when a region is moved, it is not local until compaction.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The NameNode maintains metadata information for all the physical data blocks that comprise the files.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/246A71C4-05BA-4465-9C55-F42A6E54A588.png" height="343" width="632"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Regions</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">HBase Tables are divided horizontally by row key range into “Regions.” A region contains all rows in the table between the region’s start key and end key. Regions are assigned to the nodes in the cluster, called “Region Servers,” and these serve data for reads and writes. A region server can serve about 1,000 regions.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/9EF87E40-0E84-4CE5-A936-E739756487C4.png" height="337" width="724"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase HMaster</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Region assignment, DDL (create, delete tables) operations are handled by the HBase Master.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">A master is responsible for:</p>
-<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;"><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Coordinating the region servers</p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Assigning regions on startup , re-assigning regions for recovery or load balancing</dd>
-
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Monitoring all RegionServer instances in the cluster (listens for notifications from zookeeper)</dd>
-</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;"><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Admin functions</p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Interface for creating, deleting, updating tables</dd>
-
-</li>
-</ul>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/387C90D3-0CF6-4DC5-953A-66A90DAEA140.png" height="367" width="722"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">ZooKeeper: The Coordinator</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">HBase uses ZooKeeper as a distributed coordination service to maintain server state in the cluster. Zookeeper maintains which servers are alive and available, and provides server failure notification. Zookeeper uses consensus to guarantee common shared state. Note that there should be three or five machines for consensus.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/ECB65E84-F3E1-44EF-9E23-02B80B59DE9A.png" height="318" width="703"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">How the Components Work Together</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Zookeeper is used to coordinate shared state information for members of distributed systems. Region servers and the active HMaster connect with a session to ZooKeeper. The ZooKeeper maintains ephemeral nodes for active sessions via heartbeats.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/263A297D-E002-4735-810A-4904E5631682.png" height="329" width="722"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Each Region Server creates an ephemeral node. The HMaster monitors these nodes to discover available region servers, and it also monitors these nodes for server failures. HMasters vie to create an ephemeral node. Zookeeper determines the first one and uses it to make sure that only one master is active. The active HMaster sends heartbeats to Zookeeper, and the inactive HMaster listens for notifications of the active HMaster failure.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">If a region server or the active HMaster fails to send a heartbeat, the session is expired and the corresponding ephemeral node is deleted. Listeners for updates will be notified of the deleted nodes. The active HMaster listens for region servers, and will recover region servers on failure. The Inactive HMaster listens for active HMaster failure, and if an active HMaster fails, the inactive HMaster becomes active.</p>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase First Read or Write</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">There is a special HBase Catalog table called the META table, which holds the location of the regions in the cluster. ZooKeeper stores the location of the META table.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">This is what happens the first time a client reads or writes to HBase:</p>
-<ol style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:decimal;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">The client gets the Region server that hosts the META table from ZooKeeper.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">The client will query the .META. server to get the region server corresponding to the row key it wants to access. The client caches this information along with the META table location.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">It will get the Row from the corresponding Region Server.</li>
-</ol>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">For future reads, the client uses the cache to retrieve the META location and previously read row keys. Over time, it does not need to query the META table, unless there is a miss because a region has moved; then it will re-query and update the cache.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/4777DF5C-3967-4CA7-8AEA-5DDD749D102E.png" height="356" width="590"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Meta Table</h2>
-<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">This META table is an HBase table that keeps a list of all regions in the system.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">The .META. table is like a b tree.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;"><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The .META. table structure is as follows:</p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Key: region start key,region id</dd>
-
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Values: RegionServer</dd>
-
-</li>
-</ul>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/51DBF1DA-40F8-4817-BF74-5B4C7A30D83F.png" height="362" width="736"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Region Server Components</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">A Region Server runs on an HDFS data node and has the following components:</p>
-<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">WAL: Write Ahead Log is a file on the distributed file system. The WAL is used to store new data that hasn't yet been persisted to permanent storage; it is used for recovery in the case of failure.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">BlockCache: is the read cache. It stores frequently read data in memory. Least Recently Used data is evicted when full.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">MemStore: is the write cache. It stores new data which has not yet been written to disk. It is sorted before writing to disk. There is one MemStore per column family per region.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Hfiles store the rows as sorted KeyValues on disk.</li>
-</ul>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/93221825-90D5-443A-A5FB-97799A39B7DA.png" height="366" width="675"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Write Steps (1)</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">When the client issues a Put request, the first step is to write the data to the write-ahead log, the WAL:</p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Edits are appended to the end of the WAL file that is stored on disk.</dd>
-
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- The WAL is used to recover not-yet-persisted data in case a server crashes.</dd>
-
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/4F61010E-5C06-4935-8F1B-9625F9A6755F.png" height="363" width="716"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Write Steps (2)</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Once the data is written to the WAL, it is placed in the MemStore. Then, the put request acknowledgement returns to the client.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/94256426-9C62-4FFE-A1C6-9353E6EAFF0F.png" height="298" width="664"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase MemStore</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The MemStore stores updates in memory as sorted KeyValues, the same as it would be stored in an HFile. There is one MemStore per column family. The updates are sorted per column family.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/5A37C568-2AD4-4FE4-BCF6-5F12FCCA1FC9.png" height="351" width="719"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Region Flush</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">When the MemStore accumulates enough data, the entire sorted set is written to a new HFile in HDFS. HBase uses multiple HFiles per column family, which contain the actual cells, or KeyValue instances. These files are created over time as KeyValue edits sorted in the MemStores are flushed as files to disk.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Note that this is one reason why there is a limit to the number of column families in HBase. There is one MemStore per CF; when one is full, they all flush. It also saves the last written sequence number so the system knows what was persisted so far.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The highest sequence number is stored as a meta field in each HFile, to reflect where persisting has ended and where to continue. On region startup, the sequence number is read, and the highest is used as the sequence number for new edits.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/E180EA62-7E2E-4D48-8295-9C396887CD69.png" height="248" width="622"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase HFile</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Data is stored in an HFile which contains sorted key/values. When the MemStore accumulates enough data, the entire sorted KeyValue set is written to a new HFile in HDFS. This is a sequential write. It is very fast, as it avoids moving the disk drive head.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/F191CDE6-279B-4C04-81A4-EC74B1A8ED07.png" height="351" width="698"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase HFile Structure</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">An HFile contains a multi-layered index which allows HBase to seek to the data without having to read the whole file. The multi-level index is like a b+tree:</p>
-<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Key value pairs are stored in increasing order</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Indexes point by row key to the key value data in 64KB “blocks”</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Each block has its own leaf-index</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">The last key of each block is put in the intermediate index</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">The root index points to the intermediate index</li>
-</ul>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The trailer points to the meta blocks, and is written at the end of persisting the data to the file. The trailer also has information like bloom filters and time range info. Bloom filters help to skip files that do not contain a certain row key. The time range info is useful for skipping the file if it is not in the time range the read is looking for.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/DE1272CA-CE5E-4C0A-8F24-4315D98116F8.png" height="349" width="688"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HFile Index</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The index, which we just discussed, is loaded when the HFile is opened and kept in memory. This allows lookups to be performed with a single disk seek.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/5B9552D5-9E41-4C1B-A50B-D6FC7987DD74.png" height="341" width="772"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Read Merge</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">We have seen that the KeyValue cells corresponding to one row can be in multiple places, row cells already persisted are in Hfiles, recently updated cells are in the MemStore, and recently read cells are in the Block cache. So when you read a row, how does the system get the corresponding cells to return? A Read merges Key Values from the block cache, MemStore, and HFiles in the following steps:</p>
-<ol style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:decimal;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">First, the scanner looks for the Row cells in the Block cache - the read cache. Recently Read Key Values are cached here, and Least Recently Used are evicted when memory is needed.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Next, the scanner looks in the MemStore, the write cache in memory containing the most recent writes.</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">If the scanner does not find all of the row cells in the MemStore and Block Cache, then HBase will use the Block Cache indexes and bloom filters to load HFiles into memory, which may contain the target row cells.</li>
-</ol>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/879460FC-E54E-4CBD-9803-27FD801F73BA.png" height="278" width="769"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Read Merge</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">As discussed earlier, there may be many HFiles per MemStore, which means for a read, multiple files may have to be examined, which can affect the performance. This is called read amplification.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/B0E30988-4034-4233-A3A6-6CEE94FF44E7.png" height="307" width="596"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Minor Compaction</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">HBase will automatically pick some smaller HFiles and rewrite them into fewer bigger Hfiles. This process is called minor compaction. Minor compaction reduces the number of storage files by rewriting smaller files into fewer but larger ones, performing a merge sort.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/E2219BDF-35A5-4084-8AA7-46DE7A1975F7.png" height="329" width="723"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Major Compaction</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Major compaction merges and rewrites all the HFiles in a region to one HFile per column family, and in the process, drops deleted or expired cells. This improves read performance; however, since major compaction rewrites all of the files, lots of disk I/O and network traffic might occur during the process. This is called write amplification.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Major compactions can be scheduled to run automatically. Due to write amplification, major compactions are usually scheduled for weekends or evenings. Note that MapR Database has made improvements and does not need to do compactions. A major compaction also makes any data files that were remote, due to server failure or load balancing, local to the region server.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/2CCC906E-1F54-49B4-9477-01BB07C3A910.png" height="339" width="653"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Region = Contiguous Keys</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Let’s do a quick review of regions:</p>
-<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">A table can be divided horizontally into one or more regions. A region contains a contiguous, sorted range of rows between a start key and an end key</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Each region is 1GB in size (default)</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">A region of a table is served to the client by a RegionServer</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">A region server can serve about 1,000 regions (which may belong to the same table or different tables)</li>
-</ul>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/3CACB402-641C-4BBB-9D6C-4DDB82AC9D66.png" height="334" width="653"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Region Split</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Initially there is one region per table. When a region grows too large, it splits into two child regions. Both child regions, representing one-half of the original region, are opened in parallel on the same Region server, and then the split is reported to the HMaster. For load balancing reasons, the HMaster may schedule for new regions to be moved off to other servers.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/29FF2D1C-62FD-487A-A7E9-183E834E5855.png" height="361" width="675"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Read Load Balancing</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">Splitting happens initially on the same region server, but for load balancing reasons, the HMaster may schedule for new regions to be moved off to other servers. This results in the new Region server serving data from a remote HDFS node until a major compaction moves the data files to the Regions server’s local node. HBase data is local when it is written, but when a region is moved (for load balancing or recovery), it is not local until major compaction.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/490A742F-B6DD-4923-B285-314841FE2B47.png" height="358" width="714"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HDFS Data Replication</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">All writes and Reads are to/from the primary node. HDFS replicates the WAL and HFile blocks. HFile block replication happens automatically. HBase relies on HDFS to provide the data safety as it stores its files. When data is written in HDFS, one copy is written locally, and then it is replicated to a secondary node, and a third copy is written to a tertiary node.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/C4F38E08-6259-4660-86F0-AAC23B867412.png" height="302" width="641"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HDFS Data Replication (2)</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The WAL file and the Hfiles are persisted on disk and replicated, so how does HBase recover the MemStore updates not persisted to HFiles? See the next section for the answer.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/1A3B9E47-ECAC-4A84-A797-12B83B7EB364.png" height="349" width="679"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">HBase Crash Recovery</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">When a RegionServer fails, Crashed Regions are unavailable until detection and recovery steps have happened. Zookeeper will determine Node failure when it loses region server heart beats. The HMaster will then be notified that the Region Server has failed.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">When the HMaster detects that a region server has crashed, the HMaster reassigns the regions from the crashed server to active Region servers. In order to recover the crashed region server’s memstore edits that were not flushed to disk. The HMaster splits the WAL belonging to the crashed region server into separate files and stores these file in the new region servers’ data nodes. Each Region Server then replays the WAL from the respective split WAL, to rebuild the memstore for that region.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/2D32869D-93E5-484B-A026-8C04A338B0C2.png" height="368" width="708"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Data Recovery</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">WAL files contain a list of edits, with one edit representing a single put or delete. Edits are written chronologically, so, for persistence, additions are appended to the end of the WAL file that is stored on disk.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">What happens if there is a failure when the data is still in memory and not persisted to an HFile? The WAL is replayed. Replaying a WAL is done by reading the WAL, adding and sorting the contained edits to the current MemStore. At the end, the MemStore is flush to write changes to an HFile.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/2E8C9300-AF9C-45A7-B792-EC88BE4E06C8.png" height="378" width="724"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Apache HBase Architecture Benefits</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">HBase provides the following benefits:</p>
-<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;"><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><strong style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Strong consistency model</strong></p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- When a write returns, all readers will see same value</dd>
-</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;"><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><strong style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Scales automatically</strong></p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Regions split when data grows too large</dd>
-
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Uses HDFS to spread and replicate data</dd>
-</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;"><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><strong style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Built-in recovery</strong></p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Using Write Ahead Log (similar to journaling on file system)</dd>
-</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;"><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><strong style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Integrated with Hadoop</strong></p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- MapReduce on HBase is straightforward</dd>
-
-</li>
-</ul>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Apache HBase Has Problems Too…</h2>
-<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;"><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><strong style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">Business continuity reliability:</strong></p>
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- WAL replay slow</dd>
-
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Slow complex crash recovery</dd>
-
-<dd style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;">- Major Compaction I/O storms</dd>
-
-</li>
-</ul>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">MapR Database with MapR XD does not have these problems</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">The diagram below compares the application stacks for Apache HBase on top of HDFS on the left, Apache HBase on top of MapR's read/write file system MapR XD in the middle, and MapR Database and MapR XD in a Unified Storage Layer on the right.</p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/8BEF7915-A1E5-4F7F-8B4E-072169005F92.png" height="345" width="708"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">MapR Database exposes the same HBase API and the <a href="https://mapr.com/blog/in-depth-look-hbase-architecture/#training-module_dev320-mod2" target="_blank" style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">Data model</a> for MapR Database is the same as for Apache HBase. However the MapR Database implementation integrates table storage into the MapR Distributed File and Object Store, eliminating all JVM layers and interacting directly with disks for both file and table storage.</p>
-
-<div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">
-
-
-<div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
-  <div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
-    
-    <div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
-      <div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
-        <p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">If you need to learn more about the <em style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-style:italic;">HBase data model</em>, we have 4 lessons that will help you. Module 2 of the <b style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-weight:bold;">FREE course</b>, <a href="https://mapr.com/training/on-demand/dev-320-apache-hbase-data-model-and-architecture/#2-apache-hbase-data-model" target="_blank" style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">DEV 320 - Apache HBase Data Model and Architecture</a> will walk you through everything you need to know.</p>
       </div>
     </div>
   </div>
-</div>
-</div>
+</body>
 
-
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">MapR Database offers many benefits over HBase, while maintaining the virtues of the HBase API and the idea of data being sorted according to primary key. MapR Database provides operational benefits such as no compaction delays and automated region splits that do not impact the performance of the database. The tables in MapR Database can also be isolated to certain machines in a cluster by utilizing the topology feature of MapR. The final differentiator is that MapR Database is just plain fast, due primarily to the fact that it is tightly integrated into the MapR Distributed File and Object Store itself, rather than being layered on top of a distributed file system that is layered on top of a conventional file system.</p>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Key differences between MapR Database and Apache HBase</h2>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img src="An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20%7C%20MapR.resources/7409251C-22A1-4494-AF2D-2CE12EF7DCD9.png" height="256" width="544"/></div><p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"/>
-<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;margin-top:-1em;list-style-type:disc;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Tables part of the MapR Read/Write File system<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Guaranteed data locality</li>
-</ul>
-</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Smarter load balancing<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Uses container Replicas</li>
-</ul>
-</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Smarter fail over<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Uses container replicas</li>
-</ul>
-</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Multiple small WALs<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Faster recovery</li>
-</ul>
-</li>
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">Memstore Flushes Merged into Read/Write File System<ul style="padding:0px;border:0px;font:inherit;vertical-align:baseline;margin:0px 0px 1.5em 1.5em;list-style:none;list-style-type:circle;">
-<li style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;list-style-type:inherit;list-style-position:outside;">No compaction !</li>
-</ul>
-</li>
-</ul>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><a href="https://mapr.com/training/hadoop-demand-training/hde-110" target="_blank" style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">You can take this free On Demand training to learn more about MapR XD and MapR Database</a></p>
-<p style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">In this blog post, you learned more about the HBase architecture and its main benefits over NoSQL data store solutions. If you have any questions about HBase, please ask them in the comments section below.</p>
-<h2 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:30px;line-height:35px;margin-top:35px;margin-bottom:15px;">Want to learn more?</h2>
-
-
-          
-          <div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:0px;">
-            <h6 style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-weight:bold;font-size:16px;margin-bottom:1.5em;">
-              <br/>
-              This blog post was published August 07, 2015.
-            </h6>
-          </div>
-        </div></div></div><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;margin-bottom:1.5em;position:absolute;top:-1000px;left:-1000px;">Measure</div><div style="margin:0px;padding:0px;border:0px;font:inherit;vertical-align:baseline;position:absolute;top:-1000px;left:-1000px;line-height:1;margin-bottom:0px;">Measure</div></div></div></div></div></div></div></div>
-</div>
-</body></html>
+</html>

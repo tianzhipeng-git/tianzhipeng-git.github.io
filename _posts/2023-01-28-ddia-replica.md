@@ -3,6 +3,7 @@ layout: post
 title: "DDIA读书笔记-复制"
 date: 2023-01-28 23:23:23
 categories: bigdata
+keywords: DDIA 同步复制 异步复制 单主复制 MySQL复制 HDFS复制 HBase复制
 tags: bigdata presentation
 comments: true
 ---
