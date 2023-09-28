@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "SpringMVC"
+title: "SpringMVC简单介绍"
 date: 2016-12-12 23:23:23
 categories: web
 tags: presentation web spring
