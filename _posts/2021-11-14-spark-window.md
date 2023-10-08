@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "spark-sql窗口函数介绍/原理/bug分析"
+title: "spark-sql窗口函数原理/源码/bug分析"
 date: 2021-11-14 23:23:23
 categories: bigdata
 tags: bigdata spark
@@ -9,7 +9,7 @@ excerpt: Spark SQL中使用自定义窗口函数的时候遇到了bug, 自定义
 comments: true
 ---
 
-近期在Spark SQL中使用自定义窗口函数的时候遇到了bug, 自己研究了一下.
+近期在Spark SQL中使用自定义窗口函数的时候遇到了bug, 自己研究了一下. 分析了窗口函数中扩张框/收缩框/滑动框等的执行细节.
 
 * TOC
 {:toc}
@@ -70,13 +70,14 @@ SELECT name, salary, LAG(salary) OVER (PARTITION BY dept ORDER BY salary) AS lag
     - 5种边界值
 
 这里必须详细介绍frame窗框
-- RowType根据行偏移的范围来划定窗口, 对应语句中是`rows between xx and xx`这类的
-- RangeType根据列的值的范围来划定窗口, 对应语句中是`range between xx and xx`这类的
-   举例来说, 如果有个股票价格表记录各支股票每天的价格, 如果要计算MA30(30日均线值)的话, 就可以 
+- RowType类型根据行偏移的范围来划定窗口, 对应语句中是`rows between xx and xx`
+- RangeType类型根据order by指定的列的值的范围来划定窗口, 对应语句中是`range between xx and xx`
+   举例来说, 如果有个商品销售记录表, 存放各商品销售明细, 如果要开窗计算每个商品过去7天销售价格的均值(每笔售价不同)的话, 就可以 
    ```
-   select *, avg(price) over (partition by stock_id order by dt range between 30 PRECEDING and current row) --假定dt是数值表示的
+   select *, avg(price) over (partition by product_id order by dt range between 7 PRECEDING and current row)
    ```
-- 5中边界值
+   这里dt是数值表示的日期, 按日期排序, 窗口范围是[当前行的日期-7, 当前行的日期], 这里的7是对日期字段的offset值, 窗口范围内有多少行是不定的.
+- 5种边界值
   - UNBOUNDED PRECEDING: 无限往前, 或者说从无限小/从第一行开始, 无上界. 对于RowType和RangeType是一个效果的.
   - UNBOUNDED FOLLOWING: 无限往后, 或者说是直到最后一行, 无下界. 对于RowType和RangeType是一个效果的.
   - offset PRECEDING: offset是一个数值 如30, 当是RowType时, 表示从当前行往前30行开始. 当RangeType时, 表示从当前行OrderBy那列的值减30开始(所以必须是能做减法的数值类型), 比如上面的MA30的例子, 是按dt日期排序, 取30天前到现在的范围定义的窗框.
