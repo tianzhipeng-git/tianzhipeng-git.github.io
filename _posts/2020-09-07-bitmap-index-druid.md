@@ -8,7 +8,7 @@ keywords: Bitmap索引 位图索引 Bitmap压缩 Bitmap原理
 comments: true
 ---
 
-Bitmap Index广泛应用于很多大数据分析系统中, 如Druid, Kylin等, 是一种高效的索引技术. 尤其是Druid中将Bitmap替换为Roaring Bitmap, 到底是什么东西呢?
+Bitmap Index(位图索引)广泛应用于很多大数据分析系统中, 如Druid, Kylin等, 是一种高效的索引技术. 尤其是Druid中将Bitmap替换为Roaring Bitmap, 到底是什么东西呢?
 
 * TOC
 {:toc}
