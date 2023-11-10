@@ -9,277 +9,312 @@
 
 <url>
   <loc>https://tianzhipeng-git.github.io/</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/index.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/c/category.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/c/tags.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/c/archive.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/c/about.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tianzhipeng-git.github.io/2023/11/06/spark-limit.html</loc>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tianzhipeng-git.github.io/2023/11/06/spark-bloomfilter-join.html</loc>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://tianzhipeng-git.github.io/2023/06/11/distributed-train.html</loc>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2023/06/11/spark-multi-full-join.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2023/01/28/ddia-replica.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2023/01/27/depth-hbase.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2021/11/14/spark-window.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2021/08/25/spark-bucketing.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://tianzhipeng-git.github.io/2020/09/07/bitmap-index.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <loc>https://tianzhipeng-git.github.io/2020/09/07/bitmap-index-druid.html</loc>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2020/07/14/a-scp-path.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2020/07/12/k8s-network.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2020/05/21/java-log.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2020/05/19/hive-hcatalog.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2020/04/21/apache-projects.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2020/03/30/druid-vs-clickhouse.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2020/02/06/aster-2.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2020/01/09/aster-1.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2019/12/19/druid-sourcecode.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2019/10/16/all-about-https.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2019/09/29/pr-vs-roc.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2019/09/20/threadprint10.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2019/07/24/hbase.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2019/07/04/quantiles.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/12/06/linux-net-cmd.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/07/22/maven.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/07/02/migrate-to-springboot.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/05/24/unittest.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/04/02/treeinrdb.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/03/19/bitcoin.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/02/26/io-multiplexing.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/01/31/ansible.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2018/01/14/ormtest.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2017/10/20/jenkins.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/jenkins%E4%BD%BF%E7%94%A8.pdf</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2017/09/22/http-cache.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2017/09/22/Test.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2016/12/12/spring-mvc.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2016/11/29/ad-viewable.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/2015/11/05/zk.html</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/c/resume.html</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:36+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/c/tags</loc>
-  <lastmod>2023-06-16T09:50:26+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:42+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tianzhipeng-git.github.io/resources/sparklimit/Query%205%20limit%E5%90%8Eshow.pdf</loc>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tianzhipeng-git.github.io/resources/sparklimit/Query%206%20limit%E5%90%8E%E5%86%99%E5%87%BA.pdf</loc>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tianzhipeng-git.github.io/resources/sparklimit/Query%209%20limit%E5%90%8Ejoin.pdf</loc>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://tianzhipeng-git.github.io/resources/sparklimit/Query%202%20limit%E5%89%8Dsort.pdf</loc>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/depth_hbase/An%20In-Depth%20Look%20at%20the%20HBase%20Architecture%20|%20MapR.html</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:36+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/apache/result/index.html</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:36+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/rocpr/rocpr.pdf</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/HBase%E4%BB%8B%E7%BB%8D.pdf</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/quantiles.pdf</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/linux%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4.pdf</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/blockchain.html</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/ansible.html</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/SpringMVCIntroduce.pdf</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/%E5%8F%AF%E8%A7%86%E6%9B%9D%E5%85%891.pdf</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://tianzhipeng-git.github.io/resources/presentation/Zookeeper%E4%BB%8B%E7%BB%8D.pdf</loc>
-  <lastmod>2023-06-16T09:50:20+00:00</lastmod>
+  <lastmod>2023-11-10T06:51:37+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
