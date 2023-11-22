@@ -23,11 +23,11 @@ cuda版本和驱动版本搞不清楚, runtime和driver啥区别, nvidia-smi和n
 
 但是cuda相关的组件和概念特别多, 对于新接触的人不太友好, 这里引用[cuda博客](https://blogs.nvidia.com/blog/what-is-cuda-2/)中一张图片:
 
-<img src="/resources/cuda_version/1.jpg" width="500" alt="1"/>
+<img src="/resources/cuda_version/1.jpg" width="700" alt="1"/>
 
 这个图是几年前的了,  而且没体现出我关心的driver/runtime之类的概念, 所以我重新根据目前情况画了一个图
 
-<img src="/resources/cuda_version/2.png" width="700" alt="1"/>
+<img src="/resources/cuda_version/2.png" width="800" alt="1"/>
 
 # 各个组件
 接下来从下往上介绍一下上图中的各个组件, 列了一些下载安装/查看版本的方式.
@@ -245,7 +245,7 @@ driver提供三种兼容能力, 下面细说
 ### driver的向后兼容
 Backward Compatibility, 这个最好理解, nvidia目前为止保证了, driver的版本不断升级, 都能够兼容以前的旧的cuda和应用, 即完整的向后兼容能力. 
 
-<img src="/resources/cuda_version/6.png" width="500" alt="1"/>
+<img src="/resources/cuda_version/6.png" width="600" alt="1"/>
 
 如图, driver`525.60.13`版本, 能支持12.0即之前的所有版本的cuda.
 
@@ -254,7 +254,7 @@ Backward Compatibility, 这个最好理解, nvidia目前为止保证了, driver�
 ### driver的次要版本兼容
 Minor Version Compatibility, 次要版本兼容或者说小版本兼容能力, 是从`CUDA 11`开始提供的功能, 是一种driver可以向前兼容未来的cuda版本的能力. (当然文档中说了, 这种兼容是limited feature-set, 有限功能集, 不是全部功能都能用)
 
-<img src="/resources/cuda_version/7.png" width="600" alt="1"/>
+<img src="/resources/cuda_version/7.png" width="700" alt="1"/>
 
 如图, 还是driver`525.60.13`版本为例, 它正对应的版本是12.0, 所谓小版本兼容, 就是未来所有12.x的cuda版本, 都保证能在cuda525上运行, 虽然现在最高是cuda12.3, 未来即使发不了12.8 12.9, 也能在cuda525上跑. 
 
@@ -412,7 +412,7 @@ pytorch和cuda的兼容, 和tensorflow不太一样.
 - [nvidia文档-每个cuda版本发布说明](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#)
 - [nvidia文档-c开发最佳实践](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#cuda-compatibility-developer-s-guide)
 - [nvidia文档-c开发指南](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#versioning-and-compatibility)
-- [nvidia文档-cuda安装指南] (https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#runfile-installation)
+- [nvidia文档-cuda安装指南](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#runfile-installation)
 - [nvidia驱动下载](https://developer.nvidia.com/cuda-downloads)
 - [tensorflow经过测试的构建配置?](https://www.tensorflow.org/install/source?hl=zh-cn#gpu)
 - [pytorch论坛-帖子1](https://discuss.pytorch.org/t/would-pytorch-for-cuda-11-6-work-when-cuda-is-actually-12-0/169569)
