@@ -45,7 +45,7 @@ gcc如果版本过低, 可以采用如下方式升级:
 
 GPU卡:
 - 查看GPU卡: `lspci | grep -i nvidia`  
-- [GPU Compute Capability概念](https://developer.nvidia.com/cuda-gpus)
+- [GPU Compute Capability概念](https://developer.nvidia.com/cuda-gpus) [1](https://blog.csdn.net/m0_46483236/article/details/124112298)
 
 
 ## driver
