@@ -4,8 +4,8 @@ title: "MLOps各种架构图"
 date: 2023-11-21 23:23:23
 categories: ml
 tags: ml mlops
-keywords: Spark执行优化 spark limit
-excerpt: cuda兼容性 nvidia-smi nvcc cuda-driver cuda-runtime
+keywords: MLOps架构图 MLOps组件 MLOps概念
+excerpt: MLOps架构图 MLOps组件 MLOps概念
 comments: true
 ---
 最近一直做模型工程方向的工作, 调研了很多MLOps相关的东西, 读了几本MLOps相关的书籍, 这里简单整理一些觉得不错的MLOps相关的模块功能图/架构图, 基本上是概念层面的, 可以帮助快速了解这个领域.

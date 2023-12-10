@@ -4,8 +4,8 @@ title: "cuda模块关系和版本兼容性"
 date: 2023-11-21 23:23:23
 categories: ml
 tags: ml cuda nvidia pytorch
-keywords: Spark执行优化 spark limit
-excerpt: cuda兼容性 nvidia-smi nvcc cuda-driver cuda-runtime
+keywords: cuda兼容性 cuda版本 nvidia-smi nvcc cuda-driver cuda-runtime
+excerpt: cuda兼容性 cuda版本 nvidia-smi nvcc cuda-driver cuda-runtime
 comments: true
 ---
 cuda版本和驱动版本搞不清楚, runtime和driver啥区别, nvidia-smi和nvcc版本不一致, 各个组件啥关系, 兼容性怎么支持的
