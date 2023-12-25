@@ -15,7 +15,11 @@ cuda版本和驱动版本搞不清楚, runtime和driver啥区别, nvidia-smi和n
 * TOC
 {:toc}
 
+
 # 架构分层
+
+只关心兼容性请跳过本节直达[兼容性的内容](#版本兼容)
+
 根据官网: 
 > CUDA® is a parallel computing platform and programming model developed by NVIDIA for general computing on graphical processing units (GPUs). With CUDA, developers are able to dramatically speed up computing applications by harnessing the power of GPUs.
 
@@ -183,7 +187,7 @@ rpm有多种包:
 
 图中再往上, 就是基于CUDA构建的各类算法框架了, 问题也不大, 后面在版本兼容问题再涉及一点.
 
-# 版本兼容
+# ⭐️版本兼容⭐️
 从上面架构图中可以看出, 整套东西分为很多层, 各层之间就存在一些版本兼容性的问题, 上层组件可以看做是基于下层接口开发的应用.
 
 以下是一些比较关键的兼容性界面
@@ -191,11 +195,11 @@ rpm有多种包:
 - 卡和driver
 - nvidia-driver和cuda-toolkit
 - cuda和pytorch
-- nvlink相关
 
 其他还有一些相关的兼容性问题, 本文没涉及: 
 - 一些cuda的算法libraries[(如cuDNN)和cuda toolkit/driver之间的版本兼容性问题](https://docs.nvidia.com/deeplearning/cudnn/support-matrix/index.html)
 - 直接基于cuda的C++之类的编写自己的应用, [参考](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compilation-with-nvcc)
+- nvlink相关
 
 ## 卡和driver版本兼容
 首先我们知道自己机器的GPU卡是什么版本的, 比如A800/A100/V100等, 这些都属于英伟达`Data Center / Tesla`系列的卡. 
