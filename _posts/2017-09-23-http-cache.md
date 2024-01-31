@@ -261,14 +261,14 @@ Vary这个Header用于响应, 其值是另一个Header的名, 常见的用法比
   ([新版Spring也提供了ETag等方式](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-caching))
 
 ## 总结
-那么关于 什么是缓存/怎么做缓存/为何强刷/如何不强刷 这篇博客也是够长了.
+那么关于 什么是缓存/怎么做缓存/为何强刷/如何不强刷 就讲完了, 这篇博客也是够长了.
 
 ## 参考
-- RFC 7234 7232 7231 https://tools.ietf.org/html/rfc7234
-- HTTP 缓存 MDN https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
-- HTTP Caching - Google Developer https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching
+- [RFC 7234](https://tools.ietf.org/html/rfc7234) 7232 7231
+- [HTTP 缓存 MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
+- [HTTP Caching - Google Developer](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)
 - chrome://view-http-cache/
-- 过期时间 - Chrome源码 https://chromium.googlesource.com/chromium/src/+/49.0.2606.2/net/http/http_response_headers.cc#1001
-- Chromium document https://www.chromium.org/developers/design-documents/network-stack/http-cache
-- 304 https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304
+- [过期时间 - Chrome源码](https://chromium.googlesource.com/chromium/src/+/49.0.2606.2/net/http/http_response_headers.cc#1001)
+- [Chromium document](https://www.chromium.org/developers/design-documents/network-stack/http-cache)
+- [HTTP 304状态码](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304)
 
