@@ -2,7 +2,7 @@
 layout: post
 title: "关系型数据库中存储树形结构数据(hierarchical data)"
 date: 2018-04-02 23:23:23
-categories: algo
+categories: "algo&ml"
 tags: database hierarchical datastructure
 comments: true
 ---

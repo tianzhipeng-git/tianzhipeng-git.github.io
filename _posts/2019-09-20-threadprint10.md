@@ -2,7 +2,7 @@
 layout: post
 title: "一个多线程面试题"
 date: 2019-09-20 23:23:23
-categories: algo 
+categories: "algo&ml" 
 tags: java
 comments: true
 ---

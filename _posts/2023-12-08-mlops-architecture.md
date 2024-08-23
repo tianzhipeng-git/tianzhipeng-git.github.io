@@ -2,7 +2,7 @@
 layout: post
 title: "MLOps各种架构图"
 date: 2023-11-21 23:23:23
-categories: ml
+categories: "algo&ml"
 tags: ml mlops
 keywords: MLOps架构图 MLOps组件 MLOps概念
 excerpt: MLOps架构图 MLOps组件 MLOps概念
@@ -78,7 +78,7 @@ Metaflow也是一个MLOps平台, 有收费有开源版本, 它文档中从算法
 这个很有道理, 有一些基础的需求还没满足的情况下, 整那些高级功能有啥用?
 
 ## SageMaker
-术中管理AWS SageMaker的架构图不错, 都保存了.
+书中管理AWS SageMaker的架构图不错, 都保存了.
 
 SageMaker MLOps整体架构:
 

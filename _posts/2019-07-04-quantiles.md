@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "两个分位点和直方图算法"
-categories: algo
+categories: "algo&ml"
 tags: presentation algo bigdata
 keywords: 分位点 直方图 GK算法 Doubles Sketch 估算算法
 comments: true

@@ -2,7 +2,7 @@
 layout: post
 title: "cuda模块关系和版本兼容性"
 date: 2023-11-21 23:23:23
-categories: ml
+categories: "algo&ml"
 tags: ml cuda nvidia pytorch
 keywords: cuda兼容性 cuda版本 nvidia-smi nvcc cuda-driver cuda-runtime
 excerpt: cuda兼容性 cuda版本 nvidia-smi nvcc cuda-driver cuda-runtime

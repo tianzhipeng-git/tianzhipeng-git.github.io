@@ -2,7 +2,7 @@
 layout: post
 title: "分布式训练原理 - spark-mllib传统模型"
 date: 2023-06-11 23:23:23
-categories: ml
+categories: "algo&ml"
 tags: ml distributed spark presentation
 keywords: spark-mllib distributed-train 分布式训练 分布式机器学习 参数服务器
 excerpt: 分布式机器学习的基本流程, spark mllib的实现原理, 模型并行与数据并行
