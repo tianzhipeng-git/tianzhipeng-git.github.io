@@ -2,7 +2,7 @@
 layout: post
 title: "可视曝光技术方案"
 date: 2016-11-29 23:23:23
-categories: web
+categories: "web&network"
 tags: presentation web js
 comments: true
 keywords: 可视曝光 可见曝光 广告可见性 ad-viewability

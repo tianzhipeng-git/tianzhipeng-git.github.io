@@ -1,0 +1,40 @@
+// _sass/_mermaid_toggle.scss 或 assets/css/_mermaid_toggle.scss
+
+.mermaid-container {
+  position: relative;
+  margin-bottom: 1em; /* 根据需要调整间距 */
+}
+
+.mermaid-code {
+  display: none; /* 初始时隐藏源码 */
+  background-color: #f6f8fa; /* GitHub 风格的代码块背景 */
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.mermaid-toggle-button {
+  position: absolute;
+  top: 5px; /* 调整按钮位置 */
+  right: 5px;
+  background-color: #007bff; /* 按钮颜色 */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8em;
+  z-index: 10; /* 确保按钮在图表之上 */
+
+  &:hover { // 在 SCSS 中使用嵌套
+    background-color: #0056b3;
+  }
+}
+
+.mermaid-graph svg {
+  display: block; /* 确保 SVG 正常显示 */
+  max-width: 100%; /* 防止溢出 */
+  height: auto; /* 保持宽高比 */
+}

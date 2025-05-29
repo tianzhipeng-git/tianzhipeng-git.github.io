@@ -48,5 +48,6 @@ $on-laptop:        18000px;
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
         "base",
-        "syntax-highlighting"
+        "syntax-highlighting",
+        "mermaid"
 ;

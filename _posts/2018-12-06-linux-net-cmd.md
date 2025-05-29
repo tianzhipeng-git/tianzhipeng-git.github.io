@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Linux网络命令"
-categories: network
+categories: "web&network"
 tags: presentation linux network
 comments: true
 excerpt_separator: <!--more-->

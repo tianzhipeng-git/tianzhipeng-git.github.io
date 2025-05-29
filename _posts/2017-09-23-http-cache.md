@@ -2,7 +2,7 @@
 layout: post
 title: "HTTP浏览器缓存机制介绍"
 date: 2017-09-22 16:23:32
-categories: network
+categories: "web&network"
 tags: http cache web rfc presentation
 keywords: http缓存 浏览器缓存 缓存爆裂 expire-header 缓存时效
 excerpt: 深入理解http浏览器缓存机制, 理解Expires/Cache Control等header的作用, 理解缓存时效, 使用缓存爆裂解决缓存更新问题

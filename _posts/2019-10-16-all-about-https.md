@@ -2,7 +2,7 @@
 layout: post
 title: "理解https原理&TLS1.3"
 date: 2019-10-16 23:23:23
-categories: network
+categories: "web&network"
 tags: http web network presentation
 keywords: https原理 https证书验证 https握手过程 https报文 https协议 TLS协议
 excerpt: 分析理解HTTPS的原理, 也就是TLS协议, 包括握手过程, 报文格式, 证书验证登
