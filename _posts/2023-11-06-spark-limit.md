@@ -261,6 +261,9 @@ while (buf.length < n && partsScanned < totalParts) {
 
 这种增量式的limit, 和我之前构想的类似, 不需要shuffle, 而且比我设想的更好, 有个增量设计, 虽然也只能是单线程的. 
 
+<img src="/resources/sparklimit/spark-limit-incremental-take.png" width="700" alt="1"/>
+
+
 那么这个executeTake何时被使用呢? 在limit中不涉及么? 通过idea查看executeTake方法被调用的地方:
 
 <img src="/resources/sparklimit/1.png" width="700" alt="1"/>
